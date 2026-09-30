@@ -284,8 +284,9 @@ Even after battle-testing, AcuDiag documents two known edge-case boundaries for 
 
 ## APPENDIX: Verification Summary & Demonstration Links
 
-* **Automated Unit Tests**: 31 / 31 passed (`pytest 01_Projects/AcuDiag/tests/`)
-* **Reliability Benchmark**: Pass^50 = 100% (50/50 successful multi-rail trials in 5.11s)
+* **Source Code Repository (Private)**: [https://github.com/Jaswanth1902/AcuDiag](https://github.com/Jaswanth1902/AcuDiag)
+* **Automated Unit Tests**: 32 / 32 passed (`pytest tests/`)
+* **Reliability Benchmark**: Pass^50 = 100% (50/50 successful multi-rail trials in 4.79s)
 * **Dataset Kinematics Ground Truth**: CWRU SKF 6205-2RS outer-raceway defect frequency = 1,450.0 Hz; 100/100 fault detection trials passed (0% false positives)
-* **Live Dual-Surface Demo**: `http://localhost:8000/` (WhatsApp Simulator + AgenticOrg Telemetry HUD)
+* **Live Operations Command Desk**: `http://localhost:8000/` (3-Pane Enterprise Console + Dual WhatsApp Simulator + HITL Supervisor Docket)
 * **Delhivery Mock OpenAPI**: `http://localhost:8000/docs`
