@@ -1,0 +1,1973 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AcuDiag Enterprise Incident Desk | Pine Labs AgenticOrg & Delhivery OS1</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-noir: #080C14;
+      --bg-card: #0D1321;
+      --bg-card-subtle: #121A2D;
+      --bg-card-hover: #18223B;
+      --border-subtle: rgba(212, 175, 55, 0.14);
+      --border-highlight: rgba(212, 175, 55, 0.4);
+      --border-active: #C5A059;
+      --gold-primary: #D4AF37;
+      --gold-light: #F3E5AB;
+      --gold-muted: #8E793E;
+      --emerald-glow: #10B981;
+      --emerald-bg: rgba(16, 185, 129, 0.12);
+      --amber-hold: #F59E0B;
+      --amber-bg: rgba(245, 158, 11, 0.12);
+      --crimson-alert: #EF4444;
+      --crimson-bg: rgba(239, 68, 68, 0.15);
+      --cobalt-rail: #3B82F6;
+      --cobalt-bg: rgba(59, 130, 246, 0.12);
+      --text-main: #F3F4F6;
+      --text-muted: #9CA3AF;
+      --text-dim: #6B7280;
+
+      /* WhatsApp Palette */
+      --wa-bg: #0B141A;
+      --wa-header-bg: #202C33;
+      --wa-incoming-bg: #202C33;
+      --wa-outgoing-bg: #005C4B;
+      --wa-input-bg: #2A3942;
+      --wa-text: #E9EDEF;
+      --wa-text-muted: #8696A0;
+      --wa-green: #25D366;
+      --wa-blue-ticks: #53BDEB;
+      --wa-card-bg: #111B21;
+
+      --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-noir);
+      color: var(--text-main);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+      background-image: 
+        radial-gradient(circle at 12% 15%, rgba(212, 175, 55, 0.05) 0%, transparent 45%),
+        radial-gradient(circle at 88% 80%, rgba(16, 185, 129, 0.04) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.02) 0%, transparent 60%);
+    }
+
+    .blueprint-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      background-size: 32px 32px;
+      background-image: 
+        linear-gradient(to right, rgba(212, 175, 55, 0.02) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(212, 175, 55, 0.02) 1px, transparent 1px);
+      z-index: 1;
+    }
+
+    .container {
+      position: relative;
+      z-index: 2;
+      max-width: 1840px;
+      margin: 0 auto;
+      padding: 12px 18px 36px;
+    }
+
+    /* Top Enterprise Header */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border-subtle);
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.55rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--gold-primary);
+      text-transform: uppercase;
+      text-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+    }
+
+    .brand-badges {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.06em;
+      padding: 3px 8px;
+      border-radius: 4px;
+      background: rgba(212, 175, 55, 0.1);
+      border: 1px solid var(--border-subtle);
+      color: var(--gold-light);
+      text-transform: uppercase;
+    }
+
+    .badge-cobalt {
+      background: var(--cobalt-bg);
+      border-color: rgba(59, 130, 246, 0.35);
+      color: #93C5FD;
+    }
+
+    .badge-emerald {
+      background: var(--emerald-bg);
+      border-color: rgba(16, 185, 129, 0.35);
+      color: #A7F3D0;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .telemetry-status {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      background: rgba(0, 0, 0, 0.35);
+      padding: 6px 12px;
+      border-radius: 6px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--emerald-glow);
+      box-shadow: 0 0 8px var(--emerald-glow);
+      animation: pulse-ring 2s infinite;
+    }
+
+    @keyframes pulse-ring {
+      0% { transform: scale(0.95); opacity: 0.8; }
+      50% { transform: scale(1.25); opacity: 1; }
+      100% { transform: scale(0.95); opacity: 0.8; }
+    }
+
+    .btn {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      padding: 6px 12px;
+      border-radius: 6px;
+      border: 1px solid var(--border-subtle);
+      background: var(--bg-card-subtle);
+      color: var(--text-main);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: transform 120ms var(--ease-out), background-color 150ms ease, border-color 150ms ease;
+    }
+
+    .btn:active { transform: scale(0.97); }
+    .btn:hover { border-color: var(--gold-primary); background: var(--bg-card-hover); }
+
+    .btn-gold {
+      background: linear-gradient(135deg, rgba(212, 175, 55, 0.25), rgba(197, 160, 89, 0.12));
+      border: 1px solid var(--gold-primary);
+      color: #FFF;
+      font-weight: 600;
+    }
+
+    .btn-gold:hover {
+      background: linear-gradient(135deg, rgba(212, 175, 55, 0.4), rgba(197, 160, 89, 0.25));
+      box-shadow: 0 0 16px rgba(212, 175, 55, 0.3);
+    }
+
+    .btn-emerald {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.22), rgba(16, 185, 129, 0.08));
+      border-color: var(--emerald-glow);
+      color: #FFF;
+    }
+
+    .btn-crimson {
+      background: linear-gradient(135deg, rgba(239, 68, 68, 0.25), rgba(239, 68, 68, 0.1));
+      border-color: var(--crimson-alert);
+      color: #FCA5A5;
+    }
+    .btn-crimson:hover {
+      background: linear-gradient(135deg, rgba(239, 68, 68, 0.4), rgba(239, 68, 68, 0.2));
+      box-shadow: 0 0 16px rgba(239, 68, 68, 0.3);
+    }
+
+    /* =========================================================================
+       THREE-PANE ENTERPRISE WORKSPACE
+       ========================================================================= */
+    .workspace-grid {
+      display: grid;
+      grid-template-columns: 310px 440px 1fr;
+      gap: 18px;
+      align-items: start;
+    }
+
+    /* =========================================================================
+       PANE 1: INCIDENT INBOX QUEUE
+       ========================================================================= */
+    .inbox-column {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      height: 840px;
+      overflow: hidden;
+    }
+
+    .inbox-header {
+      padding: 12px 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      background: var(--bg-card-subtle);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .inbox-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .inbox-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--gold-light);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .inbox-search {
+      width: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 6px;
+      padding: 6px 10px;
+      color: #FFF;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.74rem;
+      outline: none;
+      transition: border-color 150ms ease;
+    }
+    .inbox-search:focus { border-color: var(--gold-primary); }
+
+    .inbox-filter-tabs {
+      display: flex;
+      gap: 4px;
+      flex-wrap: wrap;
+    }
+
+    .filter-tab {
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-muted);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.62rem;
+      padding: 3px 6px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 120ms ease;
+    }
+    .filter-tab.active {
+      background: rgba(212, 175, 55, 0.15);
+      border-color: var(--gold-primary);
+      color: var(--gold-light);
+      font-weight: 600;
+    }
+
+    .inbox-list {
+      flex: 1;
+      overflow-y: auto;
+      padding: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    /* Individual Incident Card */
+    .incident-card {
+      background: var(--bg-card-subtle);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 8px;
+      padding: 10px 12px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      transition: transform 120ms var(--ease-out), border-color 120ms ease, background-color 120ms ease;
+    }
+    .incident-card:active { transform: scale(0.98); }
+    .incident-card:hover {
+      border-color: rgba(212, 175, 55, 0.3);
+      background: var(--bg-card-hover);
+    }
+    .incident-card.active {
+      border-color: var(--gold-primary);
+      background: rgba(212, 175, 55, 0.08);
+      box-shadow: inset 3px 0 0 var(--gold-primary);
+    }
+
+    .incident-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .incident-tkt {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .incident-time {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.64rem;
+      color: var(--text-dim);
+    }
+
+    .incident-appliance {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .incident-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 2px;
+    }
+
+    .alarm-pill {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.6rem;
+      font-weight: 600;
+      padding: 2px 6px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .alarm-settled { background: var(--emerald-bg); color: var(--emerald-glow); border: 1px solid rgba(16, 185, 129, 0.3); }
+    .alarm-declined { background: rgba(75, 85, 99, 0.2); color: #9CA3AF; border: 1px solid rgba(75, 85, 99, 0.4); }
+    .alarm-lowsnr { background: var(--amber-bg); color: var(--amber-hold); border: 1px solid rgba(245, 158, 11, 0.3); }
+    .alarm-spoof { background: var(--crimson-bg); color: var(--crimson-alert); border: 1px solid rgba(239, 68, 68, 0.4); }
+    .alarm-fake { background: var(--crimson-bg); color: #FCA5A5; border: 1px solid rgba(239, 68, 68, 0.4); }
+    .alarm-timeout { background: var(--cobalt-bg); color: #93C5FD; border: 1px solid rgba(59, 130, 246, 0.3); }
+
+    .incident-amount {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--gold-light);
+    }
+
+    /* =========================================================================
+       PANE 2: WHATSAPP PHONE SIMULATOR (DUAL CHANNEL: CUSTOMER & TECH)
+       ========================================================================= */
+    .phone-column {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .phone-mockup {
+      width: 100%;
+      height: 840px;
+      background: #000;
+      border-radius: 36px;
+      border: 8px solid #1E293B;
+      box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.9), 0 0 24px rgba(212, 175, 55, 0.12);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .phone-notch {
+      position: absolute;
+      top: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 22px;
+      background: #000;
+      border-radius: 18px;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 10px;
+    }
+    .notch-camera { width: 8px; height: 8px; border-radius: 50%; background: #081B26; }
+
+    .phone-status-bar {
+      height: 40px;
+      padding: 10px 20px 0;
+      background: var(--wa-header-bg);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: #FFF;
+      z-index: 40;
+    }
+
+    .wa-header {
+      background: var(--wa-header-bg);
+      padding: 8px 12px 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      z-index: 40;
+    }
+
+    .wa-contact-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .wa-avatar {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #10B981, #065F46);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      position: relative;
+    }
+
+    .wa-verified-badge {
+      position: absolute;
+      bottom: -2px;
+      right: -2px;
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      background: var(--wa-green);
+      color: #000;
+      font-size: 8px;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid #000;
+    }
+
+    .wa-contact-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .wa-contact-name {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--wa-text);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 140px;
+    }
+
+    .wa-contact-status {
+      font-size: 0.65rem;
+      color: var(--wa-green);
+    }
+
+    /* Segmented Channel Toggle Switch */
+    .channel-toggle-wrap {
+      display: flex;
+      background: rgba(0, 0, 0, 0.45);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 6px;
+      padding: 2px;
+      gap: 2px;
+    }
+
+    .channel-toggle-btn {
+      background: transparent;
+      border: none;
+      color: var(--wa-text-muted);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.62rem;
+      padding: 4px 7px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 120ms ease;
+      white-space: nowrap;
+    }
+
+    .channel-toggle-btn.active {
+      background: var(--wa-green);
+      color: #000;
+      font-weight: 700;
+    }
+
+    .wa-chat-body {
+      flex: 1;
+      background-color: var(--wa-bg);
+      background-image: radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      background-size: 16px 16px;
+      overflow-y: auto;
+      padding: 12px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .wa-date-pill {
+      align-self: center;
+      background: rgba(32, 44, 51, 0.9);
+      color: var(--wa-text-muted);
+      font-size: 0.65rem;
+      font-weight: 500;
+      padding: 3px 10px;
+      border-radius: 6px;
+      margin: 2px 0;
+      letter-spacing: 0.04em;
+    }
+
+    .wa-channel-indicator {
+      align-self: center;
+      background: rgba(16, 185, 129, 0.15);
+      color: #A7F3D0;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.62rem;
+      padding: 2px 8px;
+      border-radius: 4px;
+      margin-bottom: 4px;
+    }
+
+    .wa-bubble {
+      max-width: 86%;
+      padding: 8px 10px 6px;
+      border-radius: 8px;
+      font-size: 0.77rem;
+      line-height: 1.35;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      word-wrap: break-word;
+    }
+
+    .wa-bubble.incoming {
+      align-self: flex-start;
+      background: var(--wa-incoming-bg);
+      color: var(--wa-text);
+      border-top-left-radius: 0;
+    }
+
+    .wa-bubble.outgoing {
+      align-self: flex-end;
+      background: var(--wa-outgoing-bg);
+      color: var(--wa-text);
+      border-top-right-radius: 0;
+    }
+
+    .wa-time-meta {
+      font-size: 0.6rem;
+      color: var(--wa-text-muted);
+      align-self: flex-end;
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      margin-top: 2px;
+    }
+
+    .blue-ticks {
+      color: var(--wa-blue-ticks);
+      font-weight: bold;
+    }
+
+    .wa-voice-card {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(0, 0, 0, 0.2);
+      padding: 6px 8px;
+      border-radius: 6px;
+      margin-bottom: 4px;
+    }
+
+    .wa-voice-play {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--wa-green);
+      color: #000;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 0.75rem;
+    }
+
+    .wa-waveform {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      flex: 1;
+      height: 18px;
+    }
+
+    .wave-bar {
+      width: 3px;
+      background: #8696A0;
+      border-radius: 2px;
+    }
+
+    .wa-rich-card {
+      background: var(--wa-card-bg);
+      border: 1px solid rgba(212, 175, 55, 0.35);
+      border-radius: 8px;
+      padding: 8px;
+      margin-top: 4px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .wa-card-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--gold-light);
+    }
+
+    .wa-card-detail {
+      font-size: 0.7rem;
+      color: var(--wa-text-muted);
+      line-height: 1.35;
+    }
+
+    .wa-card-action-btn {
+      background: var(--wa-green);
+      color: #000;
+      font-weight: 700;
+      font-size: 0.72rem;
+      padding: 6px 10px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      text-align: center;
+      transition: transform 120ms ease;
+    }
+    .wa-card-action-btn:active { transform: scale(0.97); }
+
+    .wa-input-bar {
+      background: var(--wa-header-bg);
+      padding: 8px 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      z-index: 40;
+    }
+
+    .wa-input-pill {
+      flex: 1;
+      background: var(--wa-input-bg);
+      border-radius: 20px;
+      padding: 6px 12px;
+      display: flex;
+      align-items: center;
+    }
+
+    .wa-input-pill input {
+      width: 100%;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: #FFF;
+      font-size: 0.76rem;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .wa-mic-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--wa-green);
+      color: #000;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 0.85rem;
+    }
+
+    /* Quick Test Action Strip */
+    .quick-actions-bar {
+      display: flex;
+      gap: 4px;
+      padding: 4px 0;
+      overflow-x: auto;
+    }
+
+    .quick-act-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.62rem;
+      padding: 4px 8px;
+      border-radius: 4px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 120ms ease;
+    }
+    .quick-act-btn:hover {
+      border-color: var(--gold-primary);
+      color: var(--gold-light);
+    }
+    .quick-act-btn:active { transform: scale(0.96); }
+
+    /* =========================================================================
+       PANE 3: DEEP TELEMETRY & SUPERVISOR AUDIT INSPECTOR
+       ========================================================================= */
+    .telemetry-column {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      height: 840px;
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+
+    /* Anomaly / Alarm Banner */
+    .alarm-banner {
+      background: var(--bg-card);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+      padding: 10px 14px;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      transition: all 200ms ease;
+    }
+    .alarm-banner.alert-active {
+      background: var(--crimson-bg);
+      border-color: var(--crimson-alert);
+      box-shadow: 0 0 20px rgba(239, 68, 68, 0.15);
+    }
+    .alarm-banner.warning-active {
+      background: var(--amber-bg);
+      border-color: var(--amber-hold);
+      box-shadow: 0 0 20px rgba(245, 158, 11, 0.15);
+    }
+    .alarm-banner.clean-active {
+      background: var(--emerald-bg);
+      border-color: var(--emerald-glow);
+      box-shadow: 0 0 20px rgba(16, 185, 129, 0.12);
+    }
+
+    .alarm-icon {
+      font-size: 1.3rem;
+      line-height: 1;
+    }
+
+    .alarm-content {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .alarm-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    .alarm-desc {
+      font-size: 0.72rem;
+      color: var(--text-main);
+      line-height: 1.35;
+    }
+
+    /* Supervisor Quality Audit & Override Panel */
+    .supervisor-card {
+      background: var(--bg-card);
+      border: 1px solid rgba(212, 175, 55, 0.28);
+      border-radius: 10px;
+      padding: 12px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .supervisor-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      padding-bottom: 6px;
+    }
+
+    .supervisor-badge-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .supervisor-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.74rem;
+      font-weight: 700;
+      color: #FFF;
+    }
+
+    .supervisor-subtitle {
+      font-size: 0.65rem;
+      color: var(--text-muted);
+    }
+
+    .supervisor-notes-box {
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 6px;
+      padding: 8px 10px;
+      font-size: 0.72rem;
+      color: var(--text-main);
+      line-height: 1.35;
+    }
+
+    .supervisor-actions {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap;
+      padding-top: 2px;
+    }
+
+    /* Three Pillars Grid */
+    .rails-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .rail-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .rail-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      padding-bottom: 4px;
+    }
+
+    .rail-name {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.68rem;
+      font-weight: 600;
+      color: var(--gold-light);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .rail-status-pill {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.58rem;
+      padding: 2px 5px;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+
+    .rail-data-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.66rem;
+      color: var(--text-muted);
+    }
+    .rail-data-val {
+      font-family: 'JetBrains Mono', monospace;
+      color: #FFF;
+      font-weight: 500;
+    }
+
+    /* Spectrogram Canvas Card */
+    .spectrogram-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      padding: 10px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .spectrogram-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .spectrogram-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--gold-light);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .canvas-wrap {
+      width: 100%;
+      height: 95px;
+      background: #04070D;
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      border-radius: 6px;
+      overflow: hidden;
+      position: relative;
+    }
+    canvas#spectrogramCanvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    /* Chronological Audit Trail */
+    .timeline-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      flex: 1;
+    }
+
+    .timeline-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--gold-light);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      padding-bottom: 4px;
+    }
+
+    .timeline-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      overflow-y: auto;
+      max-height: 200px;
+      padding-right: 4px;
+    }
+
+    .timeline-item {
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+      font-size: 0.7rem;
+      position: relative;
+      padding-left: 12px;
+    }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 5px;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--gold-primary);
+    }
+    .timeline-item::after {
+      content: '';
+      position: absolute;
+      left: 2px;
+      top: 12px;
+      width: 1px;
+      height: calc(100% - 2px);
+      background: rgba(212, 175, 55, 0.15);
+    }
+    .timeline-item:last-child::after { display: none; }
+
+    .tl-time {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.62rem;
+      color: var(--gold-light);
+      width: 54px;
+      flex-shrink: 0;
+    }
+
+    .tl-event {
+      font-weight: 600;
+      color: #FFF;
+      margin-bottom: 1px;
+    }
+
+    .tl-detail {
+      color: var(--text-muted);
+      font-size: 0.66rem;
+      line-height: 1.3;
+    }
+
+    /* Scrollbars */
+    ::-webkit-scrollbar { width: 4px; height: 4px; }
+    ::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.2); }
+    ::-webkit-scrollbar-thumb { background: rgba(212, 175, 55, 0.25); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(212, 175, 55, 0.45); }
+  </style>
+</head>
+<body>
+  <div class="blueprint-overlay"></div>
+
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <div class="brand-wrap">
+        <span style="font-size: 1.7rem;">⚡</span>
+        <div>
+          <div class="brand-title">AcuDiag Fleet & Escrow Command Desk</div>
+          <div style="font-size: 0.68rem; color: var(--text-muted); margin-top: 1px;">
+            Dual-Sided WhatsApp Fleet Command (Customer & Field Technician) • Quality Supervisor Governance
+          </div>
+        </div>
+        <div class="brand-badges">
+          <span class="badge">Pine Labs AgenticOrg</span>
+          <span class="badge badge-emerald">Delhivery OS1</span>
+          <span class="badge badge-cobalt">Gnani Prisma v2.5</span>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <div class="telemetry-status">
+          <span class="pulse-dot"></span>
+          <span>Daemon: 127.0.0.1:8000</span>
+        </div>
+        <button class="btn btn-gold" id="btnRunDemo" onclick="runChoreographedDemo()">
+          <span>⚡ Run 90s Live Demo</span>
+        </button>
+        <button class="btn" onclick="resetAllCases()">
+          <span>🔄 Reset Cases</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Three-Pane Workspace -->
+    <div class="workspace-grid">
+
+      <!-- ===================================================================
+           PANE 1: INCIDENT INBOX QUEUE
+           =================================================================== -->
+      <div class="inbox-column">
+        <div class="inbox-header">
+          <div class="inbox-title-row">
+            <div class="inbox-title">
+              <span>📋 Incident Queue</span>
+              <span class="badge" id="inboxCountBadge">6 Active</span>
+            </div>
+            <span style="font-size: 0.68rem; color: var(--gold-light);" id="clockIST">10:14 IST</span>
+          </div>
+          <input type="text" class="inbox-search" id="inboxSearch" placeholder="Search ticket, customer, tech, PIN..." oninput="filterIncidents()">
+          <div class="inbox-filter-tabs">
+            <button class="filter-tab active" onclick="setFilter('ALL', this)">All (6)</button>
+            <button class="filter-tab" onclick="setFilter('SETTLED', this)">Settled (2)</button>
+            <button class="filter-tab" onclick="setFilter('ALARMS', this)">Alarms (4)</button>
+            <button class="filter-tab" onclick="setFilter('ESCALATIONS', this)">Supervisor (2)</button>
+          </div>
+        </div>
+
+        <div class="inbox-list" id="inboxList">
+          <!-- Populated dynamically via JS -->
+        </div>
+      </div>
+
+      <!-- ===================================================================
+           PANE 2: DUAL-SIDED WHATSAPP PHONE SIMULATOR
+           =================================================================== -->
+      <div class="phone-column">
+        <div class="phone-mockup">
+          <div class="phone-notch">
+            <div class="notch-camera"></div>
+          </div>
+
+          <!-- Status Bar -->
+          <div class="phone-status-bar">
+            <span id="phoneClock">10:14</span>
+            <div style="display: flex; gap: 6px; align-items: center; font-size: 0.7rem;">
+              <span>5G</span>
+              <span>📶</span>
+              <span>🔋 98%</span>
+            </div>
+          </div>
+
+          <!-- WhatsApp Chat Header with Channel Switcher -->
+          <div class="wa-header">
+            <div class="wa-contact-wrap">
+              <div class="wa-avatar">
+                ⚡
+                <div class="wa-verified-badge">✓</div>
+              </div>
+              <div class="wa-contact-info">
+                <span class="wa-contact-name" id="waBotTitle">AcuDiag Assistant</span>
+                <span class="wa-contact-status" id="waBotStatus">online • verified bot</span>
+              </div>
+            </div>
+
+            <!-- Segmented Channel Switcher -->
+            <div class="channel-toggle-wrap">
+              <button class="channel-toggle-btn active" id="btnChanCust" onclick="switchChannel('customer')">👤 Customer</button>
+              <button class="channel-toggle-btn" id="btnChanTech" onclick="switchChannel('technician')">🔧 Technician</button>
+            </div>
+          </div>
+
+          <!-- Chat Body -->
+          <div class="wa-chat-body" id="waChatBody">
+            <!-- Messages rendered dynamically -->
+          </div>
+
+          <!-- Input Bar -->
+          <div class="wa-input-bar">
+            <span style="font-size: 1.1rem; color: var(--wa-text-muted); cursor: pointer;">😊</span>
+            <span style="font-size: 1.1rem; color: var(--wa-text-muted); cursor: pointer;">📎</span>
+            <div class="wa-input-pill">
+              <input type="text" id="waInputText" placeholder="Reply to AcuDiag in Hinglish..." onkeypress="handleInputKey(event)">
+            </div>
+            <button class="wa-mic-btn" id="btnWaMic" onclick="sendActiveUserMessage()" title="Send">
+              ➤
+            </button>
+          </div>
+        </div>
+
+        <!-- Quick Test Actions Strip -->
+        <div class="quick-actions-bar">
+          <button class="quick-act-btn" onclick="quickAction('audio')">🔊 Send Voice Note</button>
+          <button class="quick-act-btn" onclick="quickAction('approve')">✅ Approve Escrow</button>
+          <button class="quick-act-btn" onclick="quickAction('decline')">❌ Decline Quote</button>
+          <button class="quick-act-btn" onclick="quickAction('spin')">🧪 Verify Spin Test</button>
+          <button class="quick-act-btn" onclick="quickAction('spoof')">⚠️ Trigger Replay Fraud</button>
+        </div>
+      </div>
+
+      <!-- ===================================================================
+           PANE 3: DEEP TELEMETRY & SUPERVISOR AUDIT INSPECTOR
+           =================================================================== -->
+      <div class="telemetry-column">
+        <!-- Alarm / Anomaly Banner -->
+        <div class="alarm-banner clean-active" id="alarmBanner">
+          <div class="alarm-icon" id="alarmIcon">🛡️</div>
+          <div class="alarm-content">
+            <div class="alarm-title" id="alarmTitle">ZERO ANOMALIES DETECTED</div>
+            <div class="alarm-desc" id="alarmDesc">
+              Acoustic kinematics verified against CWRU SKF 6205-2RS benchmark. Escrow pre-auth settled.
+            </div>
+          </div>
+        </div>
+
+        <!-- Supervisor Quality Audit & Override Panel -->
+        <div class="supervisor-card" id="supervisorCard">
+          <div class="supervisor-header">
+            <div class="supervisor-badge-wrap">
+              <span style="font-size: 1.15rem;">🛡️</span>
+              <div>
+                <div class="supervisor-title">Quality Supervisor Audit: <span id="supDocketId" style="color: var(--gold-light);">DOC_SUP_804</span></div>
+                <div class="supervisor-subtitle" id="supLeadName">Inspector R. Sundaram (#804) • Escalation Governance & Override Desk</div>
+              </div>
+            </div>
+            <span class="alarm-pill alarm-settled" id="supStatusPill">AUTO_RESOLVED</span>
+          </div>
+          <div class="supervisor-notes-box" id="supNotesBox">
+            Acoustic kinematics mathematically confirmed. Bearing harmonic eliminated. Auto-capture approved.
+          </div>
+          <div class="supervisor-actions" id="supActionsRow">
+            <span style="font-size: 0.65rem; color: var(--gold-light); font-family: 'JetBrains Mono', monospace;">Supervisor Overrides:</span>
+            <button class="btn btn-crimson" onclick="triggerSupervisorOverride('UPHOLD_FRAUD_LOCK')">🛡️ Uphold Fraud & Lock</button>
+            <button class="btn btn-gold" onclick="triggerSupervisorOverride('DISPATCH_SENIOR_TECH')">🔄 Re-Dispatch Senior Tech</button>
+            <button class="btn btn-emerald" onclick="triggerSupervisorOverride('RELEASE_CUSTOMER_REFUND')">💳 Authorize 100% Refund</button>
+          </div>
+        </div>
+
+        <!-- Three Rails Overview Grid -->
+        <div class="rails-grid">
+          <!-- Rail 1: Pine Labs Plural -->
+          <div class="rail-card">
+            <div class="rail-header">
+              <span class="rail-name">💳 Pine Labs Escrow</span>
+              <span class="rail-status-pill alarm-settled" id="pineStatusPill">SETTLED</span>
+            </div>
+            <div class="rail-data-row">
+              <span>Order ID:</span>
+              <span class="rail-data-val" id="pineOrderId">PL_ORD_8A92B1C4</span>
+            </div>
+            <div class="rail-data-row">
+              <span>Escrow Hold:</span>
+              <span class="rail-data-val" id="pineAmount">₹1,250.00</span>
+            </div>
+            <div class="rail-data-row">
+              <span>Technician UPI:</span>
+              <span class="rail-data-val" id="pineTechUPI">suresh@okhdfc</span>
+            </div>
+          </div>
+
+          <!-- Rail 2: Delhivery Logistics -->
+          <div class="rail-card">
+            <div class="rail-header">
+              <span class="rail-name">🚚 Delhivery OS1</span>
+              <span class="rail-status-pill alarm-settled" id="delStatusPill">DELIVERED</span>
+            </div>
+            <div class="rail-data-row">
+              <span>Waybill:</span>
+              <span class="rail-data-val" id="delWaybill">DEL16100984210</span>
+            </div>
+            <div class="rail-data-row">
+              <span>Origin Hub:</span>
+              <span class="rail-data-val" id="delHub">Godrej Peenya GW</span>
+            </div>
+            <div class="rail-data-row">
+              <span>Reverse Docket:</span>
+              <span class="rail-data-val" id="delRevDocket">DEL_REV_881920</span>
+            </div>
+          </div>
+
+          <!-- Rail 3: Gnani Speech / DSP -->
+          <div class="rail-card">
+            <div class="rail-header">
+              <span class="rail-name">🎙️ Gnani & DSP</span>
+              <span class="rail-status-pill alarm-settled" id="dspStatusPill">CLEAN</span>
+            </div>
+            <div class="rail-data-row">
+              <span>SNR Margin:</span>
+              <span class="rail-data-val" id="dspSnr">22.1 dB</span>
+            </div>
+            <div class="rail-data-row">
+              <span>N-P LRT Score:</span>
+              <span class="rail-data-val" id="dspLrt">0.38 &le; 2.45</span>
+            </div>
+            <div class="rail-data-row">
+              <span>Anti-Spoofing:</span>
+              <span class="rail-data-val" id="dspAntiSpoof">PASS (0.004)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 60 FPS Spectrogram Card -->
+        <div class="spectrogram-card">
+          <div class="spectrogram-header">
+            <div class="spectrogram-title">
+              <span>📊 Real-Time Acoustic Spectrogram (CWRU Kinematics)</span>
+              <span class="badge" id="peakFreqBadge">Peak: 1,450 Hz (BPFO)</span>
+            </div>
+            <div style="display: flex; gap: 6px;">
+              <button class="btn" style="padding: 3px 8px; font-size: 0.65rem;" onclick="triggerSyntheticAudio('FAULT')">Inject 1,450Hz Fault</button>
+              <button class="btn" style="padding: 3px 8px; font-size: 0.65rem;" onclick="triggerSyntheticAudio('CLEAN')">Inject Clean Spin</button>
+            </div>
+          </div>
+          <div class="canvas-wrap">
+            <canvas id="spectrogramCanvas" width="900" height="95"></canvas>
+          </div>
+        </div>
+
+        <!-- Chronological Workflow Audit Trail -->
+        <div class="timeline-card">
+          <div class="timeline-title">📜 Chronological Workflow & Decision Trail</div>
+          <div class="timeline-list" id="timelineList">
+            <!-- Rendered dynamically -->
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    // =========================================================================
+    // MULTI-SESSION INCIDENT DESK STATE & DUAL CHANNEL CONTROLLER
+    // =========================================================================
+    let sessionsData = {};
+    let activeSessionId = "SES_1042_PRIYA";
+    let activeSessionObject = null;
+    let currentFilter = "ALL";
+    let currentChannel = "customer"; // "customer" or "technician"
+
+    // Audio Engine variables
+    let audioCtx = null;
+    let analyser = null;
+    let activeOscillator = null;
+    const canvas = document.getElementById("spectrogramCanvas");
+    const ctx = canvas.getContext("2d");
+
+    async function loadSessions() {
+      try {
+        const res = await fetch("/api/sessions");
+        if (res.ok) {
+          const json = await res.json();
+          renderInboxList(json.sessions);
+          loadSessionDetail(activeSessionId);
+          return;
+        }
+      } catch (e) {
+        console.warn("Using local fallback session data:", e);
+      }
+      renderInboxList(FALLBACK_SUMMARIES);
+      loadSessionDetail(activeSessionId);
+    }
+
+    const FALLBACK_SUMMARIES = [
+      {
+        id: "SES_1042_PRIYA",
+        ticket_no: "1042",
+        customer_name: "Priya Sharma",
+        phone: "+91 98450 11042",
+        location: "Kengeri, Bengaluru 560059",
+        appliance: "Godrej 7kg Front-Load",
+        fault_name: "Drum Bearing Outer Race Wear (BPFO)",
+        state: "VERIFIED_SETTLED",
+        alarm: "NONE",
+        alarm_text: "Zero anomalies. Complete physical repair verified acoustically.",
+        cost_total: 1250,
+        technician_name: "Suresh Kumar",
+        supervisor_status: "AUTO_RESOLVED_CLEAN",
+        supervisor_docket_id: "DOC_SUP_804",
+        last_updated: "11:43 IST"
+      },
+      {
+        id: "SES_1043_VIKRAM",
+        ticket_no: "1043",
+        customer_name: "Vikram Singh",
+        phone: "+91 98110 44219",
+        location: "Saket, New Delhi 110017",
+        appliance: "LG 1.5 Ton Dual Inverter AC",
+        fault_name: "Compressor Discharge Valve Leak",
+        state: "AWAITING_APPROVAL",
+        alarm: "QUOTE_DECLINED",
+        alarm_text: "🚨 User declined ₹4,600 repair quote. Escrow hold cancelled. Zero funds charged.",
+        cost_total: 4600,
+        technician_name: "Unassigned",
+        supervisor_status: "CUSTOMER_DECLINED_ARCHIVED",
+        supervisor_docket_id: "DOC_SUP_811",
+        last_updated: "11:20 IST"
+      },
+      {
+        id: "SES_1044_ANANYA",
+        ticket_no: "1044",
+        customer_name: "Ananya Patel",
+        phone: "+91 97412 88310",
+        location: "Whitefield, Bengaluru 560066",
+        appliance: "Samsung 6.5kg Wobble Top-Load",
+        fault_name: "Suspension Damper Rod Fatigue",
+        state: "AWAITING_RETRY",
+        alarm: "LOW_SNR_ALERT",
+        alarm_text: "🚨 Kitchen noise interference (SNR 9.4 dB < 15 dB). Test rejected to prevent false fault diagnosis.",
+        cost_total: 750,
+        technician_name: "Pending Intake",
+        supervisor_status: "GATING_ACTIVE",
+        supervisor_docket_id: "DOC_SUP_819",
+        last_updated: "11:44 IST"
+      },
+      {
+        id: "SES_1045_RAJESH",
+        ticket_no: "1045",
+        customer_name: "Rajesh Kumar",
+        phone: "+91 99001 77234",
+        location: "Andheri West, Mumbai 400058",
+        appliance: "Whirlpool 260L Frost-Free Fridge",
+        fault_name: "Capillary Expansion Valve Whistle",
+        state: "REPAIR_REJECTED",
+        alarm: "REPLAY_SPOOF_BLOCKED",
+        alarm_text: "🚨 FRAUD DETECTED: Technician played canned audio via phone speaker (DAC spike, low rumble absent). Escrow LOCKED.",
+        cost_total: 1100,
+        technician_name: "Dinesh Patil",
+        supervisor_status: "SUPERVISOR_ACTION_REQUIRED",
+        supervisor_docket_id: "DOC_SUP_822",
+        last_updated: "12:08 IST"
+      },
+      {
+        id: "SES_1046_AMIT",
+        ticket_no: "1046",
+        customer_name: "Amit Verma",
+        phone: "+91 98860 33912",
+        location: "Indiranagar, Bengaluru 560038",
+        appliance: "Bosch Series 6 Front-Load",
+        fault_name: "Drain Pump Impeller Cavitation",
+        state: "ESCROW_LOCKED_AUDIT",
+        alarm: "FAKE_REPAIR_LOCKED",
+        alarm_text: "🚨 Incomplete repair: 820 Hz impeller screech harmonic still present (LRT 8.42 > 2.45). Escrow LOCKED.",
+        cost_total: 1000,
+        technician_name: "Manoj Tiwari",
+        supervisor_status: "SUPERVISOR_ACTION_REQUIRED",
+        supervisor_docket_id: "DOC_SUP_826",
+        last_updated: "12:39 IST"
+      },
+      {
+        id: "SES_1047_SUNITA",
+        ticket_no: "1047",
+        customer_name: "Sunita Rao",
+        phone: "+91 94480 55123",
+        location: "Malleshwaram, Bengaluru 560003",
+        appliance: "IFB Senator 8kg Smart",
+        fault_name: "Motor Tachometer Hall Sensor Failure",
+        state: "CAPTURED_SETTLED",
+        alarm: "BANK_TIMEOUT_IDEMPOTENT",
+        alarm_text: "⚠️ Pine Labs 504 Gateway Timeout recovered via SHA-256 idempotency key. Zero duplicate billing.",
+        cost_total: 1550,
+        technician_name: "Ramesh Kumar",
+        supervisor_status: "AUTO_RECOVERED",
+        supervisor_docket_id: "DOC_SUP_830",
+        last_updated: "13:12 IST"
+      }
+    ];
+
+    function renderInboxList(list) {
+      const container = document.getElementById("inboxList");
+      container.innerHTML = "";
+
+      list.forEach(item => {
+        // Filter check
+        if (currentFilter === "SETTLED" && !item.state.includes("SETTLED")) return;
+        if (currentFilter === "ALARMS" && item.alarm === "NONE") return;
+        if (currentFilter === "ESCALATIONS" && !item.supervisor_status.includes("REQUIRED") && !item.supervisor_status.includes("UPHELD")) return;
+
+        const card = document.createElement("div");
+        card.className = `incident-card ${item.id === activeSessionId ? 'active' : ''}`;
+        card.onclick = () => selectSession(item.id);
+
+        let pillClass = "alarm-settled";
+        let pillText = "SETTLED";
+        if (item.alarm === "QUOTE_DECLINED") { pillClass = "alarm-declined"; pillText = "DECLINED"; }
+        else if (item.alarm === "LOW_SNR_ALERT") { pillClass = "alarm-lowsnr"; pillText = "LOW SNR"; }
+        else if (item.alarm === "REPLAY_SPOOF_BLOCKED") { pillClass = "alarm-spoof"; pillText = "FRAUD SPOOF"; }
+        else if (item.alarm === "FAKE_REPAIR_LOCKED") { pillClass = "alarm-fake"; pillText = "FAKE REPAIR"; }
+        else if (item.alarm === "BANK_TIMEOUT_IDEMPOTENT") { pillClass = "alarm-timeout"; pillText = "504 RECOVERED"; }
+
+        card.innerHTML = `
+          <div class="incident-top">
+            <span class="incident-tkt">#${item.ticket_no} • ${item.customer_name}</span>
+            <span class="incident-time">${item.last_updated}</span>
+          </div>
+          <div class="incident-appliance">${item.appliance}</div>
+          <div class="incident-bottom">
+            <span class="alarm-pill ${pillClass}">${pillText}</span>
+            <span class="incident-amount">₹${item.cost_total}</span>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    async function selectSession(sessionId) {
+      activeSessionId = sessionId;
+      document.querySelectorAll(".incident-card").forEach(c => c.classList.remove("active"));
+      event?.currentTarget?.classList.add("active");
+      await loadSessionDetail(sessionId);
+    }
+
+    async function loadSessionDetail(sessionId) {
+      let data = null;
+      try {
+        const res = await fetch(`/api/sessions/${sessionId}`);
+        if (res.ok) data = await res.json();
+      } catch (e) {
+        console.warn("Fetch failed, using local session state");
+      }
+
+      if (!data) {
+        const match = FALLBACK_SUMMARIES.find(s => s.id === sessionId);
+        data = {
+          customer_name: match.customer_name,
+          phone: match.phone,
+          appliance: match.appliance,
+          fault_name: match.fault_name,
+          alarm: match.alarm,
+          alarm_text: match.alarm_text,
+          technician: { name: match.technician_name, phone: "+91 98450 12345", upi_vpa: "tech@okhdfc" },
+          escrow: { order_id: "PL_ORD_" + match.ticket_no, amount: match.cost_total, status: match.state, upi_vpa: "tech@upi" },
+          logistics: { waybill: "DEL" + match.ticket_no + "098", hub: "Origin GW -> Destination GW", reverse_docket: "DEL_REV_" + match.ticket_no },
+          telemetry: { snr_db: 22.1, peak_freq_hz: 1450.0, lrt_score: 0.38, lrt_threshold: 2.45, anti_spoofing: "PASS" },
+          supervisor_docket: { docket_id: match.supervisor_docket_id, status: match.supervisor_status, assigned_supervisor: "Inspector R. Sundaram (#804)", notes: match.alarm_text },
+          messages_customer: [
+            { sender: "user", time: "10:14", text: `Reporting issue on ${match.appliance}: ${match.fault_name}` },
+            { sender: "agent", time: "10:14", text: match.alarm_text || `AcuDiag diagnosed ${match.fault_name}. Escrow held: ₹${match.cost_total}.` }
+          ],
+          messages_technician: [
+            { sender: "agent", time: "10:15", text: `Job assigned to ${match.technician_name}. Appliance: ${match.appliance}.` },
+            { sender: "tech", time: "10:30", text: `${match.technician_name}: En route to customer.` }
+          ],
+          audit_timeline: [
+            { time: "10:14", event: "Incident Logged", detail: `${match.customer_name} reported ${match.fault_name}` },
+            { time: "10:15", event: "State Transition", detail: `Status changed to ${match.state} (Alarm: ${match.alarm})` }
+          ]
+        };
+      }
+
+      activeSessionObject = data;
+
+      // 1. Update WhatsApp Pane Channel Header & Messages
+      const techName = data.technician?.name?.split(' ')[0] || "Tech";
+      document.getElementById("btnChanCust").textContent = `👤 ${data.customer_name.split(' ')[0]}`;
+      document.getElementById("btnChanTech").textContent = `🔧 ${techName}`;
+      renderActiveChannelMessages();
+
+      // 2. Update Alarm Banner
+      const banner = document.getElementById("alarmBanner");
+      const icon = document.getElementById("alarmIcon");
+      const title = document.getElementById("alarmTitle");
+      const desc = document.getElementById("alarmDesc");
+
+      banner.className = "alarm-banner";
+      if (data.alarm === "NONE") {
+        banner.classList.add("clean-active");
+        icon.textContent = "🛡️";
+        title.textContent = "ZERO ANOMALIES DETECTED";
+        desc.textContent = "Acoustic kinematics verified against CWRU benchmark. Pine Labs escrow pre-auth settled.";
+      } else if (data.alarm === "QUOTE_DECLINED") {
+        banner.classList.add("warning-active");
+        icon.textContent = "⏸️";
+        title.textContent = "QUOTE DECLINED BY USER";
+        desc.textContent = "Customer declined ₹4,600 quote. Agent gracefully halted without charging card. Escrow hold voided.";
+      } else if (data.alarm === "LOW_SNR_ALERT") {
+        banner.classList.add("warning-active");
+        icon.textContent = "⚠️";
+        title.textContent = "LOW SNR REJECTION (KITCHEN NOISE)";
+        desc.textContent = "Background cooker whistle at 68 dB SPL (SNR 9.4 dB < 15 dB threshold). Diagnostic aborted to prevent false diagnosis.";
+      } else if (data.alarm === "REPLAY_SPOOF_BLOCKED") {
+        banner.classList.add("alert-active");
+        icon.textContent = "🚨";
+        title.textContent = "REPLAY ATTACK FRAUD BLOCKED";
+        desc.textContent = "Technician played canned audio through smartphone speaker. DAC jitter detected & sub-120Hz physical rumble absent. Escrow LOCKED.";
+      } else if (data.alarm === "FAKE_REPAIR_LOCKED") {
+        banner.classList.add("alert-active");
+        icon.textContent = "❌";
+        title.textContent = "FAKE REPAIR DETECTED (LRT FAILED)";
+        desc.textContent = "Technician claimed pump repair complete, but 820 Hz cavitation screech persisted (LRT 8.42 > 2.45). Escrow LOCKED.";
+      } else if (data.alarm === "BANK_TIMEOUT_IDEMPOTENT") {
+        banner.classList.add("clean-active");
+        icon.textContent = "⚡";
+        title.textContent = "504 BANK TIMEOUT RECOVERED IDEMPOTENTLY";
+        desc.textContent = "Pine Labs Plural gateway timed out during capture. Transaction saved with SHA-256 idempotency key; verified without double-charging.";
+      }
+
+      // 3. Update Supervisor Quality Docket Card
+      const sup = data.supervisor_docket || {};
+      document.getElementById("supDocketId").textContent = sup.docket_id || "DOC_SUP_804";
+      document.getElementById("supLeadName").textContent = `${sup.assigned_supervisor || 'Inspector R. Sundaram (#804)'} • Escalation Governance & Override Desk`;
+      document.getElementById("supNotesBox").textContent = sup.notes || data.alarm_text || "Standard operational docket.";
+      
+      const supPill = document.getElementById("supStatusPill");
+      supPill.textContent = sup.status || "AUTO_RESOLVED";
+      if ((sup.status || '').includes("ACTION_REQUIRED")) {
+        supPill.className = "alarm-pill alarm-spoof";
+      } else if ((sup.status || '').includes("UPHELD")) {
+        supPill.className = "alarm-pill alarm-fake";
+      } else {
+        supPill.className = "alarm-pill alarm-settled";
+      }
+
+      // 4. Update Rail Cards
+      document.getElementById("pineOrderId").textContent = data.escrow?.order_id || "N/A";
+      document.getElementById("pineAmount").textContent = `₹${data.cost?.total || data.escrow?.amount || 0}.00`;
+      document.getElementById("pineTechUPI").textContent = data.technician?.upi_vpa || data.escrow?.upi_vpa || "tech@okhdfcbank";
+      document.getElementById("pineStatusPill").textContent = data.escrow?.status || data.state;
+
+      document.getElementById("delWaybill").textContent = data.logistics?.waybill || "DEL16100984";
+      document.getElementById("delHub").textContent = data.logistics?.hub || "Local Micro-Hub";
+      document.getElementById("delRevDocket").textContent = data.logistics?.reverse_docket || "N/A";
+
+      document.getElementById("dspSnr").textContent = `${data.telemetry?.snr_db || 22.1} dB`;
+      document.getElementById("dspLrt").textContent = `${data.telemetry?.lrt_score || 0.38} ≤ 2.45`;
+      document.getElementById("dspAntiSpoof").textContent = data.telemetry?.anti_spoofing ? "VERIFIED" : "PENDING";
+      document.getElementById("peakFreqBadge").textContent = `Peak: ${data.telemetry?.peak_freq_hz || 1450} Hz`;
+
+      // 5. Update Audit Timeline
+      const tl = document.getElementById("timelineList");
+      tl.innerHTML = "";
+      (data.audit_timeline || []).forEach(item => {
+        const row = document.createElement("div");
+        row.className = "timeline-item";
+        row.innerHTML = `
+          <span class="tl-time">${item.time}</span>
+          <div>
+            <div class="tl-event">${item.event}</div>
+            <div class="tl-detail">${item.detail}</div>
+          </div>
+        `;
+        tl.appendChild(row);
+      });
+    }
+
+    function switchChannel(channel) {
+      currentChannel = channel;
+      document.getElementById("btnChanCust").classList.toggle("active", channel === "customer");
+      document.getElementById("btnChanTech").classList.toggle("active", channel === "technician");
+
+      const input = document.getElementById("waInputText");
+      if (channel === "technician") {
+        input.placeholder = `Reply as Field Tech ${activeSessionObject?.technician?.name || 'Suresh'}...`;
+        document.getElementById("waBotTitle").textContent = `AcuDiag Dispatch (${activeSessionObject?.technician?.name || 'Tech'})`;
+      } else {
+        input.placeholder = `Reply as Customer ${activeSessionObject?.customer_name?.split(' ')[0] || 'Priya'}...`;
+        document.getElementById("waBotTitle").textContent = `AcuDiag Assistant (${activeSessionObject?.customer_name?.split(' ')[0] || 'Customer'})`;
+      }
+      renderActiveChannelMessages();
+    }
+
+    function renderActiveChannelMessages() {
+      if (!activeSessionObject) return;
+      const stream = currentChannel === "technician" 
+        ? (activeSessionObject.messages_technician || [])
+        : (activeSessionObject.messages_customer || activeSessionObject.messages || []);
+      renderWhatsAppMessages(stream, currentChannel);
+    }
+
+    function renderWhatsAppMessages(messages, channelType = "customer") {
+      const container = document.getElementById("waChatBody");
+      const indicatorText = channelType === "technician" ? "🔧 FIELD TECHNICIAN DISPATCH STREAM" : "👤 CUSTOMER WHATSAPP CONVERSATION";
+      container.innerHTML = `
+        <div class="wa-date-pill">TODAY (OCTOBER 1, 2026)</div>
+        <div class="wa-channel-indicator">${indicatorText}</div>
+      `;
+
+      messages.forEach(m => {
+        const isOutgoing = m.sender === 'user' || m.sender === 'tech';
+        const bubble = document.createElement("div");
+        bubble.className = `wa-bubble ${isOutgoing ? 'outgoing' : 'incoming'}`;
+
+        if (m.type === 'diagnostic_card') {
+          bubble.innerHTML = `
+            <span>Diagnostic Report Completed:</span>
+            <div class="wa-rich-card">
+              <div class="wa-card-title">${m.title}</div>
+              <div class="wa-card-detail">
+                • <b>Appliance:</b> ${m.appliance}<br>
+                • <b>Defect:</b> ${m.defect}<br>
+                • <b>Cost:</b> ${m.cost}
+              </div>
+              <button class="wa-card-action-btn" onclick="quickAction('approve')">
+                🔒 ${m.action || 'Approve & Lock Escrow'}
+              </button>
+            </div>
+            <div class="wa-time-meta">${m.time}</div>
+          `;
+        } else if (m.type === 'verification_card') {
+          bubble.innerHTML = `
+            <div class="wa-rich-card" style="border-color: var(--emerald-glow);">
+              <div class="wa-card-title" style="color: var(--emerald-glow);">${m.title}</div>
+              <div class="wa-card-detail">
+                • <b>Neyman-Pearson LRT:</b> ${m.lrt}<br>
+                • <b>Acoustic Status:</b> ${m.status}<br>
+                ${m.text}
+              </div>
+            </div>
+            <div class="wa-time-meta">${m.time}</div>
+          `;
+        } else if (m.is_audio) {
+          bubble.innerHTML = `
+            <div class="wa-voice-card">
+              <button class="wa-voice-play" onclick="triggerSyntheticAudio('FAULT')">▶</button>
+              <div class="wa-waveform">
+                <div class="wave-bar" style="height: 10px;"></div>
+                <div class="wave-bar" style="height: 18px;"></div>
+                <div class="wave-bar" style="height: 8px;"></div>
+                <div class="wave-bar" style="height: 22px;"></div>
+                <div class="wave-bar" style="height: 14px;"></div>
+                <div class="wave-bar" style="height: 19px;"></div>
+              </div>
+              <span style="font-size: 0.65rem; color: #FFF;">0:04</span>
+            </div>
+            <span style="font-size: 0.72rem; color: #D1FAE5; font-style: italic;">"${m.text}"</span>
+            <div class="wa-time-meta">${m.time} <span class="blue-ticks">✓✓</span></div>
+          `;
+        } else {
+          bubble.innerHTML = `
+            <span>${m.text.replace(/\n/g, '<br>')}</span>
+            <div class="wa-time-meta">${m.time} ${isOutgoing ? '<span class="blue-ticks">✓✓</span>' : ''}</div>
+          `;
+        }
+
+        container.appendChild(bubble);
+      });
+      container.scrollTop = container.scrollHeight;
+    }
+
+    async function sendActiveUserMessage() {
+      const input = document.getElementById("waInputText");
+      const text = input.value.trim();
+      if (!text) return;
+      input.value = "";
+
+      const senderType = currentChannel === "technician" ? "tech" : "user";
+      try {
+        const res = await fetch(`/api/sessions/${activeSessionId}/message`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ text: text, sender: senderType, channel: currentChannel })
+        });
+        if (res.ok) {
+          const json = await res.json();
+          activeSessionObject = json.session;
+          renderActiveChannelMessages();
+          loadSessions();
+          return;
+        }
+      } catch (e) {
+        console.warn("Message API failed, appending locally");
+      }
+
+      // Local append
+      const container = document.getElementById("waChatBody");
+      const b = document.createElement("div");
+      b.className = "wa-bubble outgoing";
+      b.innerHTML = `<span>${text}</span><div class="wa-time-meta">Just now <span class="blue-ticks">✓✓</span></div>`;
+      container.appendChild(b);
+      container.scrollTop = container.scrollHeight;
+    }
+
+    function handleInputKey(e) {
+      if (e.key === "Enter") sendActiveUserMessage();
+    }
+
+    async function quickAction(type) {
+      if (type === 'audio') {
+        triggerSyntheticAudio('FAULT');
+        document.getElementById("waInputText").value = "Washing machine spin karte waqt khat-khat awaz aa rahi hai.";
+        sendActiveUserMessage();
+      } else if (type === 'approve') {
+        document.getElementById("waInputText").value = "Approve Repair & Lock Escrow";
+        sendActiveUserMessage();
+      } else if (type === 'decline') {
+        document.getElementById("waInputText").value = "Nahi, yeh bohot mehenga hai. I decline.";
+        sendActiveUserMessage();
+      } else if (type === 'spin') {
+        triggerSyntheticAudio('CLEAN');
+        document.getElementById("waInputText").value = "Spin test completed, please verify.";
+        sendActiveUserMessage();
+      } else if (type === 'spoof') {
+        triggerSyntheticAudio('FAULT');
+        document.getElementById("waInputText").value = "[Technician playing canned speaker audio]";
+        sendActiveUserMessage();
+      }
+    }
+
+    async function triggerSupervisorOverride(action) {
+      try {
+        const res = await fetch(`/api/sessions/${activeSessionId}/supervisor-override`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ action: action, reason: "Manual Supervisor Audit from Operations Desk" })
+        });
+        if (res.ok) {
+          const json = await res.json();
+          activeSessionObject = json.session;
+          loadSessionDetail(activeSessionId);
+          loadSessions();
+          return;
+        }
+      } catch (e) {
+        console.warn("Supervisor override API failed");
+      }
+    }
+
+    function setFilter(f, btn) {
+      currentFilter = f;
+      document.querySelectorAll(".filter-tab").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      loadSessions();
+    }
+
+    function filterIncidents() {
+      const q = document.getElementById("inboxSearch").value.toLowerCase();
+      document.querySelectorAll(".incident-card").forEach(card => {
+        const text = card.textContent.toLowerCase();
+        card.style.display = text.includes(q) ? "flex" : "none";
+      });
+    }
+
+    async function resetAllCases() {
+      try {
+        await fetch("/api/sessions/reset", { method: "POST" });
+      } catch(e) {}
+      loadSessions();
+    }
+
+    // 90s Choreographed Demo Flow for Recording
+    async function runChoreographedDemo() {
+      selectSession("SES_1042_PRIYA");
+      const btn = document.getElementById("btnRunDemo");
+      btn.textContent = "⏳ Running Live Flow...";
+      btn.classList.add("btn-emerald");
+
+      // Step 1: Voice note
+      setTimeout(() => {
+        quickAction('audio');
+      }, 1500);
+
+      // Step 2: Approve escrow
+      setTimeout(() => {
+        quickAction('approve');
+      }, 6000);
+
+      // Step 3: Spin test
+      setTimeout(() => {
+        quickAction('spin');
+        btn.textContent = "⚡ Run 90s Live Demo";
+        btn.classList.remove("btn-emerald");
+      }, 12000);
+    }
+
+    // =========================================================================
+    // 60 FPS SPECTROGRAM VISUALIZER
+    // =========================================================================
+    function initAudio() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        analyser = audioCtx.createAnalyser();
+        analyser.fftSize = 512;
+      }
+    }
+
+    function triggerSyntheticAudio(type) {
+      initAudio();
+      if (activeOscillator) {
+        try { activeOscillator.stop(); } catch(e) {}
+      }
+
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+
+      if (type === 'FAULT') {
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(1450, audioCtx.currentTime);
+      } else {
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(404.5, audioCtx.currentTime);
+      }
+
+      osc.connect(gain);
+      gain.connect(analyser);
+      osc.start();
+      activeOscillator = osc;
+      setTimeout(() => {
+        try { osc.stop(); } catch(e){}
+      }, 2500);
+    }
+
+    function renderSpectrogram() {
+      requestAnimationFrame(renderSpectrogram);
+      ctx.fillStyle = "#04070D";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.strokeStyle = "rgba(212, 175, 55, 0.08)";
+      ctx.lineWidth = 1;
+      const freqMarkers = [50, 120, 1450, 4000, 8000];
+      freqMarkers.forEach(freq => {
+        const x = (Math.log10(freq) / Math.log10(8000)) * canvas.width;
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, canvas.height);
+        ctx.stroke();
+      });
+
+      if (!analyser) {
+        ctx.strokeStyle = "rgba(212, 175, 55, 0.35)";
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        for (let x = 0; x < canvas.width; x += 4) {
+          const y = (canvas.height / 2) + Math.sin(x * 0.04 + Date.now() * 0.0025) * 14 + Math.cos(x * 0.015) * 5;
+          if (x === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+        return;
+      }
+
+      const bufferLength = analyser.frequencyBinCount;
+      const dataArray = new Uint8Array(bufferLength);
+      analyser.getByteFrequencyData(dataArray);
+
+      const barWidth = (canvas.width / bufferLength) * 2.3;
+      let x = 0;
+
+      for (let i = 0; i < bufferLength; i++) {
+        const barHeight = (dataArray[i] / 255) * canvas.height;
+        const ratio = i / bufferLength;
+        const r = Math.floor(212 * (1 - ratio) + 16 * ratio);
+        const g = Math.floor(175 * (1 - ratio) + 185 * ratio);
+        const b = Math.floor(55 * (1 - ratio) + 129 * ratio);
+        ctx.fillStyle = `rgb(${r}, ${g}, ${b})`;
+        ctx.fillRect(x, canvas.height - barHeight, barWidth, barHeight);
+        x += barWidth + 1;
+      }
+    }
+
+    // Initialize on load
+    window.addEventListener("DOMContentLoaded", () => {
+      loadSessions();
+      renderSpectrogram();
+      setInterval(() => {
+        const d = new Date();
+        const timeStr = d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) + " IST";
+        document.getElementById("clockIST").textContent = timeStr;
+        document.getElementById("phoneClock").textContent = d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      }, 1000);
+    });
+  </script>
+</body>
+</html>
