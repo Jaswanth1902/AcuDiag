@@ -67,7 +67,9 @@ def verify_dataset_grounding():
     print(f"    - BPFO Defect Harmonic: {expected_fault_harmonic:.1f} Hz -> Aligns with AcuDiag 1,450 Hz Filterband")
 
     # Import AcuDiag DSP Engine and test LRT detection
-    sys.path.insert(0, "01_Projects/AcuDiag/src")
+    from pathlib import Path
+    src_dir = Path(__file__).resolve().parents[2] / "src"
+    sys.path.insert(0, str(src_dir))
     from audio_diagnostic import AcousticDiagnosticEngine
     from synthetic_acoustic_gen import ApplianceAcousticSynthesizer
 

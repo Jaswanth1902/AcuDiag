@@ -705,6 +705,44 @@
     }
     .wa-card-action-btn:active { transform: scale(0.97); }
 
+    .wa-doc-bubble {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      border-radius: 8px;
+      padding: 8px 10px;
+      margin-top: 4px;
+    }
+
+    .wa-doc-icon {
+      font-size: 1.4rem;
+      flex-shrink: 0;
+    }
+
+    .wa-doc-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      overflow: hidden;
+    }
+
+    .wa-doc-name {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--gold-light);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .wa-doc-size {
+      font-size: 0.62rem;
+      color: var(--wa-text-muted);
+    }
+
     .wa-input-bar {
       background: var(--wa-header-bg);
       padding: 8px 10px;
@@ -891,11 +929,16 @@
       padding-top: 2px;
     }
 
-    /* Three Pillars Grid */
+    /* Four Pillars Grid (Pine Labs, Delhivery, Gnani DSP, OEM Warranty) */
     .rails-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: 10px;
+    }
+    @media (max-width: 1400px) {
+      .rails-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
     }
 
     .rail-card {
@@ -1122,14 +1165,14 @@
           <div class="inbox-title-row">
             <div class="inbox-title">
               <span>📋 Incident Queue</span>
-              <span class="badge" id="inboxCountBadge">6 Active</span>
+              <span class="badge" id="inboxCountBadge">7 Active</span>
             </div>
             <span style="font-size: 0.68rem; color: var(--gold-light);" id="clockIST">10:14 IST</span>
           </div>
           <input type="text" class="inbox-search" id="inboxSearch" placeholder="Search ticket, customer, tech, PIN..." oninput="filterIncidents()">
           <div class="inbox-filter-tabs">
-            <button class="filter-tab active" onclick="setFilter('ALL', this)">All (6)</button>
-            <button class="filter-tab" onclick="setFilter('SETTLED', this)">Settled (2)</button>
+            <button class="filter-tab active" onclick="setFilter('ALL', this)">All (7)</button>
+            <button class="filter-tab" onclick="setFilter('SETTLED', this)">Settled (3)</button>
             <button class="filter-tab" onclick="setFilter('ALARMS', this)">Alarms (4)</button>
             <button class="filter-tab" onclick="setFilter('ESCALATIONS', this)">Supervisor (2)</button>
           </div>
@@ -1245,7 +1288,7 @@
           </div>
         </div>
 
-        <!-- Three Rails Overview Grid -->
+        <!-- Four Rails Overview Grid -->
         <div class="rails-grid">
           <!-- Rail 1: Pine Labs Plural -->
           <div class="rail-card">
@@ -1304,6 +1347,26 @@
             <div class="rail-data-row">
               <span>Anti-Spoofing:</span>
               <span class="rail-data-val" id="dspAntiSpoof">PASS (0.004)</span>
+            </div>
+          </div>
+
+          <!-- Rail 4: OEM Warranty & Coverage -->
+          <div class="rail-card">
+            <div class="rail-header">
+              <span class="rail-name">🛡️ OEM Warranty</span>
+              <span class="rail-status-pill alarm-settled" id="warrantyStatusPill">ACTIVE</span>
+            </div>
+            <div class="rail-data-row">
+              <span>Coverage:</span>
+              <span class="rail-data-val" id="warrantyPolicy">10-Yr Motor Active</span>
+            </div>
+            <div class="rail-data-row">
+              <span>Customer Co-Pay:</span>
+              <span class="rail-data-val" id="warrantyLiability">₹750.00</span>
+            </div>
+            <div class="rail-data-row">
+              <span>Claim / Token:</span>
+              <span class="rail-data-val" id="warrantyToken">WAR-LG-88190</span>
             </div>
           </div>
         </div>
@@ -1472,6 +1535,23 @@
         supervisor_status: "AUTO_RECOVERED",
         supervisor_docket_id: "DOC_SUP_830",
         last_updated: "13:12 IST"
+      },
+      {
+        id: "SES_1048_NEHA",
+        ticket_no: "1048",
+        customer_name: "Neha Verma",
+        phone: "+91 98100 88234",
+        location: "Indiranagar, Bengaluru 560038",
+        appliance: "LG 8kg Direct Drive Front-Load",
+        fault_name: "DD Motor Rotor Position Sensor",
+        state: "VERIFIED_SETTLED",
+        alarm: "NONE",
+        alarm_text: "🛡️ LG 10-Year Motor Warranty verified active. Part ₹0.00 (OEM covered). Customer Co-Pay ₹750 settled via Pine Labs escrow.",
+        cost_total: 750,
+        technician_name: "Arun Prasad",
+        supervisor_status: "AUTO_RESOLVED_CLEAN",
+        supervisor_docket_id: "DOC_SUP_840",
+        last_updated: "14:40 IST"
       }
     ];
 
@@ -1635,6 +1715,31 @@
       document.getElementById("dspAntiSpoof").textContent = data.telemetry?.anti_spoofing ? "VERIFIED" : "PENDING";
       document.getElementById("peakFreqBadge").textContent = `Peak: ${data.telemetry?.peak_freq_hz || 1450} Hz`;
 
+      // Rail 4: OEM Warranty & Coverage
+      const wrn = data.warranty || {};
+      const wrnPill = document.getElementById("warrantyStatusPill");
+      if (wrnPill) {
+        const wStatus = wrn.status || "OUT_OF_WARRANTY";
+        wrnPill.textContent = wStatus;
+        if (wStatus.includes("ACTIVE")) {
+          wrnPill.className = "rail-status-pill alarm-settled";
+        } else if (wStatus.includes("EXPIRED")) {
+          wrnPill.className = "rail-status-pill alarm-declined";
+        } else {
+          wrnPill.className = "rail-status-pill alarm-lowsnr";
+        }
+      }
+      if (document.getElementById("warrantyPolicy")) {
+        document.getElementById("warrantyPolicy").textContent = wrn.coverage_type || wrn.policy_no || "Standard Coverage";
+      }
+      if (document.getElementById("warrantyLiability")) {
+        const copay = wrn.customer_liability !== undefined ? wrn.customer_liability : (data.cost?.total || data.escrow?.amount || 0);
+        document.getElementById("warrantyLiability").textContent = `₹${copay}.00 (Co-Pay)`;
+      }
+      if (document.getElementById("warrantyToken")) {
+        document.getElementById("warrantyToken").textContent = wrn.post_repair_token || wrn.policy_no || wrn.invoice_no || "N/A";
+      }
+
       // 5. Update Audit Timeline
       const tl = document.getElementById("timelineList");
       tl.innerHTML = "";
@@ -1713,6 +1818,34 @@
                 • <b>Neyman-Pearson LRT:</b> ${m.lrt}<br>
                 • <b>Acoustic Status:</b> ${m.status}<br>
                 ${m.text}
+              </div>
+            </div>
+            <div class="wa-time-meta">${m.time}</div>
+          `;
+        } else if (m.type === 'warranty_attachment') {
+          bubble.innerHTML = `
+            <span>${m.text || ''}</span>
+            <div class="wa-doc-bubble">
+              <div class="wa-doc-icon">📄</div>
+              <div class="wa-doc-info">
+                <span class="wa-doc-name">${m.filename}</span>
+                <span class="wa-doc-size">${m.size} • ${m.doc_type || 'PDF Document'}</span>
+              </div>
+            </div>
+            <div class="wa-time-meta">${m.time} <span class="blue-ticks">✓✓</span></div>
+          `;
+        } else if (m.type === 'warranty_badge') {
+          const isExpired = (m.status === 'EXPIRED' || m.status === 'EXPIRED_OUT_OF_WARRANTY');
+          const badgeBorder = isExpired ? 'var(--amber-hold)' : 'var(--emerald-glow)';
+          const badgeColor = isExpired ? 'var(--gold-light)' : '#A7F3D0';
+          bubble.innerHTML = `
+            <div class="wa-rich-card" style="border-color: ${badgeBorder}; background: rgba(0, 0, 0, 0.35);">
+              <div class="wa-card-title" style="color: ${badgeColor}; font-size: 0.74rem;">${m.title}</div>
+              <div class="wa-card-detail" style="color: var(--text-main); margin-top: 4px;">
+                ${m.detail}
+                <div style="margin-top: 6px; padding-top: 4px; border-top: 1px solid rgba(255,255,255,0.08); font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; color: var(--gold-light);">
+                  <b>Liability:</b> ${m.liability}
+                </div>
               </div>
             </div>
             <div class="wa-time-meta">${m.time}</div>

@@ -63,8 +63,23 @@ INITIAL_SESSIONS = {
             "notes": "Acoustic kinematics mathematically confirmed. Bearing harmonic eliminated. Auto-capture approved.",
             "override_history": []
         },
+        "warranty": {
+            "status": "EXPIRED",
+            "policy_no": "WAR-GOD-2021-9921",
+            "invoice_no": "INV-CROMA-BLR-8841",
+            "purchase_date": "14-Feb-2021",
+            "coverage_until": "13-Feb-2023",
+            "oem_provider": "Godrej SmartCare India",
+            "coverage_type": "Expired (2-Yr Comprehensive)",
+            "split_bill": "Part ₹850 + Labor ₹400 = Total ₹1,250",
+            "customer_liability": 1250.0,
+            "post_repair_token": "WAR-GODREJ-98214 (90-Day Active)"
+        },
         "audit_timeline": [
+            {"time": "10:13:50", "event": "Onboarding Initialized", "detail": "AcuDiag Bot asked customer for appliance model & noise symptom"},
             {"time": "10:14:02", "event": "Voice Ingested", "detail": "Gnani STT Prisma v2.5 (hi-IN) - Parsed Hinglish drum rattling"},
+            {"time": "10:14:15", "event": "Warranty Document Ingested", "detail": "Uploaded: Godrej_Croma_Bill_2021.pdf (Invoice #INV-CROMA-BLR-8841)"},
+            {"time": "10:14:22", "event": "OEM Warranty Verified", "detail": "Purchased 14-Feb-2021; 2-year warranty expired Feb 2023 -> Out-of-Warranty Escrow Gating Engaged"},
             {"time": "10:14:28", "event": "Noise Floor Verified", "detail": "SNR 22.1 dB >= 15 dB threshold (Acoustic capture valid)"},
             {"time": "10:15:10", "event": "Kinematic Fault Isolated", "detail": "CWRU 1,450 Hz BPFO harmonic detected (SKF 6205-2RS)"},
             {"time": "10:15:22", "event": "Pine Labs Pre-Auth Locked", "detail": "Order PL_ORD_8A92B1C4 locked ₹1,250.00 escrow hold"},
@@ -78,8 +93,12 @@ INITIAL_SESSIONS = {
             {"time": "11:43:00", "event": "Warranty Digital Token Issued", "detail": "WAR-GODREJ-98214 active for 90 days"}
         ],
         "messages_customer": [
+            {"sender": "agent", "time": "10:13:50", "text": "नमस्ते प्रिया जी! 🙏 AcuDiag में आपका स्वागत है। आपकी वॉशिंग मशीन में क्या आवाज़ या समस्या आ रही है?"},
             {"sender": "user", "time": "10:14:02", "text": "Washing machine spin karte waqt drum se ajeeb khat-khat awaz aa rahi hai.", "is_audio": True, "audio_label": "Voice Note (0:04)"},
-            {"sender": "agent", "time": "10:14:05", "text": "मैंने आपकी वॉशिंग मशीन का ड्रम खड़-खड़ लक्षण नोट कर लिया है। कृपया फोन को मशीन के पिछले हिस्से के पास 5 सेमी पर रखें।", "is_audio": True, "audio_label": "Gnani Voice Reply (0:05)"},
+            {"sender": "agent", "time": "10:14:05", "text": "लक्षण नोट कर लिए गए हैं। क्या यह मशीन अभी कंपनी वारंटी में है? यदि हाँ, तो कृपया वारंटी कार्ड या इनवॉइस की तस्वीर भेजें।"},
+            {"sender": "user", "time": "10:14:15", "type": "warranty_attachment", "filename": "Godrej_Croma_Bill_2021.pdf", "size": "1.2 MB", "doc_type": "Purchase Invoice & Warranty Card", "text": "Yeh lijiye hamara purchase bill (2021 model)."},
+            {"sender": "agent", "time": "10:14:22", "type": "warranty_badge", "status": "EXPIRED", "title": "वारंटी स्थिति: 14 महीने पहले समाप्त (Expired March 2023)", "detail": "• उपकरण: Godrej 7kg Front-Load (Eon Allure)<br>• खरीद तिथि: 14-Feb-2021 • वारंटी: 2 वर्ष समाप्त<br>• लागू नियम: AcuDiag मानकीकृत एस्क्रो सुरक्षा (अधिकतम अनुमान ₹1,250)", "liability": "₹1,250.00 (Standardized Escrow)"},
+            {"sender": "agent", "time": "10:14:28", "text": "खराबी की सटीक जांच के लिए, कृपया फोन को मशीन के पिछले हिस्से के पास 5 सेमी पर रखें और 4 सेकंड का स्पिन टेस्ट रिकॉर्ड करें।"},
             {"sender": "agent", "time": "10:15:10", "type": "diagnostic_card", "title": "AcuDiag Diagnostic Report", "appliance": "Godrej 7kg Front-Load", "defect": "Drum Bearing Outer Race Wear (BPFO 1,450 Hz)", "sku": "BEAR-6205-2RS", "cost": "Part ₹850 + Labor ₹400 = Total ₹1,250", "action": "Approve Repair & Lock Escrow"},
             {"sender": "user", "time": "10:15:22", "text": "Approve Repair & Lock Escrow"},
             {"sender": "agent", "time": "10:15:35", "text": "✅ Pine Labs Escrow Locked (₹1,250 held).\n\n• Order ID: PL_ORD_8A92B1C4\n• Delhivery Waybill: DEL16100984210\n• Assigned Tech: Suresh Kumar (+91 98450 12345)\n• ETA: Tomorrow by 11:30 AM\n\nFunds will only be released after you run a 10s post-repair spin test."},
@@ -148,6 +167,18 @@ INITIAL_SESSIONS = {
             "assigned_supervisor": "Inspector R. Sundaram (#804)",
             "notes": "High quote (₹4,600) rejected by customer. Zero escrow locked. Ticket retained in CRM for 30 days.",
             "override_history": []
+        },
+        "warranty": {
+            "status": "EXPIRED",
+            "policy_no": "WAR-LG-2019-1022",
+            "invoice_no": "INV-LG-DEL-1092",
+            "purchase_date": "12-May-2019",
+            "coverage_until": "11-May-2024 (5-Yr Compressor)",
+            "oem_provider": "LG Electronics India Ltd",
+            "coverage_type": "Expired (5-Yr Compressor Expired)",
+            "split_bill": "Part ₹3,600 + Labor ₹1,000 = Total ₹4,600",
+            "customer_liability": 4600.0,
+            "post_repair_token": "N/A (Quote Declined)"
         },
         "audit_timeline": [
             {"time": "11:18:10", "event": "Symptom Ingested", "detail": "User reported loud whistling hiss from outdoor AC unit"},
@@ -220,6 +251,18 @@ INITIAL_SESSIONS = {
             "notes": "Low SNR (9.4 dB) caught by Rule 3 noise floor filter. No false dispatch triggered.",
             "override_history": []
         },
+        "warranty": {
+            "status": "EXPIRED",
+            "policy_no": "WAR-SAMS-2022-8819",
+            "invoice_no": "INV-SAMS-BLR-7721",
+            "purchase_date": "05-Jan-2022",
+            "coverage_until": "04-Jan-2024",
+            "oem_provider": "Samsung India Electronics",
+            "coverage_type": "Out of Warranty (2-Yr Expired)",
+            "split_bill": "Part ₹450 + Labor ₹300 = Total ₹750",
+            "customer_liability": 750.0,
+            "post_repair_token": "PENDING_ACOUSTIC_RETRY"
+        },
         "audit_timeline": [
             {"time": "11:44:02", "event": "Audio Sample Uploaded", "detail": "User submitted 4s clip of vibrating machine"},
             {"time": "11:44:06", "event": "Noise Floor Evaluation", "detail": "Background pressure cooker whistle measuring 68 dB SPL (Machine: 65 dB SPL)"},
@@ -286,6 +329,18 @@ INITIAL_SESSIONS = {
             "assigned_supervisor": "Inspector R. Sundaram (#804)",
             "notes": "Acoustic spectrum indicates high DAC jitter at 16kHz from phone loudspeaker. Low-frequency motor vibration absent. Payout frozen. Supervisor action required.",
             "override_history": []
+        },
+        "warranty": {
+            "status": "EXPIRED",
+            "policy_no": "WAR-WP-2020-4411",
+            "invoice_no": "INV-VIJAY-MUM-449",
+            "purchase_date": "19-Aug-2020",
+            "coverage_until": "18-Aug-2022",
+            "oem_provider": "Whirlpool India Ltd",
+            "coverage_type": "Out of Warranty (2-Yr Expired)",
+            "split_bill": "Part ₹700 + Labor ₹400 = Total ₹1,100",
+            "customer_liability": 1100.0,
+            "post_repair_token": "FORFEITED_FRAUD"
         },
         "audit_timeline": [
             {"time": "12:05:00", "event": "Ticket Initialized", "detail": "Refrigerant valve noise reported; pre-auth ₹1,100 locked"},
@@ -357,6 +412,18 @@ INITIAL_SESSIONS = {
             "assigned_supervisor": "Inspector R. Sundaram (#804)",
             "notes": "Drain pump impeller screech harmonic persists at 820 Hz (LRT Lambda 8.42). Repair is physically incomplete. Escrow withheld. Supervisor override available.",
             "override_history": []
+        },
+        "warranty": {
+            "status": "EXPIRED",
+            "policy_no": "WAR-BOSCH-2021-884",
+            "invoice_no": "INV-RELIANCE-PUN-331",
+            "purchase_date": "02-Apr-2021",
+            "coverage_until": "01-Apr-2023",
+            "oem_provider": "BSH Household Appliances",
+            "coverage_type": "Out of Warranty (2-Yr Expired)",
+            "split_bill": "Part ₹600 + Labor ₹400 = Total ₹1,000",
+            "customer_liability": 1000.0,
+            "post_repair_token": "LOCKED_INCOMPLETE"
         },
         "audit_timeline": [
             {"time": "12:35:00", "event": "Ticket Initialized", "detail": "Drain pump cavitation screech reported; ₹1,000 escrow pre-auth locked"},
@@ -431,6 +498,18 @@ INITIAL_SESSIONS = {
             "notes": "504 Gateway Timeout intercepted and resolved via idempotency key without supervisor intervention.",
             "override_history": []
         },
+        "warranty": {
+            "status": "ACTIVE_SUPER",
+            "policy_no": "WAR-IFB-2022-7741",
+            "invoice_no": "INV-IFB-POINT-551",
+            "purchase_date": "22-Oct-2022",
+            "coverage_until": "21-Oct-2026 (4-Yr Super)",
+            "oem_provider": "IFB Industries Ltd",
+            "coverage_type": "IFB 4-Year Comprehensive Super",
+            "split_bill": "Part ₹1,150 + Labor ₹400 = Total ₹1,550",
+            "customer_liability": 1550.0,
+            "post_repair_token": "WAR-IFB-88194 (90-Day Active)"
+        },
         "audit_timeline": [
             {"time": "13:10:00", "event": "Ticket Initialized", "detail": "IFB motor speed hunting reported; ₹1,550 escrow hold created"},
             {"time": "13:12:10", "event": "Post-Repair Test PASSED", "detail": "Tacho signal locked cleanly; LRT 0.29 <= 2.45"},
@@ -448,6 +527,104 @@ INITIAL_SESSIONS = {
             {"sender": "agent", "time": "13:10:00", "text": "📍 *JOB DISPATCH:* IFB Senator 8kg (Motor Tacho). Customer: Sunita Rao. Escrow: ₹1,550."},
             {"sender": "tech", "time": "13:12:10", "text": "Ramesh: Tacho replaced. Spin test initiated."},
             {"sender": "agent", "time": "13:12:30", "text": "💰 *SETTLEMENT CONFIRMED:* ₹1,550 credited to your UPI: `ramesh.k@okaxis`. Bank timeout resolved idempotently."}
+        ]
+    },
+    "SES_1048_NEHA": {
+        "id": "SES_1048_NEHA",
+        "ticket_no": "1048",
+        "customer_name": "Neha Verma",
+        "phone": "+91 98100 88234",
+        "location": "Indiranagar, Bengaluru 560038",
+        "pincode": "560038",
+        "appliance": "LG 8kg Direct Drive Front-Load",
+        "model_no": "FHM1208ZDL",
+        "fault_name": "DD Inverter Motor Rotor Shuttering",
+        "fault_code": "WM_MOTOR_ROTOR_FAIL",
+        "sku": "MOTOR-LG-DD8",
+        "state": "VERIFIED_SETTLED",
+        "alarm": "NONE",
+        "alarm_text": "🛡️ IN-WARRANTY SPLIT-BILL: Motor (₹3,800) free from LG OEM. Customer paid standardized co-pay ₹750.",
+        "created_at": "14:05:00 IST",
+        "last_updated": "14:40:00 IST",
+        "cost": {"part": 3800, "labor": 400, "visiting": 350, "total": 750},
+        "technician": {
+            "name": "Arun Prasad",
+            "phone": "+91 98450 66210",
+            "badge": "LG Certified Lead #811",
+            "upi_vpa": "arun.lg@okaxis",
+            "rating": "4.95 / 5.0"
+        },
+        "escrow": {
+            "order_id": "PL_ORD_COPAY_881",
+            "amount": 750.0,
+            "status": "CAPTURED_SETTLED",
+            "provider": "Pine Labs Plural",
+            "upi_vpa": "arun.lg@okaxis"
+        },
+        "logistics": {
+            "waybill": "DEL992184102",
+            "hub": "LG Whitefield Central Hub -> BLR_INDIRANAGAR_GW",
+            "status": "DELIVERED_POD",
+            "reverse_docket": "DEL_REV_99120"
+        },
+        "telemetry": {
+            "snr_db": 24.5,
+            "snr_status": "CLEAN",
+            "peak_freq_hz": 120.0,
+            "lrt_score": 0.18,
+            "lrt_threshold": 2.45,
+            "lrt_verdict": "PASS",
+            "anti_spoofing": "PASSED"
+        },
+        "supervisor_docket": {
+            "docket_id": "DOC_SUP_840",
+            "status": "AUTO_RESOLVED_CLEAN",
+            "assigned_supervisor": "Inspector R. Sundaram (#804)",
+            "notes": "LG 10-Year Motor Warranty verified against LG SmartCare API. Standardized ₹750 co-pay enforced.",
+            "override_history": []
+        },
+        "warranty": {
+            "status": "ACTIVE_OEM_MOTOR",
+            "policy_no": "LG-CARE-2023-1109",
+            "invoice_no": "INV-AMZN-IN-49021",
+            "purchase_date": "10-Nov-2023",
+            "coverage_until": "09-Nov-2033 (10-Yr Motor)",
+            "oem_provider": "LG Electronics India Ltd",
+            "coverage_type": "10-Year Inverter Motor Warranty",
+            "split_bill": "OEM Motor Part (₹3,800) = ₹0 | Customer Co-Pay (Visit ₹350 + Labor ₹400) = ₹750",
+            "customer_liability": 750.0,
+            "post_repair_token": "WAR-LG-88190 (90-Day Active)"
+        },
+        "audit_timeline": [
+            {"time": "14:05:00", "event": "Onboarding Initialized", "detail": "AcuDiag Bot asked customer for appliance brand & issue description"},
+            {"time": "14:05:15", "event": "Symptom Ingested", "detail": "User reported motor shuttering / rotor desync during start"},
+            {"time": "14:05:30", "event": "Warranty Invoice Uploaded", "detail": "INV-AMZN-IN-49021 (Purchased 10-Nov-2023 on Amazon India)"},
+            {"time": "14:05:35", "event": "OEM Warranty Verified ACTIVE", "detail": "LG 10-Year Motor Warranty active. Motor part (₹3,800) covered by LG. Customer Co-Pay: ₹750"},
+            {"time": "14:06:10", "event": "Kinematic Fault Isolated", "detail": "Motor Hall Rotor Position Sensor (SKU: RPS-LG-8012)"},
+            {"time": "14:06:20", "event": "Pine Labs Co-Pay Escrow Locked", "detail": "Order PL_ORD_COPAY_881 locked ₹750.00 customer co-pay hold"},
+            {"time": "14:06:30", "event": "Delhivery Part Dispatched", "detail": "Waybill DEL992184102 manifested from LG Whitefield Hub (₹0 part charge)"},
+            {"time": "14:38:00", "event": "Post-Repair LRT Passed", "detail": "LRT Lambda: 0.18 <= 2.45; Motor rotation synchronous"},
+            {"time": "14:38:15", "event": "Co-Pay Escrow Settled", "detail": "₹750 co-pay released to technician Arun Prasad"},
+            {"time": "14:40:00", "event": "90-Day Digital Warranty Minted", "detail": "Token WAR-LG-88190 active for 90 days"}
+        ],
+        "messages_customer": [
+            {"sender": "agent", "time": "14:05:00", "text": "नमस्ते नेहा जी! 🙏 AcuDiag में आपका स्वागत है। आपकी वॉशिंग मशीन में क्या आवाज़ या समस्या आ रही है?"},
+            {"sender": "user", "time": "14:05:15", "text": "LG washing machine spin cycle start hone par bahut jhatke aur rumble awaz kar rahi hai."},
+            {"sender": "agent", "time": "14:05:18", "text": "लक्षण नोट कर लिए गए हैं। क्या यह मशीन अभी कंपनी वारंटी में है? कृपया अपने बिल या वारंटी कार्ड की फोटो भेजें।"},
+            {"sender": "user", "time": "14:05:30", "type": "warranty_attachment", "filename": "LG_Amazon_Invoice_Nov2023.pdf", "size": "980 KB", "doc_type": "Amazon Tax Invoice & LG Warranty", "text": "Yeh lijiye Amazon bill, humne pichle saal hi li thi."},
+            {"sender": "agent", "time": "14:05:35", "type": "warranty_badge", "status": "ACTIVE_OEM_MOTOR", "title": "🛡️ सत्यापित: 10-वर्षीय LG मोटर वारंटी सक्रिय (Valid till Nov 2033)", "detail": "• उपकरण: LG 8kg Direct Drive Front-Load<br>• LG मोटर पार्ट (मूल्य ₹3,800): <b>100% मुफ्त (₹0.00)</b><br>• मानकीकृत ग्राहक को-पे (विजिट ₹350 + लेबर ₹400): <b>₹750.00</b>", "liability": "₹750.00 (Standardized Co-Pay Escrow)"},
+            {"sender": "agent", "time": "14:05:40", "text": "सत्यापन पूरा हुआ! आपका ₹3,800 का मोटर पार्ट LG कंपनी देगी। नियमानुसार केवल ₹750 का विजिट+लेबर एस्क्रो में होल्ड होगा जो काम पूरा होने पर ही रिलीज होगा।\n\nसटीक पार्ट मंगाने के लिए कृपया 4 सेकंड का ऑडियो रिकॉर्ड करें।"},
+            {"sender": "agent", "time": "14:06:10", "type": "diagnostic_card", "title": "AcuDiag Diagnostic Report", "appliance": "LG 8kg Direct Drive Front-Load", "defect": "Rotor Position Sensor Desync", "sku": "MOTOR-LG-DD8", "cost": "Motor Part ₹0 (Under Warranty) + Visit & Labor ₹750 = Total ₹750", "action": "Lock ₹750 Co-Pay Escrow"},
+            {"sender": "user", "time": "14:06:20", "text": "Lock ₹750 Co-Pay Escrow"},
+            {"sender": "agent", "time": "14:06:30", "text": "✅ LG OEM वारंटी क्लेम व एस्क्रो होल्ड स्वीकृत!\n\n• एस्क्रो ऑर्डर: PL_ORD_COPAY_881 (₹750 held)\n• Delhivery Waybill: DEL992184102\n• अधिकृत तकनीशियन: Arun Prasad (+91 98450 66210)\n• पार्ट्स: LG Whitefield Hub से रवाना।"},
+            {"sender": "tech", "time": "14:37:00", "text": "Technician Arun: Rotor position sensor replaced. Motor spin cycle ready for verification."},
+            {"sender": "agent", "time": "14:38:10", "type": "verification_card", "title": "Acoustic Verification: PASSED", "lrt": "0.18 (Threshold 2.45)", "status": "Motor Synchronized", "text": "🎉 Post-repair verification passed! Motor vibration completely normal."},
+            {"sender": "agent", "time": "14:40:00", "text": "🎉 रिपेयर पूरा हुआ!\n\n• ₹750 एस्क्रो तकनीशियन अरुण को जारी।\n• 📄 90-Day Service Warranty active: WAR-LG-88190.\n\nAcuDiag चुनने के लिए धन्यवाद! ⭐⭐⭐⭐⭐"}
+        ],
+        "messages_technician": [
+            {"sender": "agent", "time": "14:06:35", "text": "📍 *OEM WARRANTY JOB DISPATCH - LG CARE*\n\n• Customer: Neha Verma (+91 98100 88234)\n• Location: Indiranagar, Bengaluru 560038\n• Defect: LG DD Rotor Position Sensor (SKU: RPS-LG-8012)\n• Billing: Customer Co-Pay ₹750 (Escrow Locked) + OEM Part ₹0\n• Waybill: DEL992184102."},
+            {"sender": "tech", "time": "14:37:00", "text": "Arun: Old sensor unclipped. New OEM LG sensor seated. Running test spin."},
+            {"sender": "agent", "time": "14:38:15", "text": "💰 *CO-PAY ESCROW RELEASED*\n\n₹750 credited to UPI: `arun.lg@okaxis` via Pine Labs Settlement."}
         ]
     }
 }
@@ -481,6 +658,9 @@ def get_all_sessions_summary():
             "technician_name": s["technician"]["name"],
             "supervisor_status": s["supervisor_docket"]["status"],
             "supervisor_docket_id": s["supervisor_docket"]["docket_id"],
+            "warranty_status": s.get("warranty", {}).get("status", "NONE"),
+            "warranty_type": s.get("warranty", {}).get("coverage_type", "Standard"),
+            "customer_liability": s.get("warranty", {}).get("customer_liability", s["cost"]["total"]),
             "last_updated": s["last_updated"],
             "last_message": last_cust_msg[:75] + ("..." if len(last_cust_msg) > 75 else ""),
             "last_tech_message": last_tech_msg[:75] + ("..." if len(last_tech_msg) > 75 else "")
