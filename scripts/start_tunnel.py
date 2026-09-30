@@ -49,8 +49,20 @@ def launch_tunnel(port: int = 8000) -> str:
                 return f"Ngrok Public URL: {public_url}"
         except Exception:
             return f"Ngrok started (PID: {proc.pid}). Connect to 127.0.0.1:4040 to view public URL."
+    elif npx := (shutil.which("npx") or shutil.which("npx.cmd")):
+        print(f"[*] Starting localtunnel via npx to localhost:{port} (windowless)...")
+        proc = subprocess.Popen(
+            [npx, "localtunnel", "--port", str(port)],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            creationflags=CREATE_NO_WINDOW,
+            text=True
+        )
+        time.sleep(3)
+        # Attempt to read stdout for assigned URL
+        return f"Localtunnel running (PID: {proc.pid}) via npx localtunnel --port {port}."
     else:
-        return "[!] Neither cloudflared nor ngrok found in PATH. Server remains on http://127.0.0.1:8000."
+        return "[!] Neither cloudflared, ngrok, nor npx found in PATH. Server remains on http://127.0.0.1:8000."
 
 if __name__ == "__main__":
     msg = launch_tunnel(8000)

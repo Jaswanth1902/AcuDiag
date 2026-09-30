@@ -590,6 +590,26 @@ async def whatsapp_webhook(request: Request):
             "अपनी वॉशिंग मशीन की आवाज़ का वॉयस नोट (Voice Note) भेजें या अपनी समस्या बताएं।"
         )
 
+    # Synchronize with working_sessions store for live Operations Desk mirroring
+    try:
+        curr_time = time.strftime("%H:%M:%S IST")
+        session = sessions_store.get_session("SES_1042_PRIYA")
+        if session:
+            display_text = body_text if body_text else "🎤 [Voice Note Audio Received via WhatsApp Gateway]"
+            session["messages_customer"].append({
+                "sender": "user",
+                "time": curr_time,
+                "text": display_text
+            })
+            session["messages_customer"].append({
+                "sender": "agent",
+                "time": curr_time,
+                "text": reply
+            })
+            session["last_updated"] = curr_time
+    except Exception as e:
+        logger.warning(f"Failed to append webhook message to session: {e}")
+
     if "application/x-www-form-urlencoded" in content_type:
         xml_resp = f'<?xml version="1.0" encoding="UTF-8"?><Response><Message>{reply}</Message></Response>'
         return Response(content=xml_resp, media_type="application/xml")

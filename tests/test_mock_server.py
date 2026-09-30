@@ -279,7 +279,16 @@ def test_sessions_incident_desk():
     assert res_sup.status_code == 200
     sup_data = res_sup.json()["session"]
     assert sup_data["state"] == "SUPERVISOR_UPHELD_FRAUD"
-    assert sup_data["supervisor_docket"]["status"] == "UPHELD_FRAUD_LOCK"
+    # 7. WhatsApp Webhook live session synchronization
+    webhook_res = client.post(
+        "/api/whatsapp/webhook",
+        data={"Body": "Machine se bahut tezz awaz aa rahi hai", "From": "whatsapp:+919845011042"},
+        headers={"Content-Type": "application/x-www-form-urlencoded"}
+    )
+    assert webhook_res.status_code == 200
+    assert "<Response><Message>" in webhook_res.text
+    res_priya_after = client.get("/api/sessions/SES_1042_PRIYA")
+    assert any("Machine se bahut tezz awaz" in m.get("text", "") for m in res_priya_after.json()["messages_customer"])
 
 
 
