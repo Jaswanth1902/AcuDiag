@@ -533,12 +533,14 @@ async def whatsapp_webhook(request: Request):
     content_type = request.headers.get("content-type", "")
     body_text = ""
     media_url = ""
+    media_type = ""
     sender = ""
 
     if "application/x-www-form-urlencoded" in content_type:
         form = await request.form()
         body_text = str(form.get("Body", "")).strip()
         media_url = str(form.get("MediaUrl0", ""))
+        media_type = str(form.get("MediaContentType0", ""))
         sender = str(form.get("From", ""))
     else:
         try:
@@ -548,16 +550,40 @@ async def whatsapp_webhook(request: Request):
             if messages:
                 msg = messages[0]
                 sender = msg.get("from", "")
-                if msg.get("type") == "text":
+                m_type = msg.get("type", "text")
+                if m_type == "text":
                     body_text = msg.get("text", {}).get("body", "")
-                elif msg.get("type") in ("audio", "voice"):
-                    media_url = msg.get(msg.get("type"), {}).get("id", "")
+                elif m_type in ("audio", "voice"):
+                    media_url = msg.get(m_type, {}).get("id", "")
+                    media_type = "audio"
+                elif m_type in ("document", "image"):
+                    media_url = msg.get(m_type, {}).get("id", "")
+                    media_type = m_type
+                    body_text = msg.get(m_type, {}).get("caption", "")
         except Exception:
             pass
 
     # Processing logic
     b_lower = body_text.lower()
-    if media_url or any(k in b_lower for k in ["sound", "awaz", "aawaz", "khat", "noise", "screech"]):
+    is_warranty_flow = ("pdf" in media_type or media_type in ("document", "image") or 
+                        any(k in b_lower for k in ["warranty", "bill", "invoice", "guarantee", "rasid", "receipt", "card"]))
+    is_audio_flow = ("audio" in media_type or bool(media_url) or 
+                     any(k in b_lower for k in ["sound", "awaz", "aawaz", "khat", "noise", "screech", "shutter", "rumble"]))
+    is_decline_flow = any(k in b_lower for k in ["nahi", "no", "cancel", "expensive", "mehenga", "decline"])
+    is_approve_flow = any(k in b_lower for k in ["approve", "lock", "yes", "ha", "haan", "theek", "ok", "proceed"])
+    is_spin_flow = any(k in b_lower for k in ["spin", "test", "done", "fixed", "verify"])
+
+    if is_warranty_flow:
+        reply = (
+            "🛡️ *AcuDiag Warranty Intelligence:*\n\n"
+            "• *Document:* Purchase Invoice & Warranty Card Verified\n"
+            "• *Appliance:* Godrej 7kg Front-Load (Eon Allure)\n"
+            "• *Status:* 2-Yr Comprehensive Expired (March 2023)\n"
+            "• *Protection:* AcuDiag Standardized Escrow Active\n"
+            "• *Capped Liability:* Part ₹850 + Labor ₹400 = *Total ₹1,250*\n\n"
+            "👉 Please send a 4-second Voice Note / Audio of the drum spin sound for kinematic diagnosis."
+        )
+    elif is_audio_flow:
         reply = (
             "⚠️ *AcuDiag Diagnostic Report:*\n\n"
             "• *Appliance:* Godrej 7kg Front-Load\n"
@@ -565,7 +591,14 @@ async def whatsapp_webhook(request: Request):
             "• *Quote:* Part ₹850 + Labor ₹400 = *Total ₹1,250*\n\n"
             "👉 Reply *APPROVE* to lock ₹1,250 in Pine Labs Escrow & dispatch Delhivery OEM parts."
         )
-    elif any(k in b_lower for k in ["approve", "yes", "ha", "haan", "theek", "ok"]):
+    elif is_decline_flow:
+        reply = (
+            "🛑 *Repair Declined:*\n\n"
+            "• AcuDiag escrow hold cancelled.\n"
+            "• Zero funds debited from your card/UPI.\n\n"
+            "Thank you for consulting AcuDiag!"
+        )
+    elif is_approve_flow:
         order_id = f"PL_ORD_{uuid.uuid4().hex[:8].upper()}"
         waybill = f"DEL{int(time.time()) % 10000000:08d}"
         reply = (
@@ -576,18 +609,18 @@ async def whatsapp_webhook(request: Request):
             f"• *ETA:* Tomorrow by 11:30 AM\n\n"
             "Funds will only be released after you record a 10s post-repair spin test."
         )
-    elif any(k in b_lower for k in ["spin", "test", "done", "fixed"]):
+    elif is_spin_flow:
         reply = (
             "🎉 *Acoustic Repair Verified!*\n\n"
             "• *Neyman-Pearson LRT:* 0.02 (PASS)\n"
             "• *Pine Labs Escrow:* ₹1,250 Released to Suresh Kumar\n"
-            "• *Warranty:* 90-Day Digital Protection Issued\n\n"
+            "• *Warranty:* 90-Day Digital Protection Issued (WAR-GODREJ-98214)\n\n"
             "Thank you for using AcuDiag! ⭐⭐⭐⭐⭐"
         )
     else:
         reply = (
             "नमस्ते! 🙏 AcuDiag में आपका स्वागत है।\n\n"
-            "अपनी वॉशिंग मशीन की आवाज़ का वॉयस नोट (Voice Note) भेजें या अपनी समस्या बताएं।"
+            "अपनी वॉशिंग मशीन की आवाज़ का वॉयस नोट (Voice Note) भेजें या अपने इनवॉइस/बिल की फोटो भेजें।"
         )
 
     # Synchronize with working_sessions store for live Operations Desk mirroring
@@ -595,17 +628,58 @@ async def whatsapp_webhook(request: Request):
         curr_time = time.strftime("%H:%M:%S IST")
         session = sessions_store.get_session("SES_1042_PRIYA")
         if session:
-            display_text = body_text if body_text else "🎤 [Voice Note Audio Received via WhatsApp Gateway]"
-            session["messages_customer"].append({
-                "sender": "user",
-                "time": curr_time,
-                "text": display_text
-            })
-            session["messages_customer"].append({
-                "sender": "agent",
-                "time": curr_time,
-                "text": reply
-            })
+            if is_warranty_flow:
+                display_text = body_text if body_text else "Attached purchase bill for warranty check."
+                session["messages_customer"].append({
+                    "sender": "user",
+                    "time": curr_time,
+                    "type": "warranty_attachment",
+                    "filename": "WhatsApp_Invoice_Upload.pdf",
+                    "size": "1.1 MB",
+                    "doc_type": "Purchase Invoice & Warranty Card",
+                    "text": display_text
+                })
+                session["messages_customer"].append({
+                    "sender": "agent",
+                    "time": curr_time,
+                    "type": "warranty_badge",
+                    "status": "EXPIRED",
+                    "title": "वारंटी स्थिति: 2 वर्ष समाप्त (Standardized Escrow Active)",
+                    "detail": "• उपकरण: Godrej 7kg Front-Load<br>• लागू नियम: AcuDiag मानकीकृत एस्क्रो सुरक्षा",
+                    "liability": "₹1,250.00 (Standardized Escrow)"
+                })
+            elif is_audio_flow:
+                display_text = body_text if body_text else "Washing machine spin karte waqt drum se ajeeb khat-khat awaz aa rahi hai."
+                session["messages_customer"].append({
+                    "sender": "user",
+                    "time": curr_time,
+                    "text": display_text,
+                    "is_audio": True,
+                    "audio_label": "Gnani STT Prisma v2.5 (0:04)"
+                })
+                session["messages_customer"].append({
+                    "sender": "agent",
+                    "time": curr_time,
+                    "type": "diagnostic_card",
+                    "title": "AcuDiag Diagnostic Report",
+                    "appliance": "Godrej 7kg Front-Load",
+                    "defect": "Drum Bearing Outer Race Wear (BPFO 1,450 Hz)",
+                    "sku": "BEAR-6205-2RS",
+                    "cost": "Part ₹850 + Labor ₹400 = Total ₹1,250",
+                    "action": "Approve Repair & Lock Escrow"
+                })
+            else:
+                display_text = body_text if body_text else "User message from WhatsApp Gateway"
+                session["messages_customer"].append({
+                    "sender": "user",
+                    "time": curr_time,
+                    "text": display_text
+                })
+                session["messages_customer"].append({
+                    "sender": "agent",
+                    "time": curr_time,
+                    "text": reply
+                })
             session["last_updated"] = curr_time
     except Exception as e:
         logger.warning(f"Failed to append webhook message to session: {e}")
