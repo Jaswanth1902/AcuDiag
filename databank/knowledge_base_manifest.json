@@ -1,0 +1,82 @@
+{
+  "01_Washing_Machines_Acoustic_Kinematics.md": {
+    "status": "LOCAL_FALLBACK",
+    "knowledge_doc": "01_Washing_Machines_Acoustic_Kinematics.md",
+    "remote_response": {
+      "error": {
+        "detail": "Invalid or expired token"
+      },
+      "status": 401
+    }
+  },
+  "02_Refrigerators_Compressor_Thermodynamics.md": {
+    "status": "LOCAL_FALLBACK",
+    "knowledge_doc": "02_Refrigerators_Compressor_Thermodynamics.md",
+    "remote_response": {
+      "error": {
+        "detail": "Invalid or expired token"
+      },
+      "status": 401
+    }
+  },
+  "03_Air_Conditioners_Inverter_Acoustics.md": {
+    "status": "LOCAL_FALLBACK",
+    "knowledge_doc": "03_Air_Conditioners_Inverter_Acoustics.md",
+    "remote_response": {
+      "error": {
+        "detail": "Invalid or expired token"
+      },
+      "status": 401
+    }
+  },
+  "04_Zero_Trust_Anti_Spoofing_Manual.md": {
+    "status": "LOCAL_FALLBACK",
+    "knowledge_doc": "04_Zero_Trust_Anti_Spoofing_Manual.md",
+    "remote_response": {
+      "error": {
+        "detail": "Invalid or expired token"
+      },
+      "status": 401
+    }
+  },
+  "05_Standardized_Rate_Card_and_Escrow_SOP.md": {
+    "status": "LOCAL_FALLBACK",
+    "knowledge_doc": "05_Standardized_Rate_Card_and_Escrow_SOP.md",
+    "remote_response": {
+      "error": {
+        "detail": "Invalid or expired token"
+      },
+      "status": 401
+    }
+  },
+  "06_OEM_Warranty_Intercept_Directory.md": {
+    "status": "LOCAL_FALLBACK",
+    "knowledge_doc": "06_OEM_Warranty_Intercept_Directory.md",
+    "remote_response": {
+      "error": {
+        "detail": "Invalid or expired token"
+      },
+      "status": 401
+    }
+  },
+  "07_Microwaves_and_Water_Purifiers_Diagnostics.md": {
+    "status": "LOCAL_FALLBACK",
+    "knowledge_doc": "07_Microwaves_and_Water_Purifiers_Diagnostics.md",
+    "remote_response": {
+      "error": {
+        "detail": "Invalid or expired token"
+      },
+      "status": 401
+    }
+  },
+  "08_Delhivery_Reverse_Logistics_and_Transit_SOP.md": {
+    "status": "LOCAL_FALLBACK",
+    "knowledge_doc": "08_Delhivery_Reverse_Logistics_and_Transit_SOP.md",
+    "remote_response": {
+      "error": {
+        "detail": "Invalid or expired token"
+      },
+      "status": 401
+    }
+  }
+}

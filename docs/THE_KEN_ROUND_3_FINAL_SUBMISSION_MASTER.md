@@ -84,8 +84,8 @@ Decision 1: Vernacular Symptom & Acoustic Entity Extraction
 * When: 2026-10-02 10:14:02 IST
 * What the agent received: Streaming voice memo: "Washing machine spin karte waqt drum se ajeeb khat-khat awaz aa rahi hai."
 * Where it came from: gnani_voice_bridge connector (User PSTN mobile audio stream via Gnani STT).
-* What it decided: Isolated the symptom as WM_BEARING_SPALL (Subsystem: Drum Bearing Assembly) and set session language to Hinglish (hi-IN/en-IN).
-* Why: System Prompt Invariant 1: "Parse Indian vernacular code-switching; map acoustic descriptions to appliance subsystem fault taxonomy."
+* What it decided: Isolated the symptom as WM_BEARING_SPALL (Subsystem: Drum Bearing Assembly) grounded via vector search against our 8-document appliance knowledge base suite (01_Washing_Machines_Acoustic_Kinematics.md & 05_Standardized_Rate_Card_and_Escrow_SOP.md) and set session language to Hinglish (hi-IN/en-IN).
+* Why: System Prompt Invariant 1: "Parse Indian vernacular code-switching; map acoustic descriptions to appliance subsystem fault taxonomy and rate card."
 * What it did or said, and to whom: Spoke to Priya: "Main samajh gaya. Drum bearing mein friction lag rahi hai. Hum turant diagnosis aur genuine part dispatch shuru karte hain."
 * Through what: gnani_voice_bridge (TTS audio stream).
 

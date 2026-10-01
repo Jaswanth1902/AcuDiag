@@ -44,10 +44,18 @@
 ### Phase 2: Vector Knowledge Base Grounding (0:20 – 0:40 | 20s)
 * **Screen**: **AgenticOrg Knowledge Base Page / Drawer** (`/dashboard/knowledge`).
 * **Visual Action**:
-  - Open `acudiag_appliance_specs.md` in the knowledge base list.
-  - Highlight the acoustic fault frequency profiles: 1,450 Hz for Washing Machine Bearing Spalls, 320 Hz for Drain Pump Cavitation, OEM part SKU `BEAR-6205-2RS`, and standardized ₹1,250 labor/parts cost matrix.
+  - Show the **8 uploaded enterprise knowledge bases**:
+    1. `01_Washing_Machines_Acoustic_Kinematics.md`
+    2. `02_Refrigerators_Compressor_Thermodynamics.md`
+    3. `03_Air_Conditioners_Inverter_Acoustics.md`
+    4. `04_Zero_Trust_Anti_Spoofing_Manual.md`
+    5. `05_Standardized_Rate_Card_and_Escrow_SOP.md`
+    6. `06_OEM_Warranty_Intercept_Directory.md`
+    7. `07_Microwaves_and_Water_Purifiers_Diagnostics.md`
+    8. `08_Delhivery_Reverse_Logistics_and_Transit_SOP.md`
+  - Quick click into `01_Washing_Machines`: Highlight the 1,450 Hz CWRU BPFO frequency, OEM SKU `BEAR-6205-2RS`, and standardized ₹1,250 labor/parts cost matrix.
 * **Founder Narration**:
-  > *"To eliminate LLM hallucination, AcuDiag grounds every decision in an uploaded appliance engineering knowledge base. Through vector retrieval, the agent references mechanical fault kinematics—such as 1,450 Hz drum bearing spalls—and pre-negotiated OEM part pricing before taking any external action."*
+  > *"To eliminate LLM hallucination, AcuDiag grounds every decision in an 8-document appliance knowledge base suite. Through vector retrieval, the agent references mechanical fault kinematics—such as 1,450 Hz drum bearing spalls—pre-negotiated OEM rate cards, and statutory warranty coverage rules before taking any external action."*
 
 ---
 
