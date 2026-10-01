@@ -20,9 +20,17 @@ async function startWhatsAppGateway() {
     console.log('⚡ Starting AcuDiag Direct WhatsApp Gateway (Zero Third Parties)');
     console.log('======================================================\n');
 
+    let pinoLogger;
+    try {
+        const pino = require('pino');
+        pinoLogger = pino({ level: 'silent' });
+    } catch (e) {
+        // fallback
+    }
+
     const sock = makeWASocket({
         auth: state,
-        printQRInTerminal: true,
+        logger: pinoLogger,
         browser: ['AcuDiag Orchestrator', 'Chrome', '1.0.0']
     });
 
@@ -31,11 +39,13 @@ async function startWhatsAppGateway() {
     sock.ev.on('connection.update', (update) => {
         const { connection, lastDisconnect, qr } = update;
         if (qr) {
-            console.log('\n👉 SCAN THE QR CODE ABOVE IN WHATSAPP (Settings -> Linked Devices -> Link a Device)\n');
+            console.log('\n================== SCAN WITH WHATSAPP ==================');
+            qrcode.generate(qr, { small: true });
+            console.log('👉 WhatsApp (phone) -> Settings -> Linked Devices -> Link a Device\n');
         }
         if (connection === 'close') {
             const shouldReconnect = lastDisconnect?.error?.output?.statusCode !== DisconnectReason.loggedOut;
-            console.log('Connection closed due to', lastDisconnect?.error, ', reconnecting:', shouldReconnect);
+            console.log('Connection closed, reconnecting:', shouldReconnect);
             if (shouldReconnect) {
                 startWhatsAppGateway();
             }
