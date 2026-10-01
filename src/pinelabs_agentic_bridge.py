@@ -51,6 +51,8 @@ class PineLabsAgenticBridge:
 
     def _request(self, method: str, endpoint: str, data: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
         url = f"{self.base_url}/{endpoint.lstrip('/')}"
+        if data is not None and isinstance(data, dict) and self.csrf_token and "csrf_token" not in data:
+            data = {**data, "csrf_token": self.csrf_token}
         headers = self._get_headers(is_json=(data is not None))
         req_data = json.dumps(data).encode("utf-8") if data is not None else None
         
@@ -167,16 +169,35 @@ class PineLabsAgenticBridge:
             "6. FAKE REPAIR PROTOCOL: If post-repair test FAILS, KEEP ESCROW LOCKED. Notify technician: \"Diagnostic test failed. Payout withheld. Scheduling secondary audit.\"\n"
             "7. TIMEOUT IDEMPOTENCY: On 504 Gateway Timeout, never retry duplicate charges. Queue transaction with SHA-256 idempotency key and poll Plural webhook."
         )
+        existing_agents = self.list_agents().get("items", [])
+        existing_id = None
+        for a in existing_agents:
+            if a.get("name") == name:
+                existing_id = a.get("id")
+                break
+
+        full_prompt = system_prompt or default_prompt
         payload = {
             "name": name,
-            "role": role,
-            "system_prompt": system_prompt or default_prompt,
-            "version": "3.0.0",
-            "connectors": authorized_connectors or ["delhivery_acudiag", "gnani_acudiag", "pinelabs_plural"],
-            "tenant_id": self.tenant_id,
-            "status": "ACTIVE"
+            "agent_type": "custom",
+            "domain": "ops",
+            "description": role,
+            "system_prompt_text": full_prompt,
+            "status": "shadow"
         }
-        res = self._request("POST", "/agents", payload)
+
+        if existing_id:
+            res = self._request("PATCH", f"/agents/{existing_id}", payload)
+            if "error" not in res:
+                res["agent_id"] = existing_id
+                res["status"] = "PROVISIONED_REMOTE"
+                return res
+        else:
+            res = self._request("POST", "/agents", payload)
+            if "error" not in res:
+                res["status"] = "PROVISIONED_REMOTE"
+                return res
+
         if "error" in res:
             self._save_local_registry("agents", name, {**payload, "registered_locally": True, "remote_error": res["error"]})
             return {"status": "LOCAL_FALLBACK", "agent": payload, "remote_response": res}
