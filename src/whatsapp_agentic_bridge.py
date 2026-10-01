@@ -109,12 +109,39 @@ async def whatsapp_webhook(request: Request):
     b_lower = effective_text.lower()
     clean_text = effective_text.strip()
     words = clean_text.split()
+
+    # 0. Zero-Trust Security Gate: Adversarial Prompt Injection & Fraud Attempt Detection
+    jailbreak_patterns = [
+        r"ignore\s+(all\s+)?(previous\s+)?instructions",
+        r"system\s+override",
+        r"developer\s+mode",
+        r"jailbreak",
+        r"release\s+(payment|escrow|funds)\s+(immediately|now)",
+        r"pretend\s+you\s+are",
+        r"bypass\s+warranty",
+        r"set\s+lrt\s*=\s*0",
+        r"drop\s+table",
+        r"<script",
+        r"union\s+select"
+    ]
+    is_jailbreak = any(re.search(pat, b_lower) for pat in jailbreak_patterns)
+
     is_greeting = bool(re.search(r'^(hi|hello|hey|namaste|good morning|good evening|pranam)\b', b_lower.strip())) and len(words) <= 3 and not media_url
     is_spin_post_repair = bool(re.search(r'\b(post-repair|after repair|repair done|fixed|repaired|spin test|test done)\b', b_lower))
     is_decline = bool(re.search(r'\b(cancel|no|nahi|nahin|reject|declined?|mehenga|expensive|stop)\b', b_lower)) and not bool(re.search(r'\b(noise|normal|sound|problem|issue|broken)\b', b_lower))
 
+    # 0. Handle Adversarial Jailbreak / Prompt Injection
+    if is_jailbreak:
+        logger.warning(f"SECURITY ALERT: Jailbreak/Injection attempt detected from {sender}: '{effective_text}'")
+        reply = (
+            "🛑 *AcuDiag Zero-Trust Security Gate (Policy Violation)*\n\n"
+            "• *Security Status:* ADVERSARIAL_INJECTION_BLOCKED\n"
+            "• *Threat Classification:* Prompt manipulation or unauthorized instruction override attempt.\n"
+            "• *Action:* Request terminated; incident logged for security audit.\n\n"
+            "AcuDiag operates under deterministic physical invariants and standardized OEM rate cards. Automated escrow operations cannot be overridden via chat prompts."
+        )
     # 1. Handle Casual Greeting
-    if is_greeting:
+    elif is_greeting:
         reply = (
             "👋 *Namaste! Welcome to AcuDiag Appliance Health.* 🛠️\n\n"
             "Main aapki machine ki dekhbhaal karne wali sahayak hoon.\n\n"
