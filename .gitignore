@@ -27,3 +27,10 @@ Thumbs.db
 # IDE & Editor
 .vscode/
 .idea/
+
+# Node & WhatsApp Sessions
+node_modules/
+whatsapp_bridge/node_modules/
+whatsapp_bridge/auth_session/
+whatsapp_bridge/*.ogg
+whatsapp_bridge/*.wav
