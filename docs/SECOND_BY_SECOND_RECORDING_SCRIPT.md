@@ -59,19 +59,20 @@
 
 ---
 
-### Phase 3: Live Incident Execution — Escrow Release & Logistics (0:40 – 1:10 | 30s)
+### Phase 3: Live Incident Execution — Diagnosis, Warranty & Escrow Lock (0:40 – 1:10 | 30s)
 * **Screen**: **AgenticOrg Agent Page $\rightarrow$ Click `[Run Agent]` Button** (`/dashboard/agents/c56edea9-8cd1-4e31-bf93-48e024d445d5`).
 * **Visual Action**:
   - Click the blue **`[Run Agent]`** button.
-  - Paste the verified live diagnostic prompt into the modal:
-    `Evaluate appliance diagnostic docket: Godrej 7kg Front-Load Washing Machine for customer Priya. Acoustic telemetry: SNR=25.2 dB, Neyman-Pearson LRT ratio=0.42 (threshold 2.45), anti-spoofing replay detected=False, dominant frequency profile=NONE (HEALTHY). Determine diagnostic verification, escrow release/withhold action, and logistics dispatch directly without external API lookups.`
-  - Hit **Run**: The modal renders the verified 3-step diagnostic card live in ~3 seconds!
-  - Highlight the execution telemetry and output:
-    1. `Acoustic Telemetry`: SNR 25.2 dB (>15 dB floor), LRT 0.42 (<= 2.45), Anti-Spoofing: Genuine (False replay), Dominant Profile: NONE (HEALTHY).
-    2. `Escrow Release Condition`: Met (LRT <= 2.45 & Anti-Spoofing TRUE).
-    3. `Action`: Diagnostic verification successful, ₹1,250 escrow payout released, logistics completed!
+  - Paste the authentic multi-hop incident prompt:
+    `Customer incident intake: Priya Sharma reported that her Godrej 7kg Front-Load Washing Machine (purchased 26 months ago) emits a loud rhythmic metallic grinding sound during the 1200 RPM spin ramp. Acoustic sensor telemetry detected a sharp 1,450 Hz harmonic excitation (SNR 22.8 dB, genuine motor vibration). Using your enterprise knowledge bases, identify the exact mechanical defect and OEM bearing SKU, verify whether Godrej manufacturer warranty applies or has expired, calculate the standardized rate card tariff (parts + labor) under HSN 8450, and formulate the escrow pre-authorization and parts dispatch recommendation.`
+  - Hit **Run**: The modal executes live multi-hop reasoning in ~3.2 seconds!
+  - Highlight the 4-part domain intelligence output:
+    1. `Kinematic Diagnosis`: Identifies 1,450 Hz BPFO bearing outer race spall on SKU `BEAR-6205-2RS`.
+    2. `Warranty Intercept`: 26 months exceeds Godrej 24-month comprehensive coverage; 10-year motor warranty excludes drum bearings.
+    3. `Tariff Calculation`: Part ₹850 + Labor ₹400 = Exactly ₹1,250.00 standardized tariff (HSN 8450).
+    4. `Escrow & Dispatch`: Pre-authorizes ₹1,250 Plural Escrow lock and mandates Delhivery forward SKU dispatch.
 * **Founder Narration**:
-  > *"Watch AcuDiag process a live diagnostic docket for customer Priya in Bengaluru. Ingesting her acoustic telemetry via Gnani, AcuDiag executes in just 3.1 seconds for a fraction of a cent. With the Neyman-Pearson ratio at 0.42—well below our 2.45 threshold—AcuDiag mathematically verifies the repair, releases the ₹1,250 escrow payout, and closes the logistics loop seamlessly."*
+  > *"Watch AcuDiag perform real autonomous triage for customer Priya in Bengaluru. Instead of a pre-baked script, we feed raw incident observations: a 1,450 Hz harmonic during spin and a 26-month-old Godrej machine. In 3.2 seconds, AcuDiag queries three modular knowledge bases: it maps the frequency to an SKF 6205 bearing spall, catches that Godrej warranty expired two months ago, enforces the standardized ₹1,250 tariff, and locks escrow via Plural."*
 
 ---
 
