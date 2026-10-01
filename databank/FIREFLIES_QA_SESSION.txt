@@ -1,0 +1,557 @@
+Devansh Mangal
+50:40
+Hi, Praka, am I audible?
+P
+Prakhar Gour
+50:41
+Yes, yes.
+0
+041 - Devansh Mangal
+50:44
+Yeah, so thank you for walking us through. Uh, I just have, like, a small doubt, uh, with regards to this, uh, knowledge base only. So, uh, basically, is it, like, similar to the gems, what we have, like, in Gemini, or, like, where we give a specific, uh, instruction to the uh, you know, uh, for the agent to work upon, or, like, is it something, like, different, like…
+P
+Prakhar Gour
+51:08
+So, Gemini is basically, your chat interface in which you are just, you're just prompting, and it is responding you back, right? It is not able to connect you to the outside, world for your particular use case
+0
+041 - Devansh Mangal
+51:22
+No, I'm talking particularly about the gems feature of the Gemini.
+P
+Prakhar Gour
+51:22
+Right? The Gemini or the ChatGPT, or these kind of thing. So.
+0
+041 - Devansh Mangal
+51:30
+Oh.
+P
+Prakhar Gour
+51:30
+Okay. Can you… can you be more specific, like, what are you trying to ask here?
+0
+041 - Devansh Mangal
+51:32
+So… So basically like in Gemini, we have a gems feature like where we give in the instruction. about, like, what we want that particular, uh, you know, chat box to do and like it just follow only those instructions. Like, I don't have to give it like repetitive prompts again and again.
+0
+041 - Devansh Mangal
+51:53
+And I can, uh, like, generate output based on, like, that particular instruction which I've given to that chat.
+P
+Prakhar Gour
+52:01
+-H
+0
+041 - Devansh Mangal
+52:01
+So like, is it like similar to the knowledge base thing where the agent will always like go back to the that particular knowledge base and uh, like, give me the specific output, or, like, is it something different? I just… I'm trying to correlate.
+S
+Sathish Babu
+52:13
+I think it's like a cloth skill. It's not like a knowledge base. I mean.
+0
+041 - Devansh Mangal
+52:18
+Oh, okay.
+S
+Sathish Babu
+52:19
+You may understand.
+0
+041 - Devansh Mangal
+52:27
+Hello? Yeah.
+J
+JAY GUPTA
+52:27
+Hello
+0
+041 - Devansh Mangal
+52:31
+Uh, yes, I'm going to say something, I think, like… Not audible.
+P
+Prakhar Gour
+52:36
+Sorry, yeah, hello?
+0
+041 - Devansh Mangal
+52:37
+Yeah.
+P
+Prakhar Gour
+52:38
+Yeah, you're saying something, yeah.
+0
+041 - Devansh Mangal
+52:43
+No, I was just asking, like, I just finished, like, I just want to ask, like, what all Uh, like, is it similar to that, or it's different? Like, similar to… I think someone mentioned about the clot skill.
+0
+041 - Devansh Mangal
+52:50
+So is this similar to that, or different?
+P
+Prakhar Gour
+52:55
+No, it's, it's more like, like, knowledge base is like a skill set, you can say that you're adding a skill set to your particular, agent repository But it will keep, it will not be like the agent will remember this particular skill, and then it will act proactively, right? Like in cloud skills, we have that ability. Here we have, like, a knowledge base where vector embedding is there, where it will search
+0
+041 - Devansh Mangal
+53:13
+Mm-hmm.
+P
+Prakhar Gour
+53:21
+The Agent LM will search and try to retrieve information from that back-time bidding. It's just that part only, it's a RAG implementation there. It's not like he, it's a skill, basically, which is being used by the agent.
+P
+Prakhar Gour
+53:35
+Right
+0
+041 - Devansh Mangal
+53:36
+Okay, okay, got it. Thank you.
+J
+JAY GUPTA
+53:43
+Can I have a doubt
+V
+Vaani
+53:43
+So we have
+S
+Soham Divate
+53:44
+Sir, I have a doubt
+V
+Vaani
+53:44
+So, sorry to interrupt, but I just have a thing. They say that we have sent you the MCP link, if you can just go to it, that you're not, you'll be able to see the tools or not.
+V
+Vaani
+53:55
+consultation
+P
+Prakhar Gour
+53:56
+Sure, I'll look into it.
+K
+Kavish Sharma
+54:01
+I have a question for Adavan, if I could just, you know…
+A
+Adhavan
+54:05
+Yeah?
+P
+Prakhar Gour
+54:05
+Sure, sure.
+K
+Kavish Sharma
+54:05
+Uh, yeah, Sullivan, in the previous round, we basically built our, uh… we wanted to test the voice capabilities of Yanni, so for that, we built our entire voice agent on it, and just test it for the calls.
+K
+Kavish Sharma
+54:15
+Because it was obviously a very integral part of our workflow. So, but in the round 3, we got an email yesterday saying that we are supposed to use the STT and TTS APIs of Kiani.
+K
+Kavish Sharma
+54:26
+And we have to integrate it into Agent Decorg. So I was just wondering if we could use the agent that we built on Gianni, uh, in the previous round and somehow connect it to Agentic Org.
+K
+Kavish Sharma
+54:36
+Or do we have… are we strictly limited to the STT and TTS APIs that were told in the email?
+A
+Adhavan
+54:46
+Hmm… Uh, see. The thing is, like, I am not sure, like, if you'll be able to connect those agents to Agenticode, which is why I don't think I have an answer yet. If you can connect well and good.
+A
+Adhavan
+55:03
+Right? Otherwise, uh, you'll have to build it through STT and this thing.
+K
+Kavish Sharma
+55:08
+Alright, yeah, I mean, that's exactly what I was wondering, if somehow we're able to connect that voice agent. Uh, I just wanted to know if it's okay to use… a back voice agent. We… I mean, we'll obviously route it through agent decorg.
+A
+Adhavan
+55:18
+Yeah, if, uh, if, if…
+K
+Kavish Sharma
+55:20
+We'll route it through agent account, so Agent Inc.org would call that. And, uh, it's just that the voice capabilities would be entirely of the agent.
+A
+Adhavan
+55:26
+Yeah, yeah, if that is feasible, yes, you can do it.
+K
+Kavish Sharma
+55:29
+Alright, alright. Thank you so much.
+N
+Nisarg Jolapara
+55:40
+Hello?
+J
+JAY GUPTA
+55:46
+Hello
+A
+Adhavan
+55:48
+Yeah, yeah.
+J
+JAY GUPTA
+55:49
+I have a doubt, Adhavan, so…
+S
+Samiksha Jadhav
+55:50
+Sir, just wanted to ask
+A
+Adhavan
+55:55
+Yes?
+S
+Samiksha Jadhav
+55:56
+So, wanted to ask about our team won't elaborate on the Agentic call, how will we collaborate, at the same time on the same project?
+A
+Adhavan
+56:08
+What do you mean by collaborate?
+S
+Samiksha Jadhav
+56:16
+If you want to divide the work between our teammates, then, if you wanted to divide the team to work in our team, and we want to work at the same time on the same project, so how will we do that
+A
+Adhavan
+56:16
+Sorry. Yeah, our advice is, like, you share the credentials.
+S
+Samiksha Jadhav
+56:31
+As, it requires login from different accounts
+A
+Adhavan
+56:36
+Now, advice is like you just have a single set of credentials and share it with yourself.
+S
+Samiksha Jadhav
+56:37
+Okay.
+J
+JAY GUPTA
+56:45
+I have a doubt, like, there is a possibility that MCP and native connector can collide Like, there will be a collision, let's say if there is a tool name, and I have, done something which is called as pay And the same endpoint is being created in the MCP server. So what if there is a collision? Can I bypass that collision? Is there any way?
+P
+Prakhar Gour
+57:08
+So, are you facing such challenge right now?
+J
+JAY GUPTA
+57:11
+No, I tried to actually register for it, and then I'm thinking if there might be a possibility of this MCP, so I've worked with a particular service before, so there was a situation where there were collisions happening With MCP, with the kind of servers and other things.
+J
+JAY GUPTA
+57:27
+So I wonder if there will be a conflict here as well
+P
+Prakhar Gour
+57:32
+No, if there is a conflict with the name naming convention and all, I would suggest that you can rename the connector, right? The connector that you are registering.
+J
+JAY GUPTA
+57:38
+Okay. Okay, is there a way that I can actually bypass this Like, instead of that, like, I mock the Pine Labs pre-authentication payments, and not register the native connector and still pass the evaluation process for this
+P
+Prakhar Gour
+57:56
+No, no, I don't think so. There is currently a way. Since we are in Agentic, we have tried to hardbound this convention that, one agent should be having a unique name, right?
+J
+JAY GUPTA
+57:59
+Okay.
+P
+Prakhar Gour
+58:07
+So that's why… yeah
+J
+JAY GUPTA
+58:09
+Alright.
+A
+Adhavan
+58:12
+Hey guys, we can take one more question. We're out of time.
+N
+Nisarg Jolapara
+58:15
+Hi, I have a question. Yeah, are we expected to build a full solution on agentic work itself? Like, there are a few agents already regarding the product which are built and working backend on my local device. So, do we expect us to migrate and build once again on your platform itself?
+A
+Adhavan
+58:18
+Yeah? Yes.
+A
+Adhavan
+58:35
+Yeah, by the way, so we can, uh, not see it. So yes.
+N
+Nisarg Jolapara
+58:40
+Okay, so is it okay right now if these are not end-to-end build? Because it might take time to migrate.
+A
+Adhavan
+58:47
+Yeah, yeah.
+A
+Ameya
+58:50
+Sir,
+V
+Vedant
+58:51
+Sir, I wanted to ask that, When I, I actually logged in into the organization, in the afternoon, but when I tried to log in again, the Ken organization is not there.
+V
+Vedant
+59:06
+In the drop-down of organization name
+A
+Adhavan
+59:08
+It goes by the name Tense Competition, right? Because, uh, uh, you should be able to see.
+V
+Vedant
+59:13
+It's not here, sir.
+A
+Adhavan
+59:25
+Can you share your screen? That's the only way to test it.
+V
+Vedant
+59:31
+Okay, sir.
+N
+Nilay
+59:34
+I sir, I had one final question. It is
+V
+Vedant
+59:39
+Sir, are you able to see the screen?
+A
+Adhavan
+59:40
+You know?
+V
+Vedant
+59:44
+It's not here in the dropdown
+P
+Prakhar Gour
+59:49
+Just click the K…
+V
+Vedant
+59:51
+Which one?
+P
+Prakhar Gour
+59:51
+You can scroll it down. Okay, okay, just click on K, K, just type K, K.
+V
+Vedant
+59:59
+I'm not able to type for
+A
+Adhavan
+01:00:02
+And when you keyboard press the key K.
+P
+Prakhar Gour
+01:00:06
+Kk, yes.
+V
+Vedant
+01:00:08
+No, sir, I'm like… There is no option.
+P
+Prakhar Gour
+01:00:11
+Let me just share my screen now.
+P
+Prakhar Gour
+01:00:28
+So, is it visible?
+N
+nikitaarora
+01:00:31
+Yeah, Pragarh.
+P
+Prakhar Gour
+01:00:32
+So, you can see the Ken's case competition is there, right? So there are other companies also, right, who are working on here, so that's why it is showing so many.
+P
+Prakhar Gour
+01:00:42
+So, you can just see your scans case computation, right?
+V
+Vedant
+01:00:47
+I don't know, some, mine drop-down options are different than yours.
+P
+Prakhar Gour
+01:00:54
+Using Agenticop.hackathan at finals.com.
+V
+Vedant
+01:00:59
+Yes, sir, yes.
+P
+Prakhar Gour
+01:01:01
+You know why it is showing the…
+V
+Vedant
+01:01:02
+No, actually, yes, yes, I'm on wrong URL, I'm not on hackathon URL. Thanks, thanks
+P
+Prakhar Gour
+01:01:07
+Okay. I think,
+A
+Adhavan
+01:01:12
+Okay guys, uh, yeah, you out of time.
+N
+Nilay
+01:01:13
+And I had one final question if there's enough time for me to ask
+A
+Ameya
+01:01:18
+Sir, Like.
+A
+Adhavan
+01:01:19
+I guess, uh, all of us have so many other questions as well, so it's better, like, you write. Yeah.
+N
+Nilay
+01:01:21
+Excuse me
+S
+Soham Divate
+01:01:22
+So, what is,
+A
+Adhavan
+01:01:25
+Yeah.
+A
+Ameya
+01:01:27
+Sir Kenar
+A
+Adhavan
+01:01:27
+Yeah, I…
+A
+Ameya
+01:01:30
+Can our queries be asked, like, after the meeting also? Maybe we could send it
+A
+Adhavan
+01:01:31
+Yeah, yeah, yeah, yes, yes. Send it to me, I'll, like, uh, get it solved for you.
+A
+Ameya
+01:01:34
+You Okay.
+N
+Nilay
+01:01:39
+It's a very general question if there's enough time for me to ask. There's just one final question. You expect us to build the whole thing on the platform, right? Are there any restrictions or certain things that we need to keep in mind to not do
+A
+Adhavan
+01:01:47
+Yeah.
+N
+Nilay
+01:01:51
+But, like, we don't violate any guidelines as such.
+A
+Adhavan
+01:01:55
+Nothing, nothing that comes to my mind.
+N
+Nilay
+01:01:56
+So as long as the whole thing is built on the platform, it's all fair game.
+A
+Adhavan
+01:02:00
+Yeah.
+N
+Nilay
+01:02:01
+Thank you. Okay.
+A
+Adhavan
+01:02:05
+All right, guys, thank you.
+S
+Shrenik Vaidya
+01:02:11
+Thank you.
+P
+Prakhar Gour
+01:02:14
+Thank you, everyone
+N
+nikitaarora
+01:02:14
+Thanks a lot, everyone.
+S
+susmitha sarlana
+01:02:19
+Hey, just one last question, can you please take it up?
+P
+Prakhar Gour
+01:02:24
+Yeah, sure.
+S
+susmitha sarlana
+01:02:26
+So for the product strategy, folks, you have mentioned that we need to address it to the company who we propose that could build, right? So when… do we… are we expected to build the entire Agentic flow, like how you've mentioned here, in the view of that particular company, or is the simulation going to be different and like a presentation on which company is going to do this, and how can they integrate in their system?
+N
+nikitaarora
+01:02:54
+So, Shmita, I think Advan has dropped off. This is a question more for him. Maybe you can share it over email with him.
+P
+Prakhar Gour
+01:02:55
+I think…
+S
+susmitha sarlana
+01:03:03
+Sure, sure, okay, yeah, thank you.
+N
+nikitaarora
+01:03:05
+Thanks.
+A
+Advaya Sharma
+01:03:11
+Thank you, thank you.
+V
+Vaani
+01:03:15
+I have also sent you the MCP link, if you can just look at it once, so that it's also a problem of authorized you, then we can move to the next step. If possible, please
+AskFred
+Consumes AI credits
+Hi, KSAI
+How can I help you today?
+Suggest follow up questions
+Catch me up (Last 1 min)

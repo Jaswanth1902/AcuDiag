@@ -1,0 +1,29 @@
+[0.0m] Adhavan: Hey guys, we'll be short. Starting now. Thank you for joining.
+[0.0m] Adhavan: By the way, I'm Adhavan. Like so far, we have all been like communicating and exchanging emails. This is the first time we are like meeting face to face, and I would love if you can turn on your video cameras.
+[0.0m] Adhavan: Yes, and a lot of you have returned to me with a lot of questions about how to use the platform and some of the issues that you guys are facing, and here we are to resolve that.
+[0.0m] Adhavan: So we have the team from Pine Lab to walk you through their platform, and they'll be taking up all the questions that you have. Right? I hope like you explored the platform and have a lot of questions for them. So let's get the best use of it. Couple of this thing is turn on your video cam as well as like whatever questions you have, just keep dropping them in the chat box, so that like the team will be able to take it up at the end.
+[0.0m] nikitaarora: Thanks, thanks, Advan. Hi, hi, everyone.
+[0.0m] nikitaarora: We have Shubham and Prakhar joining us today. They'll be able to. By the way, hi, I am Nikita from the marketing team of Pine Nus. I have Shubham and Prakhar with me, who will be giving a full demo, like a quick demo to you. I know you must have already explored the platform already, but the team can quickly give you a short demo on this. And if you have any questions, like Advan said, you can drop in those in the chat box, and we can take that up.
+[0.1m] nikitaarora: Praka, you want to take over?
+[0.1m] Prakhar Gour: One second, I want to teach a little issue with my.
+[0.1m] Prakhar Gour: Hello.
+[0.1m] nikitaarora: I think hello. Am I audible? Yeah, yeah, Prakhar, we can hear you.
+[0.1m] Prakhar Gour: I'm in a low network area. That's why not be able to open my video camera. That's all.
+[0.1m] Prakhar Gour: Sure.
+[0.1m] Prakhar Gour: So let me give you a brief intro about what agency probably.
+[0.1m] nikitaarora: Sorry, breaking up a little
+[0.1m] nikitaarora: bit. Can Shubham probably Take over.
+[0.1m] Prakhar Gour: If my screen visible?
+[0.1m] nikitaarora: Hello. No, no. Your screen is still
+[0.1m] Prakhar Gour: loading.
+[0.1m] nikitaarora: Is it visible now?
+[0.1m] Prakhar Gour: Yeah, we can see it now.
+[0.1m] Prakhar Gour: Okay.
+[0.1m] Prakhar Gour: Ah, so. so let me give you a brief about what Agenticorg is. So Agenticorg is basically a you can say a home for all your agents, right?
+[0.1m] Prakhar Gour: So you can create agents here, and these agents are nothing but just a Python script running in your background that you can just use to automate your workflows.
+[0.1m] Prakhar Gour: So these agents can be anything. They can be related to each other. They can be independent also. They can work in a workflow also. So as you can see, this is the website that we have right now, and let me just show you how it looks like.
+[0.1m] Prakhar Gour: I have created one account under the Ken competition team only.
+[0.1m] Prakhar Gour: So currently, like this is the dashboard here. So we have various sections over here, like agents is there, like there are other things also, like connectors is there. So I'm just give you a brief intro, like what is everything here. So dashboard basically showing you what total number of agents we have, what are the active agents, what are the pending approvals, what are in the shadow it, what ah what do we have in the shadow area.
+[0.1m] Prakhar Gour: So all these things are here. So as you can see, there is a second called agents here. So this agent section contains all all that all that item script that I was talking about. Basically, you will be just creating your agent right here and just pasting your prompt, and then moving forward, you can create agent and add connectors to it. So in that way, you can just create a simple. You can automate a simple flow that you want.
+[0.1m] Prakhar Gour: Similarly, there are there basically different aspects to an agent, right? One of them is you can say helping hands for an agent. So connector is one of them.
+[0.1m] Prakhar Gour: So basically, you have to you have to keep focus on these two things agents and connectors. These are the main you can say binding labor that will help you in creating a perfect workflow that you are trying to do. So in connectors

@@ -1,0 +1,29 @@
+[0] Ameya: Okay, so the other two can log in with my credentials, and they can have a look at my agent. Is that fine?
+[1] Prakhar Gour: Yeah, yeah, that could that can be done.
+[2] Ameya: Okay, and
+[3] Ameya: yeah, is like what? How will the final thing be judged? Like, will you just look at whether it works or not, or is there any other
+[4] Adhavan: parameter?
+[5] Adhavan: I'll communicate to you on that later on an email.
+[6] Adhavan: Okay. Not relevant for this
+[7] Ameya: session. Yes. Okay, fine.
+[8] Sathish Babu: So, can we configure our models? I can see that in AI credentials, I can configure the API key and all that. But is that under the rate limit of the, you know, the billing limit of the particular LLM model, or is it also under the scope of your billing, the Pine Labs billing, because I can see there are only three agents and 1k runs per month per month for free version.
+[9] Prakhar Gour: I think you must have logged in as a new as a new tenant, right? You are not logging, yeah. So I would suggest you to use the Ken's competition tenant, right? Which have been got it.
+[10] Prakhar Gour: Yeah. So we'll be using. But does that have?
+[11] Sathish Babu: Does it have an unlimited set of runs?
+[12] Prakhar Gour: Yes. Yes. You can use that panelist key. The panelist key already configured for them.
+[13] Sathish Babu: Got it. Got
+[14] Shikhar Kansal: it. Um.
+[15] Shikhar Kansal: There's a lot of problems signing in into the Ken case organization account. Like I try to sign in in and I put up the request. I put up a wrong requester role and a business domain, and then my email came as that you have already signed into an organization, and I'm not able to access the platform.
+[16] Prakhar Gour: Okay, so is it possible for you to create a new email or once a new email? Just create a dummy email, right? And just resize a developer back office. Now we can move forward.
+[17] Shikhar Kansal: So, so the requester role should be a developer, and the business domain should be back office.
+[18] Shikhar Kansal: Yes. Yes.
+[19] Shikhar Kansal: So I just put up the another email and tried to log again, but there it's written as too many sign up events. Try again later.
+[20] Prakhar Gour: So that maybe yeah. So maybe that is because you are getting 429 as an error code, right? So you must have tried a lot of money signups. Maybe that's why it is giving you. If it's possible, you can wait for half an hour. Then you can again try it. It will work.
+[21] Prakhar Gour: 
+[22] Shikhar Kansal: Okay, fair enough.
+[23] Prakhar Gour: So Excuse me, sir. Yeah. Okay.
+[24] Harshik: Yeah, sir. Um, I'm sorry if like it sounds like a dumbed out or something like that. So just to get an idea of the entire process, for um, for like the agent that you'd built right now in front of us, the Pine Labs agent, it was its job was basically to integrate the Pine Labs um payment software with our current workflow or whatever we are having, right?
+[25] Prakhar Gour: Yes, yes, yes.
+[26] Harshik: Yeah, and so essentially, for to integrate other such things as well, we also need to make agents, right? For like voice agent, we need for like delivery, we need another agent, and for every agent, we need a connector, and to make that connector, we need our own MCP server server to host the
+[27] Prakhar Gour: connector, right? Yeah. You can use MCP server or you can use the existing connectors that the native connector that I just showed you, right? There are 100 plus connectors there, so one of them must satisfy your use case, right?
+[28] Harshik: Okay. Answer. So basically, we need agents to connect all these platforms, so we also need agents for the entire

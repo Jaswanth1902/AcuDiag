@@ -1,0 +1,409 @@
+[
+  {
+    "scenario_id": "SCENARIO_HEALTHY_01",
+    "category": "healthy_baseline",
+    "appliance": "Whirlpool 7kg Front-Load WM #1",
+    "symptom_text": "Customer reported mild noise after spin cycle, requested health check.",
+    "acoustic_telemetry": {
+      "snr_db": 29.7,
+      "lrt_ratio": 1.25,
+      "lrt_threshold": 2.45,
+      "is_replay_spoof": false,
+      "fault_type": "NONE (HEALTHY)",
+      "verdict": "PASS_NORMAL_OPERATION"
+    },
+    "escrow_state": "PRE_AUTH_LOCKED",
+    "expected_action": "RELEASE_ESCROW_CAPTURE",
+    "expected_confidence": 0.96
+  },
+  {
+    "scenario_id": "SCENARIO_HEALTHY_02",
+    "category": "healthy_baseline",
+    "appliance": "Whirlpool 7kg Front-Load WM #2",
+    "symptom_text": "Customer reported mild noise after spin cycle, requested health check.",
+    "acoustic_telemetry": {
+      "snr_db": 30.9,
+      "lrt_ratio": 1.4,
+      "lrt_threshold": 2.45,
+      "is_replay_spoof": false,
+      "fault_type": "NONE (HEALTHY)",
+      "verdict": "PASS_NORMAL_OPERATION"
+    },
+    "escrow_state": "PRE_AUTH_LOCKED",
+    "expected_action": "RELEASE_ESCROW_CAPTURE",
+    "expected_confidence": 0.96
+  },
+  {
+    "scenario_id": "SCENARIO_HEALTHY_03",
+    "category": "healthy_baseline",
+    "appliance": "Whirlpool 7kg Front-Load WM #3",
+    "symptom_text": "Customer reported mild noise after spin cycle, requested health check.",
+    "acoustic_telemetry": {
+      "snr_db": 32.1,
+      "lrt_ratio": 1.55,
+      "lrt_threshold": 2.45,
+      "is_replay_spoof": false,
+      "fault_type": "NONE (HEALTHY)",
+      "verdict": "PASS_NORMAL_OPERATION"
+    },
+    "escrow_state": "PRE_AUTH_LOCKED",
+    "expected_action": "RELEASE_ESCROW_CAPTURE",
+    "expected_confidence": 0.96
+  },
+  {
+    "scenario_id": "SCENARIO_HEALTHY_04",
+    "category": "healthy_baseline",
+    "appliance": "Whirlpool 7kg Front-Load WM #4",
+    "symptom_text": "Customer reported mild noise after spin cycle, requested health check.",
+    "acoustic_telemetry": {
+      "snr_db": 33.3,
+      "lrt_ratio": 1.7,
+      "lrt_threshold": 2.45,
+      "is_replay_spoof": false,
+      "fault_type": "NONE (HEALTHY)",
+      "verdict": "PASS_NORMAL_OPERATION"
+    },
+    "escrow_state": "PRE_AUTH_LOCKED",
+    "expected_action": "RELEASE_ESCROW_CAPTURE",
+    "expected_confidence": 0.96
+  },
+  {
+    "scenario_id": "SCENARIO_HEALTHY_05",
+    "category": "healthy_baseline",
+    "appliance": "Whirlpool 7kg Front-Load WM #5",
+    "symptom_text": "Customer reported mild noise after spin cycle, requested health check.",
+    "acoustic_telemetry": {
+      "snr_db": 34.5,
+      "lrt_ratio": 1.85,
+      "lrt_threshold": 2.45,
+      "is_replay_spoof": false,
+      "fault_type": "NONE (HEALTHY)",
+      "verdict": "PASS_NORMAL_OPERATION"
+    },
+    "escrow_state": "PRE_AUTH_LOCKED",
+    "expected_action": "RELEASE_ESCROW_CAPTURE",
+    "expected_confidence": 0.96
+  },
+  {
+    "scenario_id": "SCENARIO_BEARING_01",
+    "category": "bearing_spall",
+    "appliance": "LG DirectDrive Inverter #1",
+    "symptom_text": "High-pitched rhythmic metallic grinding during 1200 RPM spin cycle.",
+    "acoustic_telemetry": {
+      "snr_db": 22.8,
+      "lrt_ratio": 3.85,
+      "lrt_threshold": 2.45,
+      "is_replay_spoof": false,
+      "fault_type": "WM_BEARING_SPALL",
+      "verdict": "FAIL_FAULT_DETECTED"
+    },
+    "escrow_state": "PRE_AUTH_LOCKED",
+    "expected_action": "DISPATCH_PARTS_WITHHOLD_PAYOUT",
+    "expected_confidence": 0.95
+  },
+  {
+    "scenario_id": "SCENARIO_BEARING_02",
+    "category": "bearing_spall",
+    "appliance": "LG DirectDrive Inverter #2",
+    "symptom_text": "High-pitched rhythmic metallic grinding during 1200 RPM spin cycle.",
+    "acoustic_telemetry": {
+      "snr_db": 23.6,
+      "lrt_ratio": 4.3,
+      "lrt_threshold": 2.45,
+      "is_replay_spoof": false,
+      "fault_type": "WM_BEARING_SPALL",
+      "verdict": "FAIL_FAULT_DETECTED"
+    },
+    "escrow_state": "PRE_AUTH_LOCKED",
+    "expected_action": "DISPATCH_PARTS_WITHHOLD_PAYOUT",
+    "expected_confidence": 0.95
+  },
+  {
+    "scenario_id": "SCENARIO_BEARING_03",
+    "category": "bearing_spall",
+    "appliance": "LG DirectDrive Inverter #3",
+    "symptom_text": "High-pitched rhythmic metallic grinding during 1200 RPM spin cycle.",
+    "acoustic_telemetry": {
+      "snr_db": 24.4,
+      "lrt_ratio": 4.75,
+      "lrt_threshold": 2.45,
+      "is_replay_spoof": false,
+      "fault_type": "WM_BEARING_SPALL",
+      "verdict": "FAIL_FAULT_DETECTED"
+    },
+    "escrow_state": "PRE_AUTH_LOCKED",
+    "expected_action": "DISPATCH_PARTS_WITHHOLD_PAYOUT",
+    "expected_confidence": 0.95
+  },
+  {
+    "scenario_id": "SCENARIO_BEARING_04",
+    "category": "bearing_spall",
+    "appliance": "LG DirectDrive Inverter #4",
+    "symptom_text": "High-pitched rhythmic metallic grinding during 1200 RPM spin cycle.",
+    "acoustic_telemetry": {
+      "snr_db": 25.2,
+      "lrt_ratio": 5.2,
+      "lrt_threshold": 2.45,
+      "is_replay_spoof": false,
+      "fault_type": "WM_BEARING_SPALL",
+      "verdict": "FAIL_FAULT_DETECTED"
+    },
+    "escrow_state": "PRE_AUTH_LOCKED",
+    "expected_action": "DISPATCH_PARTS_WITHHOLD_PAYOUT",
+    "expected_confidence": 0.95
+  },
+  {
+    "scenario_id": "SCENARIO_BEARING_05",
+    "category": "bearing_spall",
+    "appliance": "LG DirectDrive Inverter #5",
+    "symptom_text": "High-pitched rhythmic metallic grinding during 1200 RPM spin cycle.",
+    "acoustic_telemetry": {
+      "snr_db": 26.0,
+      "lrt_ratio": 5.65,
+      "lrt_threshold": 2.45,
+      "is_replay_spoof": false,
+      "fault_type": "WM_BEARING_SPALL",
+      "verdict": "FAIL_FAULT_DETECTED"
+    },
+    "escrow_state": "PRE_AUTH_LOCKED",
+    "expected_action": "DISPATCH_PARTS_WITHHOLD_PAYOUT",
+    "expected_confidence": 0.95
+  },
+  {
+    "scenario_id": "SCENARIO_PUMP_VALVE_01",
+    "category": "cavitation_or_valve",
+    "appliance": "Samsung EcoBubble / Daikin Inverter #1",
+    "symptom_text": "Gurgling cavitation from drain manifold and high-frequency valve hiss.",
+    "acoustic_telemetry": {
+      "snr_db": 20.6,
+      "lrt_ratio": 3.2,
+      "lrt_threshold": 2.45,
+      "is_replay_spoof": false,
+      "fault_type": "PUMP_CAVITATION",
+      "verdict": "FAIL_FAULT_DETECTED"
+    },
+    "escrow_state": "PRE_AUTH_LOCKED",
+    "expected_action": "AUTO_ORDER_DRAIN_IMPELLER",
+    "expected_confidence": 0.93
+  },
+  {
+    "scenario_id": "SCENARIO_PUMP_VALVE_02",
+    "category": "cavitation_or_valve",
+    "appliance": "Samsung EcoBubble / Daikin Inverter #2",
+    "symptom_text": "Gurgling cavitation from drain manifold and high-frequency valve hiss.",
+    "acoustic_telemetry": {
+      "snr_db": 21.7,
+      "lrt_ratio": 3.55,
+      "lrt_threshold": 2.45,
+      "is_replay_spoof": false,
+      "fault_type": "COMPRESSOR_VALVE_LEAK",
+      "verdict": "FAIL_FAULT_DETECTED"
+    },
+    "escrow_state": "PRE_AUTH_LOCKED",
+    "expected_action": "AUTO_ORDER_DRAIN_IMPELLER",
+    "expected_confidence": 0.93
+  },
+  {
+    "scenario_id": "SCENARIO_PUMP_VALVE_03",
+    "category": "cavitation_or_valve",
+    "appliance": "Samsung EcoBubble / Daikin Inverter #3",
+    "symptom_text": "Gurgling cavitation from drain manifold and high-frequency valve hiss.",
+    "acoustic_telemetry": {
+      "snr_db": 22.8,
+      "lrt_ratio": 3.9,
+      "lrt_threshold": 2.45,
+      "is_replay_spoof": false,
+      "fault_type": "PUMP_CAVITATION",
+      "verdict": "FAIL_FAULT_DETECTED"
+    },
+    "escrow_state": "PRE_AUTH_LOCKED",
+    "expected_action": "AUTO_ORDER_DRAIN_IMPELLER",
+    "expected_confidence": 0.93
+  },
+  {
+    "scenario_id": "SCENARIO_PUMP_VALVE_04",
+    "category": "cavitation_or_valve",
+    "appliance": "Samsung EcoBubble / Daikin Inverter #4",
+    "symptom_text": "Gurgling cavitation from drain manifold and high-frequency valve hiss.",
+    "acoustic_telemetry": {
+      "snr_db": 23.9,
+      "lrt_ratio": 4.25,
+      "lrt_threshold": 2.45,
+      "is_replay_spoof": false,
+      "fault_type": "COMPRESSOR_VALVE_LEAK",
+      "verdict": "FAIL_FAULT_DETECTED"
+    },
+    "escrow_state": "PRE_AUTH_LOCKED",
+    "expected_action": "AUTO_ORDER_DRAIN_IMPELLER",
+    "expected_confidence": 0.93
+  },
+  {
+    "scenario_id": "SCENARIO_SPOOF_FRAUD_01",
+    "category": "replay_attack",
+    "appliance": "Bosch Serie 6 WM #1",
+    "symptom_text": "Technician submitted recorded WAV file from smartphone speaker playback.",
+    "acoustic_telemetry": {
+      "snr_db": 27.0,
+      "low_freq_ratio": 0.032,
+      "speaker_resonance_ratio": 0.115,
+      "dac_spectral_flatness": 0.42,
+      "is_replay_spoof": true,
+      "fault_type": "REPLAY_SPOOF_ATTACK",
+      "verdict": "REJECTED_REPLAY_ATTACK"
+    },
+    "escrow_state": "PRE_AUTH_LOCKED",
+    "expected_action": "TRIGGER_FRAUD_ALERT_LOCK_ESCROW",
+    "expected_confidence": 0.99
+  },
+  {
+    "scenario_id": "SCENARIO_SPOOF_FRAUD_02",
+    "category": "replay_attack",
+    "appliance": "Bosch Serie 6 WM #2",
+    "symptom_text": "Technician submitted recorded WAV file from smartphone speaker playback.",
+    "acoustic_telemetry": {
+      "snr_db": 29.0,
+      "low_freq_ratio": 0.032,
+      "speaker_resonance_ratio": 0.115,
+      "dac_spectral_flatness": 0.42,
+      "is_replay_spoof": true,
+      "fault_type": "REPLAY_SPOOF_ATTACK",
+      "verdict": "REJECTED_REPLAY_ATTACK"
+    },
+    "escrow_state": "PRE_AUTH_LOCKED",
+    "expected_action": "TRIGGER_FRAUD_ALERT_LOCK_ESCROW",
+    "expected_confidence": 0.99
+  },
+  {
+    "scenario_id": "SCENARIO_SPOOF_FRAUD_03",
+    "category": "replay_attack",
+    "appliance": "Bosch Serie 6 WM #3",
+    "symptom_text": "Technician submitted recorded WAV file from smartphone speaker playback.",
+    "acoustic_telemetry": {
+      "snr_db": 31.0,
+      "low_freq_ratio": 0.032,
+      "speaker_resonance_ratio": 0.115,
+      "dac_spectral_flatness": 0.42,
+      "is_replay_spoof": true,
+      "fault_type": "REPLAY_SPOOF_ATTACK",
+      "verdict": "REJECTED_REPLAY_ATTACK"
+    },
+    "escrow_state": "PRE_AUTH_LOCKED",
+    "expected_action": "TRIGGER_FRAUD_ALERT_LOCK_ESCROW",
+    "expected_confidence": 0.99
+  },
+  {
+    "scenario_id": "SCENARIO_LOW_SNR_01",
+    "category": "low_snr_rejection",
+    "appliance": "IFB Senator Smart #1",
+    "symptom_text": "Audio captured with loud construction drilling and television playing in room.",
+    "acoustic_telemetry": {
+      "snr_db": 10.0,
+      "lrt_ratio": 0.0,
+      "is_replay_spoof": false,
+      "fault_type": "UNCLASSIFIED_HIGH_NOISE",
+      "verdict": "REJECTED_SNR_TOO_LOW"
+    },
+    "escrow_state": "PRE_AUTH_LOCKED",
+    "expected_action": "REJECT_REQUEST_CLEAN_RECORDING",
+    "expected_confidence": 0.92
+  },
+  {
+    "scenario_id": "SCENARIO_LOW_SNR_02",
+    "category": "low_snr_rejection",
+    "appliance": "IFB Senator Smart #2",
+    "symptom_text": "Audio captured with loud construction drilling and television playing in room.",
+    "acoustic_telemetry": {
+      "snr_db": 11.5,
+      "lrt_ratio": 0.0,
+      "is_replay_spoof": false,
+      "fault_type": "UNCLASSIFIED_HIGH_NOISE",
+      "verdict": "REJECTED_SNR_TOO_LOW"
+    },
+    "escrow_state": "PRE_AUTH_LOCKED",
+    "expected_action": "REJECT_REQUEST_CLEAN_RECORDING",
+    "expected_confidence": 0.92
+  },
+  {
+    "scenario_id": "SCENARIO_LOW_SNR_03",
+    "category": "low_snr_rejection",
+    "appliance": "IFB Senator Smart #3",
+    "symptom_text": "Audio captured with loud construction drilling and television playing in room.",
+    "acoustic_telemetry": {
+      "snr_db": 13.0,
+      "lrt_ratio": 0.0,
+      "is_replay_spoof": false,
+      "fault_type": "UNCLASSIFIED_HIGH_NOISE",
+      "verdict": "REJECTED_SNR_TOO_LOW"
+    },
+    "escrow_state": "PRE_AUTH_LOCKED",
+    "expected_action": "REJECT_REQUEST_CLEAN_RECORDING",
+    "expected_confidence": 0.92
+  },
+  {
+    "scenario_id": "SCENARIO_PAYMENT_CHAOS_01",
+    "category": "payment_chaos",
+    "appliance": "Siemens iQ500 WM",
+    "symptom_text": "Escrow pre-auth gateway failure mode: low_balance.",
+    "chaos_mode": "low_balance",
+    "idempotency_key": "IDEM_LOW_BALANCE_KEY_0001",
+    "escrow_state": "INITIATED",
+    "expected_action": "SEND_WHATSAPP_FALLBACK_LINK",
+    "expected_confidence": 0.94
+  },
+  {
+    "scenario_id": "SCENARIO_PAYMENT_CHAOS_02",
+    "category": "payment_chaos",
+    "appliance": "Siemens iQ500 WM",
+    "symptom_text": "Escrow pre-auth gateway failure mode: timeout_504.",
+    "chaos_mode": "timeout_504",
+    "idempotency_key": "IDEM_TIMEOUT_504_KEY_0002",
+    "escrow_state": "INITIATED",
+    "expected_action": "QUEUE_IDEMPOTENT_POLL",
+    "expected_confidence": 0.94
+  },
+  {
+    "scenario_id": "SCENARIO_PAYMENT_CHAOS_03",
+    "category": "payment_chaos",
+    "appliance": "Siemens iQ500 WM",
+    "symptom_text": "Escrow pre-auth gateway failure mode: invalid_vpa.",
+    "chaos_mode": "invalid_vpa",
+    "idempotency_key": "IDEM_INVALID_VPA_KEY_0003",
+    "escrow_state": "INITIATED",
+    "expected_action": "SEND_WHATSAPP_FALLBACK_LINK",
+    "expected_confidence": 0.94
+  },
+  {
+    "scenario_id": "SCENARIO_FAKE_REPAIR_01",
+    "category": "fake_repair_withhold",
+    "appliance": "Godrej Edge Digi #1",
+    "symptom_text": "Technician marked repair complete, but post-repair acoustic scan still exhibits severe bearing rattle.",
+    "acoustic_telemetry": {
+      "snr_db": 24.2,
+      "lrt_ratio": 3.88,
+      "lrt_threshold": 2.45,
+      "is_replay_spoof": false,
+      "fault_type": "WM_BEARING_SPALL",
+      "verdict": "FAIL_FAULT_DETECTED"
+    },
+    "escrow_state": "PRE_AUTH_LOCKED",
+    "expected_action": "WITHHOLD_PAYOUT_SECONDARY_AUDIT",
+    "expected_confidence": 0.97
+  },
+  {
+    "scenario_id": "SCENARIO_FAKE_REPAIR_02",
+    "category": "fake_repair_withhold",
+    "appliance": "Godrej Edge Digi #2",
+    "symptom_text": "Technician marked repair complete, but post-repair acoustic scan still exhibits severe bearing rattle.",
+    "acoustic_telemetry": {
+      "snr_db": 24.2,
+      "lrt_ratio": 3.88,
+      "lrt_threshold": 2.45,
+      "is_replay_spoof": false,
+      "fault_type": "WM_BEARING_SPALL",
+      "verdict": "FAIL_FAULT_DETECTED"
+    },
+    "escrow_state": "PRE_AUTH_LOCKED",
+    "expected_action": "WITHHOLD_PAYOUT_SECONDARY_AUDIT",
+    "expected_confidence": 0.97
+  }
+]

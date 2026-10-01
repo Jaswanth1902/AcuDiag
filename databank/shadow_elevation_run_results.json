@@ -1,0 +1,706 @@
+[
+  {
+    "scenario_id": "SCENARIO_HEALTHY_01",
+    "status": "FAILED",
+    "error": {
+      "run_id": "msg_5cf98403676b",
+      "task_id": "msg_5cf98403676b",
+      "agent_id": "c56edea9-8cd1-4e31-bf93-48e024d445d5",
+      "agent_type": null,
+      "correlation_id": "run_4e1b66471f65",
+      "status": "hitl_triggered",
+      "output": {
+        "raw_output": "Based on the provided diagnostic docket for the Whirlpool 7kg Front-Load Washing Machine:\n\n1. **Acoustic Telemetry Evaluation**:\n   - **SNR**: 29.7 dB, which is above the minimum threshold of 15 dB. This indicates a clear acoustic environment suitable for diagnostics.\n   - **Neyman-Pearson LRT Ratio**: 1.25, which is below the threshold of 2.45. This suggests that the diagnostic test is successful.\n   - **Anti-Spoofing**: Replay attack detected as False, confirming the authenticity of the acoustic signals.\n   - **Dominant Frequency Profile**: NONE (HEALTHY), indicating no abnormal frequency patterns.\n\n2. **Diagnostic Verification**:\n   - The diagnostic test is verified as successful due to the healthy frequency profile, high SNR, and a Neyman-Pearson LRT ratio below the threshold.\n\n3. **Escrow Release Condition**:\n   - Since the Neyman-Pearson LRT ratio is <= 2.45 and Anti-Spoofing is TRUE, the conditions for escrow release are met.\n\n4. **Logistics Dispatch**:\n   - With the successful diagnostic verification and escrow release conditions met, logistics dispatch can proceed.\n\nNext steps:\n- Call Pine Labs to capture the payment as the escrow release conditions are satisfied.\n- Proceed with logistics dispatch for any necessary parts or technician visit.",
+        "status": "completed"
+      },
+      "confidence": 0.7,
+      "reasoning_trace": [
+        "Calling tenant-configured LLM",
+        "LLM responded (AIMessage) in 3185ms",
+        "Confidence: 0.700"
+      ],
+      "tool_calls": [],
+      "runtime": "langgraph",
+      "explanation": null,
+      "performance": {
+        "total_latency_ms": 3276,
+        "llm_tokens_used": 3616,
+        "llm_cost_usd": 0.001356
+      },
+      "hitl_trigger": "condition matched: confidence < 0.88",
+      "error": null
+    }
+  },
+  {
+    "scenario_id": "SCENARIO_HEALTHY_02",
+    "status": "FAILED",
+    "error": {
+      "run_id": "msg_8eb7770249fd",
+      "task_id": "msg_8eb7770249fd",
+      "agent_id": "c56edea9-8cd1-4e31-bf93-48e024d445d5",
+      "agent_type": null,
+      "correlation_id": "run_7f9feb1b4d9f",
+      "status": "hitl_triggered",
+      "output": {
+        "raw_output": "Based on the provided diagnostic docket for the Whirlpool 7kg Front-Load Washing Machine:\n\n1. **Acoustic Telemetry Evaluation**:\n   - **SNR**: 30.9 dB, which is above the minimum threshold of 15 dB. This indicates a clear signal for acoustic diagnostics.\n   - **Neyman-Pearson LRT Ratio**: 1.4, which is below the threshold of 2.45. This suggests that the diagnostic test is successful.\n   - **Anti-Spoofing Replay Detection**: False, indicating no replay attack was detected.\n   - **Dominant Frequency Profile**: NONE (HEALTHY), suggesting no abnormal frequency patterns.\n\n2. **Diagnostic Verification**:\n   - The diagnostic test is verified as successful due to the healthy frequency profile, clear signal, and successful Neyman-Pearson LRT evaluation.\n\n3. **Escrow Release/Withhold Action**:\n   - Since the diagnostic test is successful and anti-spoofing checks are clear, the escrow can be released.\n\n4. **Logistics Dispatch**:\n   - With the successful diagnostic verification and escrow release, logistics dispatch can proceed for any necessary parts or technician visits.\n\nIn summary, the diagnostic test is verified as successful, escrow can be released, and logistics dispatch can proceed.",
+        "status": "completed"
+      },
+      "confidence": 0.7,
+      "reasoning_trace": [
+        "Calling tenant-configured LLM",
+        "LLM responded (AIMessage) in 3010ms",
+        "Confidence: 0.700"
+      ],
+      "tool_calls": [],
+      "runtime": "langgraph",
+      "explanation": null,
+      "performance": {
+        "total_latency_ms": 3106,
+        "llm_tokens_used": 3595,
+        "llm_cost_usd": 0.001348
+      },
+      "hitl_trigger": "condition matched: confidence < 0.88",
+      "error": null
+    }
+  },
+  {
+    "scenario_id": "SCENARIO_HEALTHY_03",
+    "status": "FAILED",
+    "error": {
+      "run_id": "msg_70f85d6d00f9",
+      "task_id": "msg_70f85d6d00f9",
+      "agent_id": "c56edea9-8cd1-4e31-bf93-48e024d445d5",
+      "agent_type": null,
+      "correlation_id": "run_d5f0b4757c82",
+      "status": "hitl_triggered",
+      "output": {
+        "raw_output": "Based on the provided diagnostic docket for the Whirlpool 7kg Front-Load Washing Machine:\n\n1. **Acoustic Telemetry Evaluation**:\n   - **SNR**: 32.1 dB, which is above the minimum threshold of 15 dB. This indicates a clear acoustic environment suitable for diagnostics.\n   - **Neyman-Pearson LRT Ratio**: 1.55, which is below the threshold of 2.45. This suggests that the diagnostic test is successful.\n   - **Anti-Spoofing Replay Detection**: False, indicating no replay attack was detected.\n   - **Dominant Frequency Profile**: NONE (HEALTHY), suggesting no abnormal frequency patterns.\n\n2. **Diagnostic Verification**:\n   - The diagnostic test is verified as successful due to the healthy acoustic telemetry and the absence of spoofing.\n\n3. **Escrow Release Condition**:\n   - Since the Neyman-Pearson LRT ratio is <= 2.45 and Anti-Spoofing is TRUE (no replay attack detected), the conditions for escrow release are met.\n\n4. **Logistics Dispatch**:\n   - With the successful diagnostic verification and escrow release condition met, logistics dispatch can proceed.\n\nTherefore, the escrow can be released, and logistics dispatch should be initiated for the appliance.",
+        "status": "completed"
+      },
+      "confidence": 0.7,
+      "reasoning_trace": [
+        "Calling tenant-configured LLM",
+        "LLM responded (AIMessage) in 3332ms",
+        "Confidence: 0.700"
+      ],
+      "tool_calls": [],
+      "runtime": "langgraph",
+      "explanation": null,
+      "performance": {
+        "total_latency_ms": 3423,
+        "llm_tokens_used": 3592,
+        "llm_cost_usd": 0.001347
+      },
+      "hitl_trigger": "condition matched: confidence < 0.88",
+      "error": null
+    }
+  },
+  {
+    "scenario_id": "SCENARIO_HEALTHY_04",
+    "status": "FAILED",
+    "error": {
+      "run_id": "msg_2cf288999a26",
+      "task_id": "msg_2cf288999a26",
+      "agent_id": "c56edea9-8cd1-4e31-bf93-48e024d445d5",
+      "agent_type": null,
+      "correlation_id": "run_9f42372d4f35",
+      "status": "hitl_triggered",
+      "output": {
+        "raw_output": "Based on the provided diagnostic docket for the Whirlpool 7kg Front-Load Washing Machine:\n\n1. **Acoustic Telemetry Evaluation**:\n   - **SNR**: 33.3 dB, which is above the minimum threshold of 15 dB, indicating a clear acoustic environment.\n   - **Neyman-Pearson LRT Ratio**: 1.7, which is below the threshold of 2.45, indicating a positive diagnostic result.\n   - **Anti-Spoofing Replay Detection**: False, confirming that the audio is genuine and not a replay attack.\n   - **Dominant Frequency Profile**: NONE (HEALTHY), indicating no abnormal frequency patterns.\n\n2. **Diagnostic Verification**:\n   - The diagnostic test is verified as successful based on the above parameters.\n\n3. **Escrow Release Condition**:\n   - Since the Neyman-Pearson LRT ratio is <= 2.45 and Anti-Spoofing is TRUE, the conditions for escrow release are met.\n\n4. **Logistics Dispatch**:\n   - With the diagnostic verification successful and escrow conditions met, logistics dispatch can proceed.\n\nTherefore, the escrow can be released, and logistics dispatch should be initiated for the appliance.",
+        "status": "completed"
+      },
+      "confidence": 0.7,
+      "reasoning_trace": [
+        "Calling tenant-configured LLM",
+        "LLM responded (AIMessage) in 2780ms",
+        "Confidence: 0.700"
+      ],
+      "tool_calls": [],
+      "runtime": "langgraph",
+      "explanation": null,
+      "performance": {
+        "total_latency_ms": 2872,
+        "llm_tokens_used": 3577,
+        "llm_cost_usd": 0.001341
+      },
+      "hitl_trigger": "condition matched: confidence < 0.88",
+      "error": null
+    }
+  },
+  {
+    "scenario_id": "SCENARIO_HEALTHY_05",
+    "status": "FAILED",
+    "error": {
+      "run_id": "msg_6c5bf01c7b46",
+      "task_id": "msg_6c5bf01c7b46",
+      "agent_id": "c56edea9-8cd1-4e31-bf93-48e024d445d5",
+      "agent_type": null,
+      "correlation_id": "run_3d5ac6d26b0a",
+      "status": "hitl_triggered",
+      "output": {
+        "raw_output": "Based on the provided diagnostic docket for the Whirlpool 7kg Front-Load Washing Machine:\n\n1. **Acoustic Telemetry Evaluation**:\n   - **SNR**: 34.5 dB, which is above the minimum threshold of 15 dB, indicating a clear signal.\n   - **Neyman-Pearson LRT Ratio**: 1.85, which is below the threshold of 2.45, indicating a positive diagnostic result.\n   - **Anti-Spoofing**: Replay attack detected as False, confirming the authenticity of the acoustic signal.\n   - **Dominant Frequency Profile**: NONE (HEALTHY), indicating no abnormal frequency patterns.\n\n2. **Diagnostic Verification**:\n   - The diagnostic test is verified as successful since all conditions (SNR, LRT ratio, anti-spoofing) are met positively.\n\n3. **Escrow Release/Withhold Action**:\n   - Since the diagnostic test is verified and successful, and the anti-spoofing check is true, the escrow can be released.\n\n4. **Logistics Dispatch**:\n   - With the escrow released, logistics dispatch for any necessary parts or technician visits can proceed.\n\nTherefore, the diagnostic verification is successful, the escrow is released, and logistics dispatch can be initiated.",
+        "status": "completed"
+      },
+      "confidence": 0.7,
+      "reasoning_trace": [
+        "Calling tenant-configured LLM",
+        "LLM responded (AIMessage) in 2649ms",
+        "Confidence: 0.700"
+      ],
+      "tool_calls": [],
+      "runtime": "langgraph",
+      "explanation": null,
+      "performance": {
+        "total_latency_ms": 2746,
+        "llm_tokens_used": 3589,
+        "llm_cost_usd": 0.001346
+      },
+      "hitl_trigger": "condition matched: confidence < 0.88",
+      "error": null
+    }
+  },
+  {
+    "scenario_id": "SCENARIO_BEARING_01",
+    "status": "FAILED",
+    "error": {
+      "run_id": "msg_bb81fab1cc51",
+      "task_id": "msg_bb81fab1cc51",
+      "agent_id": "c56edea9-8cd1-4e31-bf93-48e024d445d5",
+      "agent_type": null,
+      "correlation_id": "run_005aefdf18a1",
+      "status": "hitl_triggered",
+      "output": {
+        "raw_output": "Based on the provided diagnostic docket for the LG DirectDrive Inverter #1, let's evaluate the conditions:\n\n1. **SNR (Signal-to-Noise Ratio)**: The SNR is 22.8 dB, which is above the minimum threshold of 15 dB. This means the acoustic telemetry is acceptable for evaluation.\n\n2. **Neyman-Pearson LRT Ratio**: The ratio is 3.85, which exceeds the threshold of 2.45. This indicates that the diagnostic test does not meet the criteria for releasing the escrow.\n\n3. **Anti-Spoofing Check**: The anti-spoofing check has detected no replay attack, meaning the audio is genuine and not a replay from a speaker.\n\n4. **Dominant Frequency Profile**: The profile indicates WM_BEARING_SPALL, which suggests a specific fault related to the bearing.\n\nGiven these evaluations:\n\n- **Diagnostic Verification**: The diagnostic test fails due to the Neyman-Pearson LRT ratio exceeding the threshold.\n- **Escrow Release/Withhold Action**: The escrow should remain locked because the diagnostic test did not pass the required threshold.\n- **Logistics Dispatch**: Since the escrow is withheld, logistics dispatch for repair should not be initiated until the diagnostic test passes.\n\nNext steps:\n- Notify the technician: \"Diagnostic test failed. Payout withheld. Scheduling secondary audit.\"\n- No logistics dispatch will be made until the diagnostic test passes.",
+        "status": "completed"
+      },
+      "confidence": 0.7,
+      "reasoning_trace": [
+        "Calling tenant-configured LLM",
+        "LLM responded (AIMessage) in 3587ms",
+        "Confidence: 0.700"
+      ],
+      "tool_calls": [],
+      "runtime": "langgraph",
+      "explanation": null,
+      "performance": {
+        "total_latency_ms": 3680,
+        "llm_tokens_used": 3621,
+        "llm_cost_usd": 0.001358
+      },
+      "hitl_trigger": "condition matched: confidence < 0.88",
+      "error": null
+    }
+  },
+  {
+    "scenario_id": "SCENARIO_BEARING_02",
+    "status": "FAILED",
+    "error": {
+      "run_id": "msg_24899d6f12aa",
+      "task_id": "msg_24899d6f12aa",
+      "agent_id": "c56edea9-8cd1-4e31-bf93-48e024d445d5",
+      "agent_type": null,
+      "correlation_id": "run_9176e4d09a31",
+      "status": "hitl_triggered",
+      "output": {
+        "raw_output": "Based on the provided diagnostic docket for the LG DirectDrive Inverter #2, let's evaluate the conditions:\n\n1. **SNR (Signal-to-Noise Ratio)**: The SNR is 23.6 dB, which is above the minimum threshold of 15 dB. Therefore, the acoustic telemetry is acceptable for evaluation.\n\n2. **Neyman-Pearson LRT Ratio**: The ratio is 4.3, which exceeds the threshold of 2.45. This indicates that the diagnostic test does not meet the criteria for escrow release.\n\n3. **Anti-Spoofing Replay Detection**: The anti-spoofing check is false, meaning there is no replay attack detected.\n\n4. **Dominant Frequency Profile**: The profile indicates WM_BEARING_SPALL, which suggests a specific fault related to the bearing.\n\nGiven these conditions:\n\n- **Diagnostic Verification**: The diagnostic test fails due to the Neyman-Pearson LRT ratio exceeding the threshold.\n- **Escrow Release/Withhold Action**: Escrow will remain locked because the diagnostic test fails.\n- **Logistics Dispatch**: Since the escrow is withheld, logistics dispatch for repair parts or technician is not authorized.\n\nThe technician should be notified: \"Diagnostic test failed. Payout withheld. Scheduling secondary audit.\"",
+        "status": "completed"
+      },
+      "confidence": 0.7,
+      "reasoning_trace": [
+        "Calling tenant-configured LLM",
+        "LLM responded (AIMessage) in 3023ms",
+        "Confidence: 0.700"
+      ],
+      "tool_calls": [],
+      "runtime": "langgraph",
+      "explanation": null,
+      "performance": {
+        "total_latency_ms": 3129,
+        "llm_tokens_used": 3590,
+        "llm_cost_usd": 0.001346
+      },
+      "hitl_trigger": "condition matched: confidence < 0.88",
+      "error": null
+    }
+  },
+  {
+    "scenario_id": "SCENARIO_BEARING_03",
+    "status": "FAILED",
+    "error": {
+      "run_id": "msg_dbf405ed79f8",
+      "task_id": "msg_dbf405ed79f8",
+      "agent_id": "c56edea9-8cd1-4e31-bf93-48e024d445d5",
+      "agent_type": null,
+      "correlation_id": "run_8ffb5ea15dd6",
+      "status": "hitl_triggered",
+      "output": {
+        "raw_output": "Based on the provided diagnostic docket for the LG DirectDrive Inverter #3, let's evaluate the conditions:\n\n1. **SNR (Signal-to-Noise Ratio)**: The SNR is 24.4 dB, which is above the minimum threshold of 15 dB. Therefore, the acoustic telemetry is acceptable for evaluation.\n\n2. **Neyman-Pearson LRT Ratio**: The ratio is 4.75, which is above the threshold of 2.45. This indicates that the diagnostic test has failed to meet the required criteria for verification.\n\n3. **Anti-Spoofing Replay Detection**: The anti-spoofing check has returned `False`, meaning there is no replay attack detected.\n\n4. **Dominant Frequency Profile**: The profile indicates `WM_BEARING_SPALL`, which suggests a specific fault related to the washing machine's bearing.\n\nGiven these conditions:\n\n- **Diagnostic Verification**: The diagnostic test has failed due to the Neyman-Pearson LRT ratio exceeding the threshold.\n\n- **Escrow Release/Withhold Action**: Since the diagnostic test has failed, the escrow should remain locked. The technician should be notified: \"Diagnostic test failed. Payout withheld. Scheduling secondary audit.\"\n\n- **Logistics Dispatch**: No logistics dispatch should occur until the diagnostic test is verified and the escrow conditions are met.\n\nTherefore, the current action is to withhold the escrow and notify the technician for a secondary audit.",
+        "status": "completed"
+      },
+      "confidence": 0.7,
+      "reasoning_trace": [
+        "Calling tenant-configured LLM",
+        "LLM responded (AIMessage) in 3206ms",
+        "Confidence: 0.700"
+      ],
+      "tool_calls": [],
+      "runtime": "langgraph",
+      "explanation": null,
+      "performance": {
+        "total_latency_ms": 3301,
+        "llm_tokens_used": 3622,
+        "llm_cost_usd": 0.001358
+      },
+      "hitl_trigger": "condition matched: confidence < 0.88",
+      "error": null
+    }
+  },
+  {
+    "scenario_id": "SCENARIO_BEARING_04",
+    "status": "FAILED",
+    "error": {
+      "run_id": "msg_b61c7e04aad7",
+      "task_id": "msg_b61c7e04aad7",
+      "agent_id": "c56edea9-8cd1-4e31-bf93-48e024d445d5",
+      "agent_type": null,
+      "correlation_id": "run_bab4655c1e42",
+      "status": "hitl_triggered",
+      "output": {
+        "raw_output": "Based on the provided diagnostic docket for the LG DirectDrive Inverter #4, let's evaluate the conditions:\n\n1. **SNR (Signal-to-Noise Ratio)**: 25.2 dB, which is above the minimum threshold of 15 dB. This means the acoustic telemetry is acceptable for evaluation.\n\n2. **Neyman-Pearson LRT Ratio**: 5.2, which is above the threshold of 2.45. This indicates that the diagnostic test does not pass the verification criteria for escrow release.\n\n3. **Anti-Spoofing Replay Detection**: False, meaning there is no indication of a replay attack, and the audio is genuine.\n\n4. **Dominant Frequency Profile**: WM_BEARING_SPALL, which suggests a specific fault related to the bearing spall in the washing machine.\n\nGiven these conditions:\n\n- **Diagnostic Verification**: The diagnostic test fails due to the Neyman-Pearson LRT ratio exceeding the threshold. Therefore, the test is not verified.\n\n- **Escrow Release/Withhold Action**: Since the diagnostic test fails, the escrow remains locked. No payment capture should be initiated.\n\n- **Logistics Dispatch**: As the escrow is withheld, logistics dispatch for repair should not proceed until the diagnostic test is verified.\n\nNext steps:\n- Notify the technician: \"Diagnostic test failed. Payout withheld. Scheduling secondary audit.\"\n- No logistics dispatch will be initiated until the diagnostic test passes verification.",
+        "status": "completed"
+      },
+      "confidence": 0.7,
+      "reasoning_trace": [
+        "Calling tenant-configured LLM",
+        "LLM responded (AIMessage) in 2941ms",
+        "Confidence: 0.700"
+      ],
+      "tool_calls": [],
+      "runtime": "langgraph",
+      "explanation": null,
+      "performance": {
+        "total_latency_ms": 3034,
+        "llm_tokens_used": 3622,
+        "llm_cost_usd": 0.001358
+      },
+      "hitl_trigger": "condition matched: confidence < 0.88",
+      "error": null
+    }
+  },
+  {
+    "scenario_id": "SCENARIO_BEARING_05",
+    "status": "FAILED",
+    "error": {
+      "run_id": "msg_b11343687005",
+      "task_id": "msg_b11343687005",
+      "agent_id": "c56edea9-8cd1-4e31-bf93-48e024d445d5",
+      "agent_type": null,
+      "correlation_id": "run_3d8f872bc4da",
+      "status": "hitl_triggered",
+      "output": {
+        "raw_output": "Based on the provided diagnostic docket for the LG DirectDrive Inverter #5, let's evaluate the conditions:\n\n1. **SNR (Signal-to-Noise Ratio)**: 26.0 dB, which is above the minimum threshold of 15 dB. This means the acoustic telemetry is acceptable for evaluation.\n\n2. **Neyman-Pearson LRT Ratio**: 5.65, which is above the threshold of 2.45. This indicates that the diagnostic test does not meet the criteria for escrow release.\n\n3. **Anti-Spoofing Replay Detection**: False, meaning there is no indication of a replay attack, and the audio is genuine.\n\n4. **Dominant Frequency Profile**: WM_BEARING_SPALL, which suggests a specific fault related to the bearing spall.\n\nGiven these conditions:\n\n- **Diagnostic Verification**: The diagnostic test fails due to the Neyman-Pearson LRT ratio exceeding the threshold. The dominant frequency profile indicates a bearing spall issue.\n\n- **Escrow Release/Withhold Action**: Escrow should be withheld because the diagnostic test fails the Neyman-Pearson LRT criteria.\n\n- **Logistics Dispatch**: Since the escrow is withheld, logistics dispatch should not be initiated until the diagnostic test passes or further verification is completed.\n\nTherefore, the technician should be notified: \"Diagnostic test failed. Payout withheld. Scheduling secondary audit.\"",
+        "status": "completed"
+      },
+      "confidence": 0.7,
+      "reasoning_trace": [
+        "Calling tenant-configured LLM",
+        "LLM responded (AIMessage) in 3325ms",
+        "Confidence: 0.700"
+      ],
+      "tool_calls": [],
+      "runtime": "langgraph",
+      "explanation": null,
+      "performance": {
+        "total_latency_ms": 3418,
+        "llm_tokens_used": 3611,
+        "llm_cost_usd": 0.001354
+      },
+      "hitl_trigger": "condition matched: confidence < 0.88",
+      "error": null
+    }
+  },
+  {
+    "scenario_id": "SCENARIO_PUMP_VALVE_01",
+    "status": "FAILED",
+    "error": {
+      "run_id": "msg_e06dfc60ddcd",
+      "task_id": "msg_e06dfc60ddcd",
+      "agent_id": "c56edea9-8cd1-4e31-bf93-48e024d445d5",
+      "agent_type": null,
+      "correlation_id": "run_fee8950e49b0",
+      "status": "hitl_triggered",
+      "output": {
+        "raw_output": "Based on the provided diagnostic docket for the Samsung EcoBubble / Daikin Inverter #1, let's evaluate the conditions:\n\n1. **Acoustic Telemetry:**\n   - **SNR:** 20.6 dB, which is above the minimum threshold of 15 dB. This means the ambient noise level is acceptable for the test.\n   - **Neyman-Pearson LRT Ratio:** 3.2, which is above the threshold of 2.45. This indicates that the test does not meet the criteria for escrow release.\n   - **Anti-Spoofing Replay Detected:** False, meaning the audio is genuine and not a replay attack.\n   - **Dominant Frequency Profile:** PUMP_CAVITATION, which suggests a specific fault in the appliance related to the pump.\n\n2. **Diagnostic Verification:**\n   - The test is valid in terms of ambient noise and anti-spoofing checks.\n   - However, the Neyman-Pearson LRT ratio exceeds the threshold, indicating that the diagnostic test does not pass for escrow release.\n\n3. **Escrow Release/Withhold Action:**\n   - Since the Neyman-Pearson LRT ratio is above the threshold, the escrow should be withheld. The conditions for escrow release are not met.\n\n4. **Logistics Dispatch:**\n   - As the escrow is withheld, logistics dispatch for technician or parts should not be initiated until the payment is confirmed.\n\nIn summary, the diagnostic test is valid but does not meet the criteria for escrow release due to the Neyman-Pearson LRT ratio. The escrow remains locked, and no logistics dispatch should occur until payment is confirmed.",
+        "status": "completed"
+      },
+      "confidence": 0.7,
+      "reasoning_trace": [
+        "Calling tenant-configured LLM",
+        "LLM responded (AIMessage) in 3122ms",
+        "Confidence: 0.700"
+      ],
+      "tool_calls": [],
+      "runtime": "langgraph",
+      "explanation": null,
+      "performance": {
+        "total_latency_ms": 3217,
+        "llm_tokens_used": 3667,
+        "llm_cost_usd": 0.001375
+      },
+      "hitl_trigger": "condition matched: confidence < 0.88",
+      "error": null
+    }
+  },
+  {
+    "scenario_id": "SCENARIO_PUMP_VALVE_02",
+    "status": "FAILED",
+    "error": {
+      "run_id": "msg_b5000dcb1bae",
+      "task_id": "msg_b5000dcb1bae",
+      "agent_id": "c56edea9-8cd1-4e31-bf93-48e024d445d5",
+      "agent_type": null,
+      "correlation_id": "run_00c74c260a3c",
+      "status": "hitl_triggered",
+      "output": {
+        "raw_output": "Based on the provided diagnostic docket for the Samsung EcoBubble / Daikin Inverter #2, here's the evaluation:\n\n1. **Acoustic Telemetry Evaluation:**\n   - **SNR:** 21.7 dB, which is above the minimum threshold of 15 dB. This means the ambient noise level is acceptable for the test.\n   - **Neyman-Pearson LRT Ratio:** 3.55, which is above the threshold of 2.45. This indicates that the diagnostic test does not meet the criteria for releasing escrow.\n   - **Anti-Spoofing:** Replay attack detected is False, meaning the audio is genuine and not a replay attack.\n   - **Dominant Frequency Profile:** COMPRESSOR_VALVE_LEAK, indicating a specific fault in the appliance.\n\n2. **Diagnostic Verification:**\n   - The diagnostic test fails to meet the Neyman-Pearson LRT threshold, which means the verification is not successful.\n\n3. **Escrow Release/Withhold Action:**\n   - Since the Neyman-Pearson LRT ratio is above the threshold, the escrow cannot be released. The payment remains locked.\n\n4. **Logistics Dispatch:**\n   - As the escrow is withheld due to the failed diagnostic verification, logistics dispatch for technician or parts cannot proceed until the payment is confirmed.\n\n**Next Steps:**\n- Notify the technician: \"Diagnostic test failed. Payout withheld. Scheduling secondary audit.\"\n- If payment was declined, send a WhatsApp payment link to the customer for further action.\n\nNo logistics dispatch will occur until the escrow conditions are met.",
+        "status": "completed"
+      },
+      "confidence": 0.7,
+      "reasoning_trace": [
+        "Calling tenant-configured LLM",
+        "LLM responded (AIMessage) in 3638ms",
+        "Confidence: 0.700"
+      ],
+      "tool_calls": [],
+      "runtime": "langgraph",
+      "explanation": null,
+      "performance": {
+        "total_latency_ms": 3730,
+        "llm_tokens_used": 3654,
+        "llm_cost_usd": 0.00137
+      },
+      "hitl_trigger": "condition matched: confidence < 0.88",
+      "error": null
+    }
+  },
+  {
+    "scenario_id": "SCENARIO_PUMP_VALVE_03",
+    "status": "FAILED",
+    "error": {
+      "run_id": "msg_5f39b2620fa1",
+      "task_id": "msg_5f39b2620fa1",
+      "agent_id": "c56edea9-8cd1-4e31-bf93-48e024d445d5",
+      "agent_type": null,
+      "correlation_id": "run_bc01d9e3e124",
+      "status": "hitl_triggered",
+      "output": {
+        "raw_output": "Based on the provided diagnostic docket for the Samsung EcoBubble / Daikin Inverter #3, let's evaluate the conditions:\n\n1. **SNR (Signal-to-Noise Ratio)**: The SNR is 22.8 dB, which is above the minimum threshold of 15 dB. Therefore, the acoustic telemetry is valid for evaluation.\n\n2. **Neyman-Pearson LRT Ratio**: The ratio is 3.9, which exceeds the threshold of 2.45. This indicates that the diagnostic test does not meet the criteria for releasing the escrow.\n\n3. **Anti-Spoofing Replay Detection**: The anti-spoofing check is false, meaning there is no replay attack detected.\n\n4. **Dominant Frequency Profile**: The profile indicates \"PUMP_CAVITATION,\" which suggests a specific fault in the appliance.\n\nGiven these conditions:\n\n- **Diagnostic Verification**: The diagnostic test fails due to the Neyman-Pearson LRT ratio exceeding the threshold.\n- **Escrow Release/Withhold Action**: The escrow should be withheld because the diagnostic test did not pass the required criteria.\n- **Logistics Dispatch**: Since the escrow is withheld, logistics dispatch should not be initiated until the diagnostic criteria are met.\n\nTherefore, the technician should be notified: \"Diagnostic test failed. Payout withheld. Scheduling secondary audit.\"",
+        "status": "completed"
+      },
+      "confidence": 0.7,
+      "reasoning_trace": [
+        "Calling tenant-configured LLM",
+        "LLM responded (AIMessage) in 2691ms",
+        "Confidence: 0.700"
+      ],
+      "tool_calls": [],
+      "runtime": "langgraph",
+      "explanation": null,
+      "performance": {
+        "total_latency_ms": 2854,
+        "llm_tokens_used": 3605,
+        "llm_cost_usd": 0.001352
+      },
+      "hitl_trigger": "condition matched: confidence < 0.88",
+      "error": null
+    }
+  },
+  {
+    "scenario_id": "SCENARIO_PUMP_VALVE_04",
+    "status": "FAILED",
+    "error": {
+      "run_id": "msg_b729ea8f5b82",
+      "task_id": "msg_b729ea8f5b82",
+      "agent_id": "c56edea9-8cd1-4e31-bf93-48e024d445d5",
+      "agent_type": null,
+      "correlation_id": "run_cf269bcba4db",
+      "status": "hitl_triggered",
+      "output": {
+        "raw_output": "Based on the provided diagnostic docket for the Samsung EcoBubble / Daikin Inverter #4, let's evaluate the conditions:\n\n1. **SNR (Signal-to-Noise Ratio)**: 23.9 dB, which is above the minimum threshold of 15 dB. This means the acoustic telemetry is acceptable for evaluation.\n\n2. **Neyman-Pearson LRT Ratio**: 4.25, which is above the threshold of 2.45. This indicates that the diagnostic test does not meet the criteria for escrow release.\n\n3. **Anti-Spoofing Replay Detected**: False, meaning there is no indication of a replay attack, and the audio is genuine.\n\n4. **Dominant Frequency Profile**: COMPRESSOR_VALVE_LEAK, which identifies the specific fault in the appliance.\n\nGiven these conditions:\n\n- **Diagnostic Verification**: The diagnostic test is verified as genuine due to the acceptable SNR and no replay attack detected. However, the Neyman-Pearson LRT ratio being above the threshold means the test fails to meet the criteria for escrow release.\n\n- **Escrow Release/Withhold Action**: Since the Neyman-Pearson LRT ratio exceeds the threshold, the escrow remains locked. No payment capture will be initiated.\n\n- **Logistics Dispatch**: As the escrow is withheld, logistics dispatch for repair cannot proceed until the diagnostic test meets the criteria for escrow release.\n\nTherefore, the current action is to withhold the escrow and not proceed with logistics dispatch until the diagnostic test passes the Neyman-Pearson LRT threshold.",
+        "status": "completed"
+      },
+      "confidence": 0.7,
+      "reasoning_trace": [
+        "Calling tenant-configured LLM",
+        "LLM responded (AIMessage) in 3523ms",
+        "Confidence: 0.700"
+      ],
+      "tool_calls": [],
+      "runtime": "langgraph",
+      "explanation": null,
+      "performance": {
+        "total_latency_ms": 3616,
+        "llm_tokens_used": 3650,
+        "llm_cost_usd": 0.001369
+      },
+      "hitl_trigger": "condition matched: confidence < 0.88",
+      "error": null
+    }
+  },
+  {
+    "scenario_id": "SCENARIO_SPOOF_FRAUD_01",
+    "status": "FAILED",
+    "error": {
+      "run_id": "msg_5d31dd409547",
+      "task_id": "msg_5d31dd409547",
+      "agent_id": "c56edea9-8cd1-4e31-bf93-48e024d445d5",
+      "agent_type": null,
+      "correlation_id": "run_246979a129cb",
+      "status": "hitl_triggered",
+      "output": {
+        "raw_output": "Based on the provided diagnostic docket for the Bosch Serie 6 WM #1, here's the evaluation:\n\n1. **Acoustic Telemetry**:\n   - **SNR**: 27.0 dB, which is above the minimum threshold of 15 dB, so the ambient noise level is acceptable.\n   - **Neyman-Pearson LRT Ratio**: 0, which is below the threshold of 2.45, indicating a positive diagnostic result.\n   - **Anti-Spoofing**: Replay attack detected with a dominant frequency profile indicating a replay spoof attack.\n\n2. **Diagnostic Verification**:\n   - The anti-spoofing check has detected a replay attack, which means the audio is not originating from the physical machine vibration but rather from a speaker or similar device. This invalidates the diagnostic test.\n\n3. **Escrow Release/Withhold Action**:\n   - Since the anti-spoofing check is not true (replay attack detected), the escrow cannot be released. The payment remains locked.\n\n4. **Logistics Dispatch**:\n   - Due to the invalid diagnostic verification (replay attack), logistics dispatch for technician or parts cannot proceed.\n\n**Conclusion**: The diagnostic test is rejected due to a replay spoof attack. Escrow remains locked, and no logistics dispatch will occur.",
+        "status": "completed"
+      },
+      "confidence": 0.7,
+      "reasoning_trace": [
+        "Calling tenant-configured LLM",
+        "LLM responded (AIMessage) in 2734ms",
+        "Confidence: 0.700"
+      ],
+      "tool_calls": [],
+      "runtime": "langgraph",
+      "explanation": null,
+      "performance": {
+        "total_latency_ms": 2827,
+        "llm_tokens_used": 3592,
+        "llm_cost_usd": 0.001347
+      },
+      "hitl_trigger": "condition matched: confidence < 0.88",
+      "error": null
+    }
+  },
+  {
+    "scenario_id": "SCENARIO_SPOOF_FRAUD_02",
+    "status": "FAILED",
+    "error": {
+      "run_id": "msg_6354c3816e60",
+      "task_id": "msg_6354c3816e60",
+      "agent_id": "c56edea9-8cd1-4e31-bf93-48e024d445d5",
+      "agent_type": null,
+      "correlation_id": "run_0708d7c8557a",
+      "status": "hitl_triggered",
+      "output": {
+        "raw_output": "Based on the provided diagnostic docket for the Bosch Serie 6 WM #2, here is the evaluation:\n\n1. **Acoustic Telemetry Analysis:**\n   - **SNR:** 29.0 dB, which is above the minimum threshold of 15 dB. This means the ambient noise level is acceptable for analysis.\n   - **Neyman-Pearson LRT Ratio:** 0, which is below the threshold of 2.45. This indicates a strong likelihood of a genuine fault.\n   - **Anti-Spoofing Replay Detected:** True, with a dominant frequency profile indicating a replay spoof attack.\n\n2. **Diagnostic Verification:**\n   - The presence of a replay spoof attack means the audio analysis is compromised and cannot be trusted as a genuine representation of the appliance's condition.\n\n3. **Escrow Release/Withhold Action:**\n   - Due to the detection of a replay spoof attack, the escrow cannot be released. The diagnostic test is considered invalid.\n\n4. **Logistics Dispatch:**\n   - No logistics dispatch should be initiated as the diagnostic verification failed due to the replay spoof attack.\n\n**Conclusion:** The diagnostic test is rejected due to the replay spoof attack. Escrow remains locked, and no technician or parts dispatch should occur.",
+        "status": "completed"
+      },
+      "confidence": 0.7,
+      "reasoning_trace": [
+        "Calling tenant-configured LLM",
+        "LLM responded (AIMessage) in 4183ms",
+        "Confidence: 0.700"
+      ],
+      "tool_calls": [],
+      "runtime": "langgraph",
+      "explanation": null,
+      "performance": {
+        "total_latency_ms": 4302,
+        "llm_tokens_used": 3580,
+        "llm_cost_usd": 0.001342
+      },
+      "hitl_trigger": "condition matched: confidence < 0.88",
+      "error": null
+    }
+  },
+  {
+    "scenario_id": "SCENARIO_SPOOF_FRAUD_03",
+    "status": "FAILED",
+    "error": {
+      "run_id": "msg_a054bb2fc656",
+      "task_id": "msg_a054bb2fc656",
+      "agent_id": "c56edea9-8cd1-4e31-bf93-48e024d445d5",
+      "agent_type": null,
+      "correlation_id": "run_f42f5c22b1c8",
+      "status": "hitl_triggered",
+      "output": {
+        "raw_output": "Based on the provided diagnostic docket for the Bosch Serie 6 WM #3, here's the evaluation:\n\n1. **Acoustic Telemetry Analysis**:\n   - **SNR**: 31.0 dB, which is above the minimum threshold of 15 dB, indicating that ambient noise is not an issue.\n   - **Neyman-Pearson LRT Ratio**: 0, which is below the threshold of 2.45, indicating a favorable condition for escrow release.\n   - **Anti-Spoofing**: Replay detected with a dominant frequency profile indicating a REPLAY_SPOOF_ATTACK.\n\n2. **Diagnostic Verification**:\n   - The presence of a replay spoof attack means the audio is not originating from the physical machine vibration but rather from a speaker or similar device. This invalidates the diagnostic test.\n\n3. **Escrow Release/Withhold Action**:\n   - Due to the anti-spoofing detection of a replay attack, the escrow cannot be released. The diagnostic test is considered invalid.\n\n4. **Logistics Dispatch**:\n   - Since the diagnostic test is invalid due to the replay spoof attack, logistics dispatch should be withheld until a valid diagnostic test is conducted.\n\n**Conclusion**: The diagnostic test is rejected due to a replay spoof attack. Escrow remains locked, and logistics dispatch is withheld. The customer should be alerted about the replay attack and advised to conduct a valid diagnostic test.",
+        "status": "completed"
+      },
+      "confidence": 0.7,
+      "reasoning_trace": [
+        "Calling tenant-configured LLM",
+        "LLM responded (AIMessage) in 3591ms",
+        "Confidence: 0.700"
+      ],
+      "tool_calls": [],
+      "runtime": "langgraph",
+      "explanation": null,
+      "performance": {
+        "total_latency_ms": 3901,
+        "llm_tokens_used": 3613,
+        "llm_cost_usd": 0.001355
+      },
+      "hitl_trigger": "condition matched: confidence < 0.88",
+      "error": null
+    }
+  },
+  {
+    "scenario_id": "SCENARIO_LOW_SNR_01",
+    "status": "FAILED",
+    "error": {
+      "run_id": "msg_02e39c42eba1",
+      "task_id": "msg_02e39c42eba1",
+      "agent_id": "c56edea9-8cd1-4e31-bf93-48e024d445d5",
+      "agent_type": null,
+      "correlation_id": "run_29d59f6a9217",
+      "status": "hitl_triggered",
+      "output": {
+        "raw_output": "Based on the provided diagnostic docket for the IFB Senator Smart #1 appliance, let's evaluate the conditions:\n\n1. **SNR (Signal-to-Noise Ratio)**: The SNR is 10.0 dB, which is below the required threshold of 15 dB. This means the ambient noise is too high for a reliable acoustic diagnostic test.\n\n2. **Neyman-Pearson LRT Ratio**: The ratio is 0.0, which is below the threshold of 2.45. This indicates that the test does not meet the criteria for releasing escrow.\n\n3. **Anti-Spoofing Replay Detection**: The detection is false, meaning there is no indication of a replay attack from a speaker.\n\n4. **Dominant Frequency Profile**: The profile is classified as UNCLASSIFIED_HIGH_NOISE, which further supports the conclusion that the environment is too noisy for a valid test.\n\nGiven these conditions, the actions are as follows:\n\n- **Diagnostic Verification**: The test is rejected due to high ambient noise. The instruction to the customer should be: \"Ambient noise too high, please close doors and re-record.\"\n\n- **Escrow Release/Withhold Action**: Escrow should remain locked because the Neyman-Pearson LRT ratio is below the threshold, and the test conditions are not met.\n\n- **Logistics Dispatch**: No dispatch should occur until a valid diagnostic test is completed and escrow conditions are satisfied.\n\nPlease ensure the customer is informed about the need to re-record the diagnostic test in a quieter environment.",
+        "status": "completed"
+      },
+      "confidence": 0.7,
+      "reasoning_trace": [
+        "Calling tenant-configured LLM",
+        "LLM responded (AIMessage) in 2883ms",
+        "Confidence: 0.700"
+      ],
+      "tool_calls": [],
+      "runtime": "langgraph",
+      "explanation": null,
+      "performance": {
+        "total_latency_ms": 2977,
+        "llm_tokens_used": 3638,
+        "llm_cost_usd": 0.001364
+      },
+      "hitl_trigger": "condition matched: confidence < 0.88",
+      "error": null
+    }
+  },
+  {
+    "scenario_id": "SCENARIO_LOW_SNR_02",
+    "status": "FAILED",
+    "error": {
+      "run_id": "msg_7b360fda7139",
+      "task_id": "msg_7b360fda7139",
+      "agent_id": "c56edea9-8cd1-4e31-bf93-48e024d445d5",
+      "agent_type": null,
+      "correlation_id": "run_705b6d26f1fd",
+      "status": "hitl_triggered",
+      "output": {
+        "raw_output": "Based on the provided diagnostic docket for the IFB Senator Smart #2 appliance, let's evaluate the conditions:\n\n1. **SNR (Signal-to-Noise Ratio)**: The SNR is 11.5 dB, which is below the required threshold of 15 dB. This means the ambient noise is too high for a reliable acoustic diagnostic test.\n\n2. **Neyman-Pearson LRT Ratio**: The ratio is 0.0, which is below the threshold of 2.45. This indicates that the test does not meet the criteria for releasing escrow.\n\n3. **Anti-Spoofing Replay Detection**: The detection is false, meaning there is no indication of a replay attack.\n\n4. **Dominant Frequency Profile**: The profile is classified as UNCLASSIFIED_HIGH_NOISE, which further supports the conclusion that the acoustic environment is not suitable for diagnostics.\n\nGiven these conditions:\n\n- **Diagnostic Verification**: The test is rejected due to high ambient noise. The instruction to the customer should be: \"Ambient noise too high, please close doors and re-record.\"\n\n- **Escrow Release/Withhold Action**: Escrow should remain locked because the Neyman-Pearson LRT ratio is below the threshold, and the test conditions are not met.\n\n- **Logistics Dispatch**: No dispatch should be initiated until a valid diagnostic test is completed and escrow conditions are satisfied.\n\nPlease ensure the customer is informed about the need to re-record the diagnostic test in a quieter environment.",
+        "status": "completed"
+      },
+      "confidence": 0.7,
+      "reasoning_trace": [
+        "Calling tenant-configured LLM",
+        "LLM responded (AIMessage) in 2825ms",
+        "Confidence: 0.700"
+      ],
+      "tool_calls": [],
+      "runtime": "langgraph",
+      "explanation": null,
+      "performance": {
+        "total_latency_ms": 2917,
+        "llm_tokens_used": 3629,
+        "llm_cost_usd": 0.001361
+      },
+      "hitl_trigger": "condition matched: confidence < 0.88",
+      "error": null
+    }
+  },
+  {
+    "scenario_id": "SCENARIO_LOW_SNR_03",
+    "status": "FAILED",
+    "error": {
+      "run_id": "msg_4f9f806fc77b",
+      "task_id": "msg_4f9f806fc77b",
+      "agent_id": "c56edea9-8cd1-4e31-bf93-48e024d445d5",
+      "agent_type": null,
+      "correlation_id": "run_ad097cc6083e",
+      "status": "hitl_triggered",
+      "output": {
+        "raw_output": "Based on the provided diagnostic docket for the IFB Senator Smart #3 appliance, let's evaluate the conditions:\n\n1. **SNR (Signal-to-Noise Ratio)**: The SNR is 13.0 dB, which is below the required threshold of 15 dB. This means the ambient noise is too high for a reliable acoustic diagnostic test.\n\n2. **Neyman-Pearson LRT Ratio**: The ratio is 0.0, which is below the threshold of 2.45. This indicates that the diagnostic test does not meet the criteria for releasing the escrow.\n\n3. **Anti-Spoofing Replay Detection**: The detection is false, meaning there is no indication of a replay attack.\n\n4. **Dominant Frequency Profile**: The profile is classified as UNCLASSIFIED_HIGH_NOISE, further supporting the conclusion that the acoustic environment is not suitable for accurate diagnostics.\n\nGiven these conditions, the actions are as follows:\n\n- **Diagnostic Verification**: The test is rejected due to high ambient noise. The instruction to the user is: \"Ambient noise too high, please close doors and re-record.\"\n\n- **Escrow Release/Withhold Action**: The escrow remains locked because the Neyman-Pearson LRT ratio is below the threshold, and the diagnostic test cannot be verified due to high noise levels.\n\n- **Logistics Dispatch**: No dispatch action is taken because the diagnostic test is not verified, and the escrow is withheld.\n\nPlease ensure the user is informed about the need to re-record the diagnostic test in a quieter environment.",
+        "status": "completed"
+      },
+      "confidence": 0.7,
+      "reasoning_trace": [
+        "Calling tenant-configured LLM",
+        "LLM responded (AIMessage) in 3260ms",
+        "Confidence: 0.700"
+      ],
+      "tool_calls": [],
+      "runtime": "langgraph",
+      "explanation": null,
+      "performance": {
+        "total_latency_ms": 3358,
+        "llm_tokens_used": 3641,
+        "llm_cost_usd": 0.001365
+      },
+      "hitl_trigger": "condition matched: confidence < 0.88",
+      "error": null
+    }
+  },
+  {
+    "scenario_id": "SCENARIO_PAYMENT_CHAOS_01",
+    "status": "FAILED",
+    "error": {
+      "run_id": "msg_874989c1ea51",
+      "task_id": "msg_874989c1ea51",
+      "agent_id": "c56edea9-8cd1-4e31-bf93-48e024d445d5",
+      "agent_type": null,
+      "correlation_id": "run_e8c5d74cb709",
+      "status": "hitl_triggered",
+      "output": {
+        "raw_output": "Based on the provided diagnostic docket for the Siemens iQ500 washing machine, let's evaluate the conditions:\n\n1. **SNR (Signal-to-Noise Ratio)**: The SNR is 0 dB, which is below the acceptable threshold of 15 dB. This means the ambient noise is too high for a reliable acoustic diagnostic test. Therefore, the test is rejected with the instruction: \"Ambient noise too high, please close doors and re-record.\"\n\n2. **Neyman-Pearson LRT Ratio**: The ratio is 0, which is below the threshold of 2.45. However, since the SNR condition is not met, this evaluation cannot proceed further.\n\n3. **Anti-Spoofing Replay Detection**: The anti-spoofing check indicates that no replay attack was detected (False).\n\n4. **Dominant Frequency Profile**: None detected, which aligns with the SNR issue.\n\nGiven these conditions:\n- **Diagnostic Verification**: The diagnostic test is rejected due to low SNR.\n- **Escrow Release/Withhold Action**: Escrow cannot be released because the diagnostic test is rejected.\n- **Logistics Dispatch**: No dispatch action can be taken until a valid diagnostic test is completed.\n\nPlease ensure the environment is quieter and re-record the acoustic telemetry for further evaluation.",
+        "status": "completed"
+      },
+      "confidence": 0.7,
+      "reasoning_trace": [
+        "Calling tenant-configured LLM",
+        "LLM responded (AIMessage) in 2594ms",
+        "Confidence: 0.700"
+      ],
+      "tool_calls": [],
+      "runtime": "langgraph",
+      "explanation": null,
+      "performance": {
+        "total_latency_ms": 2690,
+        "llm_tokens_used": 3582,
+        "llm_cost_usd": 0.001343
+      },
+      "hitl_trigger": "condition matched: confidence < 0.88",
+      "error": null
+    }
+  },
+  {
+    "scenario_id": "SCENARIO_PAYMENT_CHAOS_02",
+    "status": "FAILED",
+    "error": {
+      "run_id": "msg_02b47c41e6a2",
+      "task_id": "msg_02b47c41e6a2",
+      "agent_id": "c56edea9-8cd1-4e31-bf93-48e024d445d5",
+      "agent_type": null,
+      "correlation_id": "run_6148cf4dc664",
+      "status": "hitl_triggered",
+      "output": {
+        "raw_output": "Based on the provided diagnostic docket for the Siemens iQ500 washing machine, let's evaluate the conditions:\n\n1. **SNR (Signal-to-Noise Ratio)**: The SNR is 0 dB, which is below the required threshold of 15 dB. This means the ambient noise is too high for a reliable acoustic diagnostic test. Therefore, the test must be rejected with the instruction: \"Ambient noise too high, please close doors and re-record.\"\n\n2. **Neyman-Pearson LRT Ratio**: The ratio is 0, which is below the threshold of 2.45. This indicates that the test does not meet the criteria for releasing the escrow.\n\n3. **Anti-Spoofing Replay Detection**: The anti-spoofing check has not detected a replay attack, which is positive.\n\n4. **Dominant Frequency Profile**: The profile is NONE, which suggests no significant acoustic signature was detected.\n\nGiven these evaluations:\n\n- **Diagnostic Verification**: The test is rejected due to low SNR. The customer should be instructed to reduce ambient noise and re-record the test.\n\n- **Escrow Release/Withhold Action**: The escrow cannot be released because the Neyman-Pearson LRT ratio is below the threshold, and the test is rejected due to low SNR.\n\n- **Logistics Dispatch**: No logistics dispatch should be initiated until a valid diagnostic test is completed and the escrow conditions are met.\n\nPlease inform the customer to re-record the acoustic telemetry under quieter conditions for further evaluation.",
+        "status": "completed"
+      },
+      "confidence": 0.7,
+      "reasoning_trace": [
+        "Calling tenant-configured LLM",
+        "LLM responded (AIMessage) in 3313ms",
+        "Confidence: 0.700"
+      ],
+      "tool_calls": [],
+      "runtime": "langgraph",
+      "explanation": null,
+      "performance": {
+        "total_latency_ms": 3425,
+        "llm_tokens_used": 3625,
+        "llm_cost_usd": 0.001359
+      },
+      "hitl_trigger": "condition matched: confidence < 0.88",
+      "error": null
+    }
+  }
+]
