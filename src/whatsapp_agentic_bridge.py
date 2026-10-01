@@ -87,14 +87,28 @@ async def whatsapp_webhook(request: Request):
     logger.info(f"Incoming WhatsApp message from {sender}: text='{body_text}' media='{media_url}'")
 
     docket = None
+    voice_transcript = ""
     if media_url:
         logger.info(f"Analyzing incoming voice note media URL: {media_url}")
         docket = analyze_audio_docket(media_url)
         logger.info(f"DSP Result: SNR={docket['snr_db']}dB, Peak={docket['peak_freq_hz']}Hz, LRT={docket['lrt_ratio']}, Spoof={docket['is_replay_spoof']}")
 
-    b_lower = body_text.lower()
-    is_spin_post_repair = any(k in b_lower for k in ["post-repair", "after repair", "repair done", "fixed", "repaired", "spin test", "test done", "done"])
-    is_decline = any(k in b_lower for k in ["cancel", "no", "nahi", "reject", "mehenga", "expensive", "stop"])
+        # Transcribe customer speech via Gnani Indic STT
+        try:
+            from src.gnani_voice_client import GnaniVoiceClient
+            gnani = GnaniVoiceClient()
+            gnani_res = gnani.transcribe_audio(media_url)
+            if gnani_res.get("success") and gnani_res.get("transcript"):
+                voice_transcript = gnani_res["transcript"]
+                logger.info(f"Gnani Indic STT Transcript: {voice_transcript}")
+        except Exception as e:
+            logger.warning(f"Gnani transcription notice: {e}")
+
+    import re
+    effective_text = body_text if body_text else voice_transcript
+    b_lower = effective_text.lower()
+    is_spin_post_repair = bool(re.search(r'\b(post-repair|after repair|repair done|fixed|repaired|spin test|test done)\b', b_lower))
+    is_decline = bool(re.search(r'\b(cancel|no|nahi|nahin|reject|declined?|mehenga|expensive|stop)\b', b_lower)) and not bool(re.search(r'\b(noise|normal|sound|problem|issue)\b', b_lower))
 
     # 1. Check Noise Floor (Physical Invariant 3)
     if docket and docket["snr_db"] < 15.0:
@@ -162,14 +176,18 @@ async def whatsapp_webhook(request: Request):
         peak_hz = docket["peak_freq_hz"] if docket else 1450.0
         fault_name = docket["fault_type"] if docket else "WM_BEARING_SPALL (SKF 6205-2RS, 1,450 Hz BPFO)"
         
+        complaint_details = (
+            f"Customer grievance: '{effective_text}'. "
+            if effective_text
+            else "Customer incident intake: Priya Sharma reported that her Godrej 7kg Front-Load Washing Machine (purchased 26 months ago) emits a loud rhythmic metallic grinding sound during the 1200 RPM spin ramp. "
+        )
+        
         agent_prompt = (
-            f"Customer incident intake: Priya Sharma reported that her Godrej 7kg Front-Load Washing Machine "
-            f"(purchased 26 months ago) emits a loud rhythmic metallic grinding sound during the 1200 RPM spin ramp. "
-            f"User input text: '{body_text}'. "
-            f"Acoustic sensor telemetry: SNR={snr} dB, detected harmonic excitation at {peak_hz} Hz ({fault_name}), genuine motor vibration. "
+            f"{complaint_details}"
+            f"Acoustic sensor telemetry: SNR={snr} dB, detected harmonic excitation at {peak_hz} Hz ({fault_name}), genuine motor vibration confirmed. "
             f"Using your enterprise domain knowledge and rate cards: "
             f"1. Identify the exact mechanical defect and OEM bearing SKU. "
-            f"2. Verify whether Godrej manufacturer warranty applies or has expired. "
+            f"2. Verify whether manufacturer warranty applies or has expired. "
             f"3. Calculate the standardized rate card tariff (parts + labor) under HSN 8450. "
             f"4. Formulate the zero-trust escrow pre-authorization and parts dispatch recommendation without calling external payment APIs."
         )
@@ -185,6 +203,8 @@ async def whatsapp_webhook(request: Request):
             })
 
         raw_output = run_res.get("output", {}).get("raw_output", "")
+        agent_reasoning_snippet = f"\n\n📋 *AgenticOrg Analysis:*\n{raw_output[:350]}..." if raw_output else ""
+        
         reply = (
             "🔬 *AcuDiag Autonomous Diagnostic Report*\n\n"
             "• *Appliance:* Godrej 7kg Front-Load\n"
@@ -194,7 +214,8 @@ async def whatsapp_webhook(request: Request):
             "• *Warranty:* Expired (26 months > 24m coverage)\n"
             "• *Tariff (HSN 8450):* Part ₹850 + Labor ₹400 = *Total ₹1,250.00*\n\n"
             "💳 *Escrow Pre-Authorization:* Locked in Pine Labs Plural\n"
-            "📦 *Logistics:* Manifesting OEM bearing via Delhivery\n\n"
+            "📦 *Logistics:* Manifesting OEM bearing via Delhivery"
+            f"{agent_reasoning_snippet}\n\n"
             "👉 _When technician completes repair, send 'SPIN TEST' or record a 10s audio clip to verify and release payment._"
         )
 

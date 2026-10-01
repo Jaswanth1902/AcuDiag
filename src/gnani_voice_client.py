@@ -64,53 +64,79 @@ class GnaniVoiceClient:
                 "transcript": "मेरी गोदरेज वॉशिंग मशीन स्पिन साइकिल में बहुत तेज़ खड़-खड़ आवाज़ कर रही है।"
             }
 
-        if not os.path.exists(audio_path):
-            return {"success": False, "error": f"Audio file not found: {audio_path}"}
+        temp_downloaded_path = None
+        target_path = audio_path
 
-        # Build multipart/form-data payload
-        boundary = f"----WebKitFormBoundary{uuid.uuid4().hex}"
-        body = bytearray()
+        if audio_path.startswith("http://") or audio_path.startswith("https://"):
+            import tempfile
+            try:
+                dl_req = urllib.request.Request(
+                    audio_path,
+                    headers={"User-Agent": "AcuDiag-Voice-Ingress/1.0"}
+                )
+                with urllib.request.urlopen(dl_req, timeout=15) as dl_resp:
+                    raw_audio_bytes = dl_resp.read()
+                tf = tempfile.NamedTemporaryFile(suffix=".wav", delete=False)
+                tf.write(raw_audio_bytes)
+                tf.close()
+                temp_downloaded_path = tf.name
+                target_path = temp_downloaded_path
+            except Exception as e:
+                return {"success": False, "error": f"Failed to download audio from URL: {e}"}
 
-        def add_field(name: str, value: str):
-            body.extend(f"--{boundary}\r\n".encode("utf-8"))
-            body.extend(f'Content-Disposition: form-data; name="{name}"\r\n\r\n'.encode("utf-8"))
-            body.extend(f"{value}\r\n".encode("utf-8"))
+        if not os.path.exists(target_path):
+            return {"success": False, "error": f"Audio file not found: {target_path}"}
 
-        add_field("language_code", language_code)
-        add_field("format", "transcribe")
-        add_field("itn_native_numerals", "true")
-        add_field("enable_substitution", "true")
-        
-        if bias_list:
-            add_field("bias_list", json.dumps(bias_list))
-            add_field("bias_score", str(bias_score))
-
-        # Add file field
-        filename = os.path.basename(audio_path)
-        content_type = mimetypes.guess_type(audio_path)[0] or "audio/wav"
-        body.extend(f"--{boundary}\r\n".encode("utf-8"))
-        body.extend(f'Content-Disposition: form-data; name="audio_file"; filename="{filename}"\r\n'.encode("utf-8"))
-        body.extend(f"Content-Type: {content_type}\r\n\r\n".encode("utf-8"))
-        with open(audio_path, "rb") as f:
-            body.extend(f.read())
-        body.extend(b"\r\n")
-        body.extend(f"--{boundary}--\r\n".encode("utf-8"))
-
-        headers = {
-            "Content-Type": f"multipart/form-data; boundary={boundary}",
-            "X-API-Key-ID": self.api_key,
-            "User-Agent": "AcuDiag-Client/1.0"
-        }
-
-        req = urllib.request.Request(self.stt_url, data=bytes(body), headers=headers, method="POST")
         try:
+            # Build multipart/form-data payload
+            boundary = f"----WebKitFormBoundary{uuid.uuid4().hex}"
+            body = bytearray()
+
+            def add_field(name: str, value: str):
+                body.extend(f"--{boundary}\r\n".encode("utf-8"))
+                body.extend(f'Content-Disposition: form-data; name="{name}"\r\n\r\n'.encode("utf-8"))
+                body.extend(f"{value}\r\n".encode("utf-8"))
+
+            add_field("language_code", language_code)
+            add_field("format", "transcribe")
+            add_field("itn_native_numerals", "true")
+            add_field("enable_substitution", "true")
+            
+            if bias_list:
+                add_field("bias_list", json.dumps(bias_list))
+                add_field("bias_score", str(bias_score))
+
+            # Add file field
+            filename = os.path.basename(target_path)
+            content_type = mimetypes.guess_type(target_path)[0] or "audio/wav"
+            body.extend(f"--{boundary}\r\n".encode("utf-8"))
+            body.extend(f'Content-Disposition: form-data; name="audio_file"; filename="{filename}"\r\n'.encode("utf-8"))
+            body.extend(f"Content-Type: {content_type}\r\n\r\n".encode("utf-8"))
+            with open(target_path, "rb") as f:
+                body.extend(f.read())
+            body.extend(b"\r\n")
+            body.extend(f"--{boundary}--\r\n".encode("utf-8"))
+
+            headers = {
+                "Content-Type": f"multipart/form-data; boundary={boundary}",
+                "X-API-Key-ID": self.api_key,
+                "User-Agent": "AcuDiag-Client/1.0"
+            }
+
+            req = urllib.request.Request(self.stt_url, data=bytes(body), headers=headers, method="POST")
             with urllib.request.urlopen(req, timeout=15) as resp:
                 return json.loads(resp.read().decode("utf-8"))
         except urllib.error.HTTPError as e:
-            err = e.read().decode("utf-8")
+            err = e.read().decode("utf-8", errors="ignore")
             return {"success": False, "status": e.code, "error": err}
         except Exception as e:
             return {"success": False, "error": str(e)}
+        finally:
+            if temp_downloaded_path and os.path.exists(temp_downloaded_path):
+                try:
+                    os.remove(temp_downloaded_path)
+                except Exception:
+                    pass
 
     def synthesize_speech(
         self,
@@ -172,6 +198,43 @@ class GnaniVoiceClient:
             return {"success": False, "status": e.code, "error": err}
         except Exception as e:
             return {"success": False, "error": str(e)}
+
+    def test_connection(self) -> Dict[str, Any]:
+        """Validates Gnani Vachana API credentials by sending a lightweight check."""
+        if not self.api_key:
+            return {"connected": False, "error": "GNANI_API_KEY is not configured in credentials.env"}
+        
+        payload = {
+            "text": "परीक्षण",
+            "voice": "Nalini",
+            "model": "timbre-v2.5",
+            "language": "hi-IN",
+            "speed": 1.0,
+            "audio_config": {
+                "sample_rate": 16000,
+                "num_channels": 1,
+                "sample_width": 2,
+                "encoding": "linear_pcm",
+                "container": "wav"
+            }
+        }
+        data = json.dumps(payload).encode("utf-8")
+        headers = {
+            "Content-Type": "application/json",
+            "X-API-Key-ID": self.api_key,
+            "User-Agent": "AcuDiag-Client/1.0"
+        }
+        req = urllib.request.Request(self.tts_url, data=data, headers=headers, method="POST")
+        try:
+            with urllib.request.urlopen(req, timeout=10) as resp:
+                if resp.status == 200:
+                    return {"connected": True, "status": 200, "message": "Gnani Vachana API authenticated successfully"}
+                return {"connected": False, "status": resp.status}
+        except urllib.error.HTTPError as e:
+            err = e.read().decode("utf-8", errors="ignore")
+            return {"connected": False, "status": e.code, "error": err}
+        except Exception as e:
+            return {"connected": False, "error": str(e)}
 
 if __name__ == "__main__":
     client = GnaniVoiceClient()
