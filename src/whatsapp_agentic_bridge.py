@@ -107,18 +107,29 @@ async def whatsapp_webhook(request: Request):
     import re
     effective_text = body_text if body_text else voice_transcript
     b_lower = effective_text.lower()
-    is_spin_post_repair = bool(re.search(r'\b(post-repair|after repair|repair done|fixed|repaired|spin test|test done)\b', b_lower))
-    is_decline = bool(re.search(r'\b(cancel|no|nahi|nahin|reject|declined?|mehenga|expensive|stop)\b', b_lower)) and not bool(re.search(r'\b(noise|normal|sound|problem|issue)\b', b_lower))
+    clean_text = effective_text.strip()
+    words = clean_text.split()
+    is_greeting = bool(re.search(r'^(hi|hello|hey|namaste|good morning|good evening|pranam)\b', b_lower.strip())) and len(words) <= 3 and not media_url
 
-    # 1. Check Noise Floor (Physical Invariant 3)
-    if docket and docket["snr_db"] < 15.0:
+    # 1. Handle Casual Greeting
+    if is_greeting:
+        reply = (
+            "👋 *Namaste! Welcome to AcuDiag Appliance Health.* 🛠️\n\n"
+            "Main aapki machine ki dekhbhaal karne wali sahayak hoon.\n\n"
+            "Aapki machine mein kya dikkat aa rahi hai?\n"
+            "• Washing Machine, AC, Refrigerator, ya RO Purifier?\n"
+            "• Please apni machine ka brand aur problem batayein,\n"
+            "• Ya phone ko machine ke paas rakh kar ek *5-second voice note* bhejein taaki main mechanical sound scan kar sakun!"
+        )
+    # 2. Check Noise Floor (Physical Invariant 3)
+    elif docket and docket["snr_db"] < 15.0:
         reply = (
             f"⚠️ *AcuDiag Acoustic Rejection (Low SNR):*\n\n"
             f"• *Signal-to-Noise Ratio:* {docket['snr_db']} dB (< 15.0 dB floor)\n"
             f"• *Status:* Environment too noisy for reliable diagnostic.\n\n"
             f"👉 *Instruction:* Please close doors/windows, place phone within 30cm of the drum, and re-record a 5s audio clip."
         )
-    # 2. Check Physical Anti-Spoofing (Physical Invariant 4)
+    # 3. Check Physical Anti-Spoofing (Physical Invariant 4)
     elif docket and docket["is_replay_spoof"]:
         reply = (
             f"🛑 *AcuDiag Zero-Trust Security Gate (Replay Attack):*\n\n"
@@ -127,7 +138,7 @@ async def whatsapp_webhook(request: Request):
             f"• *Action:* Escrow payout withheld pending secondary supervisor audit.\n\n"
             f"AcuDiag detected this audio was played through a speaker rather than genuine machine mechanical contact."
         )
-    # 3. Handle Quotation Decline
+    # 4. Handle Quotation Decline
     elif is_decline:
         reply = (
             "🛑 *AcuDiag Service Hold:*\n\n"
@@ -136,7 +147,7 @@ async def whatsapp_webhook(request: Request):
             "• Case #1042 closed gracefully.\n\n"
             "Thank you for consulting AcuDiag!"
         )
-    # 4. Handle Post-Repair Verification (Voice Note or Spin Command)
+    # 5. Handle Post-Repair Verification (Voice Note or Spin Command)
     elif is_spin_post_repair:
         lrt = docket["lrt_ratio"] if docket else 0.42
         snr = docket["snr_db"] if docket else 25.2

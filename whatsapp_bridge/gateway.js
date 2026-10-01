@@ -70,6 +70,22 @@ async function startWhatsAppGateway() {
             || msg.message.imageMessage?.caption 
             || '';
 
+        // Anti-Loop Guard: Never process AcuDiag's own outgoing replies
+        if (
+            bodyText.includes('*AcuDiag') ||
+            bodyText.includes('🔬') ||
+            bodyText.includes('🎉') ||
+            bodyText.includes('🛑') ||
+            bodyText.includes('⚠️') ||
+            bodyText.includes('Escrow Pre-Authorization') ||
+            bodyText.includes('Autonomous Diagnostic Report') ||
+            bodyText.includes('Repair Verified & Settled') ||
+            bodyText.includes('AgenticOrg Analysis') ||
+            bodyText.includes('Namaste! Welcome to AcuDiag')
+        ) {
+            return;
+        }
+
         let audioFile = '';
 
         // Check if voice note or audio
