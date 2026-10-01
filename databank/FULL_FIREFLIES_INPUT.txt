@@ -1,0 +1,732 @@
+<USER_REQUEST>
+Ending notes and Transcript:
+Analyze thoroughly and make sure there aren't any misinterpretations.
+
+
+
+Agentic Platform Foundations - (05:16 - 47:16)
+- Agentic Org hosts Python-based agents for automating independent or connected workflows.
+- Platform dashboard displays agents, connectors, approvals, and shadow agents.
+- Agents use Python scripts and prompts; connectors enable automated workflows.
+- Connectors are prebuilt classes invoked directly; MCP connectors require URL and API key.
+- MCP registration requires a URL and optional API key; agents can invoke uploaded documents through Add Tool.
+- Human approvals refine agent prompts and determine future production behavior.
+- Agents support scheduled runs, execution history, and inter-agent data transfer.
+- Agents transfer completed tasks bidirectionally within workflows; Shubham will demonstrate agent creation and connectors.
+- Teams can access Gyani STT/TTS through an MCP server for audio-text conversion.
+
+
+Demo Troubleshooting - (13:16 - 15:16)
+- Screen sharing remains loading; Shubham will retry shortly.
+- Screen remained blank; recording will be shared for later reference.
+
+
+Agent Creation and Connectors - (15:16 - 23:16)
+- Shubham created an agent fetching Jira reports and GitHub PR details.
+- LLM converts simple language into prompts; connectors securely access Jira reports and GitHub PRs.
+- Jira connector offers multiple API tools; GitHub tools are also available.
+- GitHub tools support Jira agent access; shadow agent validates prompt behavior before deployment.
+- Shadow agent validated; Jira and GitHub connections passed health checks.
+- Shubham demonstrated health checks and registering a custom connector with base URL details.
+- Shubham configured base URL, credentials, hardware ID, and verified connection success.
+
+
+Merchant MCP Approvals - (25:16 - 32:16)
+- MCP enables merchants to integrate Pine Labs through conversational guidance instead of extensive documentation.
+- Prakhar demonstrated registering an MCP URL and configuring API-key authentication for merchant integrations.
+- Configure API keys or custom JSON authentication before registering MCP connectors.
+- Prakhar created Pine Labs Merchant Coding Assistant with back-office domain.
+- Agent uses active connector tools; shadow sample starts at zero before interactions.
+- Approval triggers when LLM confidence falls below the 88% threshold.
+- Moving accuracy averages self-correct across chats, prompting updates when responses underperform.
+
+
+MCP Architecture and Inputs - (32:16 - 37:16)
+- Harshik asked whether Pine Labs will provide MCP and connector details.
+- MCP servers connect LLMs to backend tools by providing contextual intent.
+- Vedant asked whether deliverables require another dashboard for customer web or app interactions.
+- Agents run on Pine Labs; documents belong in knowledge bases, real-world inputs use connectors.
+- Agents can use connectors, including WhatsApp tools for sending media messages.
+
+
+Platform Access Priorities - (37:16 - 41:16)
+- Vaani reported authorized tools missing; Prakhar requested MCP URL and credentials.
+- Prakhar recommended focusing on agent creation, connectors, and agent intelligence—covering 60–70% of platform understanding.
+- Team asks whether three members can collaboratively edit one agent.
+- Agents are private to creators; teammates may use shared credentials, judging criteria pending.
+
+
+Competition Access Troubleshooting - (41:16 - 43:16)
+- Use the KENS competition tenant with Pine SKU and configured final key.
+- Use developer/back-office details; wait 30 minutes after 429 sign-up errors.
+
+
+Agent Workflow Architecture - (43:16 - 46:16)
+- Pine Labs agent integrates payment workflows; native connectors or MCP servers support additional integrations.
+- Prakhar recommends one agent with all connectors and deterministic prompt-driven workflows.
+- Agents can support multiple connectors; Prakhar’s SRE agent connects GitHub, Jira, Grafana, Mail, Outlook, and Teams.
+
+
+MCP Integration Discussion - (47:16 - 48:16)
+- Team will test the MCP URL to verify Agentic tool visibility and connectivity.
+
+
+Agent Connectors and Knowledge Bases - (48:16 - 49:16)
+- Agents can connect through visible tools; unavailable connectors require hosted MCPs, while uploaded knowledge bases can serve multiple agents.
+
+
+Knowledge Base Sharing - (49:16 - 50:16)
+- Knowledge bases are shared across agents; agent-specific restrictions remain unavailable.
+
+
+Adhavan (02:11)
+Hey guys, when we shot starting now. Thank you for joining. Um, by the way, I'm Adawan. Like, so far, we have all been like communicating and exchanging emails. This is the first time we are like meeting face to face and I would love if you can turn on your video cameras.
+
+Adhavan (02:31)
+Yes, and uh… A lot of you have returned to me with a lot of questions about how to use the platform and some of the issues that you guys are facing. And here we are to resolve that.
+
+Adhavan (02:46)
+So we have the team from PineLab to walk you through their platform. And they'll be taking up all the questions that you have, right? I hope like you explored the platform and have a lot of questions for them.
+
+Adhavan (03:00)
+So let's get the best use of it. Couple of this thing is turn on your video cam as well as like whatever questions you have, just keep dropping them in the chat box so that like the team will be able to take it up at the end.
+
+nikitaarora (03:20)
+Thanks. Thanks, Edwin. Hi. Hi, everyone. We have Shubham and Prakar joining us today. They'll be able to, by the way, hi, I am Nikita from the marketing team of Pine Labs. I have Shubham and Prakar with me, who will be giving a full demo, like a quick demo to you. I know you must have already explored the platform already, but the team can quickly give you a short demo on this. And if you have any questions like Advan said, you can drop in those in the chat box and we can take that up.
+
+nikitaarora (04:02)
+tracker, you want to take over?
+
+Prakhar Gour (04:18)
+One second, what is a network issue at my
+
+nikitaarora (04:30)
+I think there's…
+
+Prakhar Gour (04:30)
+Hello, am I audible?
+
+nikitaarora (04:31)
+Yeah, yeah, Prakar, we can hear you.
+
+Prakhar Gour (04:35)
+Actually, I'm in a low network area, that's why. Not be able to open my video camera.
+
+nikitaarora (04:38)
+Let's it.
+
+Prakhar Gour (04:40)
+Yeah. So, let me give you a brief intro about what Agenticog is. I mean
+
+nikitaarora (04:56)
+Sario.
+
+Prakhar Gour (04:56)
+I have started using it
+
+nikitaarora (04:57)
+Breaking up a little bit. Uh, can Shubam probably take over?
+
+Prakhar Gour (05:24)
+Is my screen visible? Hello? Nikita?
+
+nikitaarora (05:28)
+No problem, no, your screen is still loading.
+
+Prakhar Gour (05:36)
+Is it visible now?
+
+nikitaarora (05:38)
+Yeah, we can see it now.
+
+Prakhar Gour (05:42)
+Okay. So, so let me give you a brief about what Agentic Org is. So, Agentic call is basically a… you can say, a home for all your agents, right? So you can create agents here, and these agents are nothing but just a Python script running in your background that you can just use to automate your workflows.
+
+Prakhar Gour (06:02)
+So, these agents can be anything, they can be related to each other, they can be independent also, they can work in a workflow also. So, as you can see, this is the website that we have right now.
+
+Prakhar Gour (06:12)
+And, let me just show you how it looked like I've created one account, under the Ken Competition Team only So currently, like, this is a, dashboard here. So, we have various sections over here, like, agents is there, like, there are other things also, like, connectors is there. So, I'll just give you a brief intro, like, what is, everything here So, dashboard basically showing you what total number of agents we have, what are the active agents, what are the pending approvals, what are in the shadow agent, what are… what do we have in the shadow area So, all these things are here. So, as you can see, there is a second ball, agents here. So, this agent section contains all that Python script that I was talking about. Basically, you will be just creating your agent right here and pasting your prompt, and then moving forward, you can create agent and add connectors to it So, in that way, you can just create a simple… you can automate a simple flow that you want Similarly, there are basically different aspects to an agent, right? One of them is, you can say, helping hands for an agent. So, connector is one of them.
+
+Prakhar Gour (07:42)
+So, basically, you have to… you have to keep focus on these two things, agents and connectors. These are the main, you can say, binding labels that will help you in creating a perfect workflow that you are trying to do.
+
+Prakhar Gour (07:55)
+So, in connectors, we have various list of connectors, as you can see here. So, other than that, we have native connectors. So, these connectors are already active, right? As you can see and the native connectors are those which are basically They are not active. These are just classes which are present in your, in your Agentic org. So you have to invoke those classes, right? Just like in, you can say, just a terminology similar to, C++ or, any C, in any class object There is a class, right? That class is already written, you just have to invoke it. So, in this way, like, these are the connectors that I have, and And I can just invoke any of those connectors, like I have GitHub connector, I have Finance Router, food service. These are many other connectors that I have So, I just have to invoke a connector and start using it.
+
+Prakhar Gour (08:47)
+So, these are basically those connectors which we have created via code in Agentic we have created code for these characters and you just have to start using the connector And these connectors are tightly coupled with the cone. But there are also connectors which we can create via MCP. So if you just go to here, register connector You can see a section called MCP here, just tick mark it. Just paste your URL, provide the API key if there and start register and then your MCP is totally registered here, right? You can start using this MCP in any agent.
+
+Prakhar Gour (09:26)
+So, other than that, If I just show you other things that we have as the knowledge base here, knowledge base is basically a section where we can just upload the documents and start using this knowledge base as an input point for all the agents that we are creating. So, in the same way, right.
+
+Prakhar Gour (09:44)
+When you're creating an agent, just, when you're creating an agent, like, this is some agent there, so, in this agent, we have a section here that, if I go here There is a section called Add Tool here, right? Though, whenever we are creating an agent using knowledge base, we just have to select this Add Tool and start using the knowledge base tool here. So, using that tool, you can just invoke those particular knowledge base sections that you want to trigger And other than that, let me show other things that we have There's a section called Approvals, where all the approvals will be coming, like, you will be interacting with your agent, we will tell you about that in a little more detail. You will be interacting with the agents, and after a certain level, your agent will start triggering approvals for a human in the loop Approvals. So these, approvals are basically just telling you how to, you can manipulate the LLM in such a way that its prompt is, it's, its prompt is up to that level where it can, start, it can be justified that now your agent is Moving towards that direction where it is totally deterministic for your purpose, that you are trying to achieve, right? So these approvals are very much important, like, you have to approve the response, what the LLM is giving, you have to reject the response the LLM that you are not liking. So Every, thing that you are doing in that section will be determining how your agent will be performing in the future, when you are just deploying this in the production So There are also questions, like, you can say here, knowledge base, I've already told about What else, which is very much important? Like, there's a My Schedule session. In this, you can see that, this is basically nothing, but you want the agent to run at a particular frequency, right? Like, every 5 minutes, or every day, or every week, something like that.
+
+Prakhar Gour (11:38)
+You can configure your agent just to run, just to run it at any frequency. So, that, in that case, that agent will start to be showing here, and it will be showing you the history of what it has run, how much time it has run, these kind of things. I'll be showing this in a brief time And other than that We have workflows also, where, where what we're doing is we are creating agents, the agents that we have created are now interacting with each other in such a way that one agent is transferring the data to another agent, and another agent is transferring it to another agent So this is a two-way communication happening right now, where one agent is, shifting up, you can say a task, which is… which it has achieved, and it is transferring that task to another agent.
+
+Prakhar Gour (12:23)
+So, this is basically a workflow And What else I can show you I think I can, I will jump into the details of agent creation once, once my teammate Shubham, has given a brief intro about how to create an agent and how to add connectors and everything to it. He will give you a brief demo about how to do it, then I will go in deep.
+
+Prakhar Gour (12:51)
+How to make a region smart to achieve your work. Shivam, if you want to take over
+
+Shubham Chauhan (12:56)
+Yeah, thanks, Booker. So, let me share my screen. Yeah, so confirm me once my skin is visible.
+
+nikitaarora (13:20)
+It's still loading, Subar.
+
+Shubham Chauhan (13:32)
+Is it still nodding?
+
+nikitaarora (13:32)
+Yeah, yeah, do you want to try again?
+
+Shubham Chauhan (13:36)
+Okay, just a minute.
+
+Shubham Chauhan (14:34)
+So let me re-share again.
+
+nikitaarora (14:36)
+Yeah.
+
+Shubham Chauhan (14:42)
+Is it working?
+
+nikitaarora (14:43)
+It still shows a blank screen.
+
+Shubham Chauhan (14:59)
+There might be a permission entire just a minute.
+
+nikitaarora (15:06)
+Oh, okay. Folks will also be sharing the recording to the session, uh, just so that you can refer to it afterwards. We can see your screen now, Ashwanthas.
+
+Shubham Chauhan (15:24)
+Okay, perfect. So, there was some permission issue. Yeah. So I think Prakar has given the walkthrough of the agents and the connectors. So let me show you how it works actually. So there is an agent. Let me create one agent.
+
+Shubham Chauhan (15:39)
+Live demo for this, so I'm just creating a simple agent by writing some simple English, let's say you are an agent. Which can fetch. The Jira report. And also have access to.
+
+Shubham Chauhan (16:02)
+GitHub. Which will help. To fetch. PR details. Okay, so I'm just writing a simple language. So what it do, let's say once you write in simple English and you can promote anyone and then once you generate the.
+
+Shubham Chauhan (16:23)
+This there is a LLM which is, you know, converting this simple text to a prompt for the agent. Here you can see there is an employee name designation. You can assign agent name. For example, I'm just.
+
+Shubham Chauhan (16:38)
+Writing is Shubham Chan, let's say one. And then I'm just, ah, making there is a option for the domain like which domain you want to create, let's say finance, HR. So I'm marking this as a operations.
+
+Shubham Chauhan (16:54)
+Here, there is a specialization you can mention. There is a report to Oracle, like for example is reporting to whom and there is a custom agent. So my agent is the thing is the Jira agent. It is a custom agent type. So what type of agent it is.
+
+Shubham Chauhan (17:13)
+When you go to next, I was mentioning in the layers, I returned the simple language, but it converted in the prompt text, so there is a LLM behind this which is doing this all the works.
+
+Shubham Chauhan (17:25)
+Now, when I going to next, so there is a LLM you can also select the LLM like which I am using this one. Now there is a connector. So what is connector? So connector is a secure bridge between the agent or the external system. So let's say I have created this agent, but.
+
+Shubham Chauhan (17:44)
+How it will fetch the report, it will refresh the report from the Jira. So for that Jira, we need a connector so that we can just use their APIs and then get the details from that Jira and.
+
+Shubham Chauhan (17:57)
+agent can work on that report and then show a beautify data, right? Also, I will use the github connector to fetch the PR details and the branches, etc. So for that we need a Jira, sorry, a GitHub connector.
+
+Shubham Chauhan (18:14)
+The connector, you can say there is a multiple tools associated with the connector. So, for example, if you are fetching the Jira details, so there is a get Jira details, there is a, you can say, if you want to put the comment on the Jira, right, so there we are, let's say comment on Jira, there might be different, different tools, right? So let me show you how it is working.
+
+Shubham Chauhan (18:40)
+So I will select the Jira. So if you see there are tools which is just like APIs for the Jira. So let's say Jira add command, create issue, generate issue report, get attachment.
+
+Shubham Chauhan (18:54)
+There is a getSprint data, getTungeon, so all these tools, so this agent will use these tools to access the Jira and then, uh, will provide the report as per the request, ok, let me also add you the GitHub.
+
+Shubham Chauhan (19:09)
+Now, you can see there is a GitHub tools also available on the associated with this agent. So now agent will use this as a hands to fetch all the details and then provide to you.
+
+Shubham Chauhan (19:25)
+Now I'm just, ah, marking this as a next. This is the complete rewards, like a summary. We selected the agent type is a Jira agent, SPL agent Jira report management and issue tracking. This is the authorized tools which I have provided the access to this agent and this is the prompt.
+
+Shubham Chauhan (19:45)
+Now, I'm just creating a shadow agent. So I think in later Prakal will explain in details, but what is shadow agent? So until we are not sure, like, uh, this agent will perfectly fine, this agent will do exactly what we were thinking, right? So, Whatever prompt we have given, it is working correctly as per the prompt, as per your expectation. Till then, this will be a shadow agent once.
+
+Shubham Chauhan (20:15)
+That is you can say the alignment with your all the requested and then it is working fine. Then you can promote to the actual active agent. As of now, I'm creating as a shadow.
+
+Shubham Chauhan (20:29)
+So my rent is working, right? So I can show you in the dashboard also there is a multiple agents. So how, let me show you before we moving how agent is working. I want to create a one, you can see the connector.
+
+Shubham Chauhan (20:46)
+So, let me show you Jira. So this is the Jira connector which we are using. I testing it, it is connection test path. I'm also checking is health check, so it is just hitting an, uh, access to API and then checking if it is healthy or not.
+
+Shubham Chauhan (21:01)
+So it is healthy. Let me check the GitHub also. So I can also test this, this is test connection is passed. Health checking is working. I also want you to let Let me show you one connector how we can create a connector.
+
+Shubham Chauhan (21:24)
+So I'm taking example of Let me first delete his. And we can again create it. Yeah, so I'm registering it. So for registering, there is an option for base URL like because this is a custom agent, not a standard like Jira and GitHub. This is the custom agent. So you can create your custom you can say the.
+
+Shubham Chauhan (21:52)
+connector and then you can then provide the details so that the connector can work. Let me just find out these details. Give me a minute. So I'm just copy-pasting the details.
+
+Shubham Chauhan (22:19)
+Yeah, so I have put the base URL and then the extra config which is the user ID, password and the hardware ID. Just a minute. Yeah, so food services register. Let me check.
+
+Shubham Chauhan (22:54)
+Yeah, so connection is passed. Now let me show you how agent is working. So you can also, ah, see the agent description here, the overview. authorized tools, there is a config where you can see the what type of LLM is configured for this agent. Also the thrice tools and then condition. Let's see if confidence is less than 0.8, it will ask for the human approval, right?
+
+Shubham Chauhan (23:21)
+Also, you can, like, during, you see, like, there is a change required in the prompt while it is in shadow mode, you can also edit it. So, you can see there is a agent here, it's you are a Jira operation specialist responsible.
+
+Shubham Chauhan (23:36)
+Just a minute. Yeah, so now I'm chatting with the agent, live agent, let's say I'm writing hi. Can you sh… Uh, show me the details… sine. Jira. To me. Yeah, so it gave me the details of Jira. Let me also.
+
+Shubham Chauhan (24:12)
+asking for the complete details of this Jira. Let me can you… Also, provide me the details. PA1995. Yeah, it shows me the summary, like, issue type, summary, status, what is the state of priority, the project name created assignee, right? So this is just an example how you can create a agent, the simple agent by simply.
+
+Shubham Chauhan (24:51)
+You know, and take the simple language and then create, ah, as per your use case, right? So this is the just a demo and how you can use it, right? So I think, ah, now I want to over to Prakhar, ah, for details like how things are working in internally, yeah.
+
+Prakhar Gour (25:11)
+Sure. Let me share my screen again. Is it visible?
+
+nikitaarora (25:25)
+Yabrakha.
+
+Prakhar Gour (25:25)
+Okay, so, let's go, step by step, like, what Sugum has told us, and how… what is happening at the background, right? So, like, let me create… so, one of the things that we want to do is create a character, right?
+
+Prakhar Gour (25:40)
+So, I'm just… so, what I'm trying to achieve, I have created one NCP, and that MCP is basically used for helping our merchants to integrate code, right?
+
+Prakhar Gour (25:51)
+So, what happens is, the problem statement was, there is a huge documentation that PineLabs gave to the merchants for integrating their application with PineLabs application for transaction, right? So, merchant has to go through the entire documentation. For that, we created one MCP That MCP has all the capabilities, like, it can help your, your merchant to integrate just by chatting. He will say that I want to integrate with Pylums, it will… it will help the user to integrate. So I'm taking this use case. So how to implement this use case in Agent Takeoff, right?
+
+Prakhar Gour (26:25)
+So, I will just register my MCP The coding assistant MCP that I'm using right now, right? coding assistant And I have checked, I have tick marked this MCP checkbox, and then I'm just pasting the URL for MCP. This is the URL.
+
+Prakhar Gour (26:46)
+And for me, there is no authentication right now, because I have not added any authentication. So, for, I have seen some chats that you are facing some issues with MCP, right? So, one of the way is, if you have given some, the MCP that you are using has some authentication on it And I would suggest just to take the particular authentication flow and start using it. Like, for example, here, if API key is used for your MCP, then place your API key right here, and it will start using the MCP correctly. If you are not placing your authentication correctly, the agent will not be able to access this connector to solve your problem Okay. And if none of them is satisfying your condition, just select none And then add the extra config… then add the JSON part of that particular authentication flow. Like, for example, I have shared one, let me just show you this guide with someone from your team. So If you can see, I have shared this, like if there is a custom connector, he just have to just place in this way, like JSON's format, just place your API key or whatever it is, just place it here in this manner So, once you register it, then it will start using this particular JSON as that authentication mechanism.
+
+Prakhar Gour (27:57)
+So, like, for my use case, I have not added any authentication, so I can just directly go and register it. So, now what I will do, I will go to the agent I will start creating the agent I will say, I am Pine Labs Merchant Coding assistant That helps merchants to integrate Pine Labs SDK So now I will just go to generate.
+
+Prakhar Gour (28:37)
+So, it has given me some name, and that Shubham has just told you. I'll just overwrite it with my name, like, coding assistant, something like that Now, let's make it our domain, let's make it, like, let's say back office.
+
+Prakhar Gour (28:57)
+And then next So, this is just a dev agent, so it has… so LLM is basically placing these values on its own. You can even override it if you want. If you don't want, and it's okay.
+
+Prakhar Gour (29:07)
+Then you can just next it So you… so now prompt has been modified, like, Shubham has explained. You are a merchant integration specialist, and these and this, everything is written here. So now I will just go and next.
+
+Prakhar Gour (29:18)
+And here, I will just select my connector So, this connector will start appearing here. Since you have active… this connector is active, so it will start appearing here. The tools are appearing, okay?
+
+Prakhar Gour (29:31)
+Now I just go and, if you just say, once again One second. So now, if I just go in Next and start using it. So, my connector is… my assistant is ready, right? So it will start using this connector, and It will start working correctly So, like, say… now, let me explain to you what is this confidence score and shadow sample, and what is this, right? So, once you have created this agent, right.
+
+Prakhar Gour (30:00)
+The shadow sample is just telling you that, that this connect… that this agent is in the initial stage, right? So this, it is showing you zero. You haven't interacted with this agent right now. So as… as, in later stages, when you are interacting with this agent You are chatting with this agent, the shadow sample count will keep on increasing Okay? And with this, the shadow accuracy will also been affected So, how it is affected? So, once you have started chatting, you will start receiving some response from the LLM as per the prompt that you have added, right? And if somehow you just, if while chatting, you see that the response that the LLM is giving is not up to the mark You will just you will see that the response is not up to the mark, and LLM itself is doubting its answer, what LLM is giving you. Then the approval flow is triggered So this confidence floor comes into picture. It is saying that The LLM should be confident enough, like, 88% confident enough, that it should be able to answer your problems in a correct way, right? If it's not, then the LLM will itself give some value using some, you can say a formula that we have derived on So, this particular value will start coming up in this section And it will start showing you certain percentage value, right? So it's a moving average, which is happening right now, so every… while every chat, what will happen is, while every chat we are doing, this, this percentage will keeps on increasing, and it will keeps on, correcting itself self-correcting itself. So, it will say that, like, at some point, it will start saying, this particular answer that I'm giving is not up to the mark. So you can update your prompt to support that particular answer. So, what are the… what are the ways, like, suppose if you see here, there is a section called, why did the agent do this? One second Just close this section So, as you can see, there is a section called Why Did the Agent Do This? So, here it is saying that when you are chatting with the agent, some response will be coming from the agent. So the agent response will be showing here. Then you can take action on that particular response saying that this particular thing that you are doing is not up to the mark or something like that And it will start responding in that way. So, if you want, I can recreate the agent and start telling you again if you want, but for the sake of time, we can just move forward.
+
+Prakhar Gour (32:38)
+Let me just show you some agent which I have already created.
+
+Harshik (32:59)
+Excuse me, sir, I have a question
+
+Prakhar Gour (33:00)
+Yeah, yeah, sure.
+
+Harshik (33:01)
+Yeah, sir, in the entire process of making the connector and then making the agent out of the connector, for Pine Labs, we will be given the details about the connector, right? Like, the MCP and everything?
+
+Prakhar Gour (33:16)
+No, I didn't get you. The MCP part, is something that you guys are developing yourself, right? And you are hosting it somewhere else, and that MCP, you can just register directly here, right?
+
+Harshik (33:22)
+Okay. Okay, and what about, like, so, honestly, can you just, like, briefly, like, explain, like, what is an MCP server and, like, what all do we have to make?
+
+Prakhar Gour (33:37)
+So, MCP server is basically, you can say, a mechanism in which the LLM is communicating with your particular backend system, right? LLM does not understand normal API calls, LLM does not understand anything other than you can say a natural way of talking, right? Natural conversation that we are doing, right? It needs some intent in order to understand what… what tool or what function it has to call. So these MCP is basically that only. It's a model contextual protocol. You can read about it on the internet also
+
+Harshik (33:56)
+Yeah. Okay.
+
+Prakhar Gour (34:08)
+It is used to provide a context to the LLM in order to call certain tools which are associated with this particular… any use case that you are trying to do.
+
+Prakhar Gour (34:17)
+Okay. So, so that's why it is much more easier, because LLM is something which keeps on, you can say, changing nowadays, right? And it needs a certain common way in interaction with in index interaction, like, some LLM comes and start using APIs. Another LLM comes start using something else. So, we need a common way in which LLM can interact with our backend system, with our traditional backend systems, I have to say.
+
+Prakhar Gour (34:47)
+If that makes sense. Yeah, Vedan… If you can… if you ask me something?
+
+Vedant (34:56)
+Sir, I wanted to ask that, what are the deliverables you want in this round? Like, we are creating agent in, this PineLab dashboard, and do we need to create the another dashboard, where we will be connecting No, the customer will interact through the web or through the app
+
+Adhavan (35:20)
+Yeah, I'll take it. So Vedant, for this round, all you're expected to do is just post your agent on this. And run it.
+
+Vedant (35:32)
+So, like, we just need to run the agent on this platform, right? We don't need… like…
+
+Adhavan (35:35)
+Yes.
+
+Vedant (35:37)
+But the actual solution is that the user can interact it through the app or through the WhatsApp or something. We don't need to show that also.
+
+Adhavan (35:49)
+You know, if your agent is live, uh, those inputs should be, like, uh, available to your agent, right?
+
+Vedant (35:54)
+But the inputs are from, you know, on that dashboard, you just, you can just only chat through the agent. You cannot send the documents, or you cannot give references
+
+Adhavan (36:08)
+The documents are all going to be part of the knowledge base. Your agent needs input from real world, right, which is why the connectors exist. So whatever you're asking your agent to do, it should be able to like use the connectors and get whatever it needs, right? In order to make the decision and like get its job done.
+
+Vedant (36:28)
+Can I, can we just make the agents on this dashboard, and then connect it to WhatsApp? Like, our solution is… solution and problem statement is based on that. If…
+
+Adhavan (36:38)
+Yeah, yeah. I'll let Rahul answer that. We know Gmail, uh, is connected. WhatsApp, is it possible, Rahul? Rahul Praka?
+
+Prakhar Gour (36:51)
+I think WhatsApp support is also there, if you can just scroll to the connector section There must be WhatsApp also. Yeah, what… yeah, WhatsApp section is there with all the tools, like send media message and everything
+
+Adhavan (37:00)
+All right.
+
+Prakhar Gour (37:06)
+So you can use that also
+
+Adhavan (37:09)
+Got it. Okay.
+
+Vedant (37:12)
+Thank you, sir.
+
+Prakhar Gour (37:16)
+Any other questions?
+
+Vaani (37:19)
+And also, sir, I wanted to ask once for just a minute.
+
+Adhavan (37:21)
+Vani, there is some echo, actually.
+
+Vaani (37:28)
+Is it fine now?
+
+Prakhar Gour (37:28)
+Yes, yes.
+
+Vaani (37:30)
+Yeah, sure. Also, actually, I wanted to ask this, that we have made the MCP server and all of that stuff, we have already done it. We have connected also, we have made the connector, but when we are connected, connecting it, we have… we will not be able to see the
+
+Prakhar Gour (37:38)
+-H
+
+Vaani (37:45)
+authorized tools, like, it was shown in search screen, the authorized tools that he has made, but in our screen, like, we have made the org directory concept. So, in the user that we have made, we are, like, we will not be able to see them Authorized
+
+Prakhar Gour (38:01)
+If it's possible for you to share me the, URL of the MCP and regs, or if there is… if there are any credentials for that
+
+Vaani (38:11)
+Surely, I'll send you the MCP server link, just…
+
+Prakhar Gour (38:16)
+Yeah, I can just show you live only, you know, if
+
+Vaani (38:20)
+Okay, okay, I'll send you.
+
+Prakhar Gour (38:25)
+Any other questions?
+
+Ameya (38:28)
+Sir, I think we, all of us, have many doubts, and I don't think it could be solved just by this meeting, so is it possible that we get a document or anything about Each part, like, each feature that this thing has, something like that, sort of like how you have API docs
+
+Prakhar Gour (38:51)
+-H
+
+Ameya (38:52)
+Something like that for this website.
+
+Prakhar Gour (38:53)
+So, yeah, so I would recommend you to just focus on 3 aspects. First is the agent creation part, second is the connectors that you are creating and how you are adding that connector to that agent, and how you are making that agent smart, right? If we perform these three tasks And then we are, I think, we are more than, you can say 60-70% up in our journey, right? Because Then now you have… you are more or less capable enough to automate your flow. So I would suggest, We just focus on these three segments, then, more… more or less everything must have been achieved, other than that, there are other sections also, like, knowledge base and workflows, and other than that. We can give our documentation about that also, but That will only be beneficial for you once you have a clear understanding of these things that I'm talking about, the three tasks that I've told you.
+
+Ameya (39:50)
+Okay, sir, and also, like, in my team, there are 3 people, so, can the 3 of us work together on a single agent, or is this… I can work on one… like, can my work be shared with others?
+
+Prakhar Gour (40:08)
+So, like, if you guys are sharing some, I think, Advent, I think you should take it if it's regarding some ground and all
+
+Adhavan (40:14)
+Uh-huh, no, what, uh, they are trying to understand is, like, Three members from same team right let's registering at this portal, and they all three want to work on the same agent. So they are trying to understand like, is that possible?
+
+Prakhar Gour (40:30)
+Acha, no, no, no, so, this agent is basically… if one user has created that agent, it is visible to that only. So, we have given this restriction in order to prevent, you know, someone else trying to kill your agent, or someone else try to update or do anything to your prompt.
+
+Ameya (40:45)
+Okay, so, but the other two can log in with my credentials and they can have a look at my agent? Is that fine?
+
+Adhavan (40:45)
+Okay.
+
+Prakhar Gour (40:53)
+Yeah.
+
+Adhavan (40:54)
+Yeah.
+
+Prakhar Gour (40:54)
+Yeah, that could… that can be done.
+
+Ameya (40:58)
+Okay. And, Yeah, if, like, what, how will the final thing be judged? Like, will you just look at whether it works or not, or is there any other parameter?
+
+Adhavan (41:15)
+I'll communicate to you that later on an email.
+
+Ameya (41:19)
+Okay.
+
+Adhavan (41:19)
+Not relevant for this session, yes.
+
+Ameya (41:21)
+Okay, fine.
+
+Sathish Babu (41:25)
+So, can we configure our models? I can see that in AI credentials, I can configure the API key and all that, but is that under the rate limit of the You know, the billing limit of the particular LLM model or is it also under the scope of… your building, the Pine Labs building, because I can see there are only 3 agents and 1K runs per month per month.
+
+Sathish Babu (41:51)
+The free version.
+
+Prakhar Gour (41:54)
+I think you must have logged in as a new tenant, right? You are not logging… yeah, so I would suggest you to use the KENS competition tenant, right? Which have been
+
+Sathish Babu (41:57)
+Yes. Got it. Okay. So does that have, does it have an unlimited set of runs?
+
+Prakhar Gour (42:04)
+So, yeah, so we'll be using Pine SKU. Yes, yes, you can use the finals key, the final key already configured for that.
+
+Sathish Babu (42:11)
+Got it. Okay. Got a daughter.
+
+Shikhar Kansal (42:18)
+There's a lot of problems signing in into the, KenKase organization account, like, I tried to sign in, and I put up the request… I put up a wrong requested role and a business domain, and then my email came as that you have already signed into an organization And I'm not able to access the platform.
+
+Prakhar Gour (42:34)
+Okay, so is it possible for you to create a new email, or new email, just create a dummy email, right? And just release as a developer back office. And also, you can move forward.
+
+Shikhar Kansal (42:41)
+Yeah, I have So the requested role should be a developer and the business domain should be back office
+
+Adhavan (42:52)
+Yes, yes.
+
+Prakhar Gour (42:52)
+Yes, yes.
+
+Shikhar Kansal (42:53)
+Okay, so I just put up another email and tried to log in, but there are… it's written as too many sign-up events, try again later. So, will that be fixed
+
+Prakhar Gour (43:01)
+Now, maybe, maybe that is because you're getting 429 as an error code, right? So, you must have tried a lot of money sign-ups, maybe that's why it is giving you.
+
+Prakhar Gour (43:10)
+If it's possible, you can wait for half an hour, then you can again try it. It will work.
+
+Shikhar Kansal (43:16)
+That is fair enough.
+
+Prakhar Gour (43:24)
+So, yeah, okay.
+
+Harshik (43:24)
+Excuse me, sir? Yeah, sir, I'm sorry if, like, it sounds like a dumbed out or something like that. Sir, just to get an idea of the entire process. For, for, like, the agent that you built right now in front of us, the Pine Labs agent, it's job was basically to integrate the PineLabs payment software with our current workflow, whatever we are having, right?
+
+Prakhar Gour (43:49)
+Yes, yes, yes.
+
+Harshik (43:51)
+Yeah, and so, essentially, for… to integrate other such things as well, we also need to make agents, right? For, like, voice agent, we need for, like, delivery, we need another agent. And for every agent, we need a connector, and to make that connector, we need our own MCP server to host the connector, right?
+
+Prakhar Gour (44:08)
+Yeah, you can use MCP server, or you can use the existing connectors, the native connector that I just showed you, right? There are 100 plus connectors there. So, one of them must have satisfied your use case, right?
+
+Harshik (44:15)
+Okay. Okay, and sir, so basically, we need agents to connect all these platforms, but we also need agents for the entire, like, workflow process of the thing, right? For the solution that you are building. We need multiple agents for that
+
+Prakhar Gour (44:33)
+So, I would suggest… the one way is to achieve everything via workflow, right? One agent, like, suppose… one agent is doing development, one agent is doing testing, one agent is doing something else. So, that is also a good approach, right? One of the other approach is just create a single agent, because since we are in the beginning stage, right, I would suggest you create a single agent
+
+Harshik (44:38)
+Yeah
+
+Prakhar Gour (44:53)
+And just try to create a deterministic flow via prompt, and then achieve all the tasks via that prompt only. Because we are not… you can say we are just a beginner in our journey of Agentic AI, right? That's why I'm saying that.
+
+Harshik (45:07)
+Okay, so And if you create one single agent, we need to add every connector, like, for Pine Labs, for, like, delivery, for, like, voice agent in that same agent, right?
+
+Prakhar Gour (45:15)
+Yeah, yeah, you do that. Like, for, like, suppose there is one agent that I created for… in my starting days, I created a simple SRE agent, which has the capability of connecting to GitHub, Jira, Grafana, and you can say Mail, Outlook, and Teams also now
+
+Harshik (45:22)
+Hmm.
+
+Prakhar Gour (45:32)
+So, I can connect as many connectors as I want here.
+
+Harshik (45:33)
+Okay. Yeah. Okay. Okay, thank you.
+
+Prakhar Gour (45:49)
+Any other questions?
+
+Deblina Talukdar (45:50)
+Hi, so I don't know if this is getting repeated, but, let's say when you're talking about, like, we are deploying only one agent And that is, like, what our main action is, the Pine Labs one, and then if we have to do a Gyani voice connector, that can be through an existing connector, right? We don't need to deploy another agent for that.
+
+Prakhar Gour (46:15)
+Can I get a use case Can you… can you give me a little… can you be a little more elaborate?
+
+Deblina Talukdar (46:21)
+So, let's say
+
+Adhavan (46:21)
+Uh, Praka, just a minute, Devilina. Uh, I give you the context, right? So, uh, let's say the teams here want to, uh, use Gyani's, uh, STT or TSS, right?
+
+Adhavan (46:35)
+convert an audio to transcript or like a text to audio. Okay. How should they go about it?
+
+Prakhar Gour (46:40)
+Okay. I think Akshit is there from Pine Labs? Raul? Raul, sir? Hello? Rahul is there, or someone Shubham?
+
+Shubham Chauhan (46:55)
+Yes, Poker.
+
+Prakhar Gour (46:56)
+So, can you see if Akshit is available? He can give a brief intro about… because he's, you can say, master for that part, right?
+
+Shubham Chauhan (47:03)
+Just a moment.
+
+Adhavan (47:07)
+One way to do this is, like, uh, via MCP server, where, like, uh, uh, you communicate to Giani via that server. And use that inside agenticog. But I remember reading a few emails where when they did that, they are not able to see the tools.
+
+Deblina Talukdar (47:30)
+Hmm. Yeah
+
+Prakhar Gour (47:31)
+Not able to see the tools in Agentic or
+
+Adhavan (47:34)
+Yeah.
+
+Prakhar Gour (47:37)
+Can you, can you share me the MCP URL, or if credits, if you have that? I'll try it myself. And see if it's working or not, because it has to work, because it's a generic implementation.
+
+Shubham Chauhan (47:44)
+Akshat is not available as of now, yeah.
+
+Adhavan (47:44)
+Okay.
+
+Prakhar Gour (47:45)
+Gotcha.
+
+Shubham Chauhan (47:47)
+We can have in, uh, next section maybe.
+
+Prakhar Gour (47:51)
+Okay, regarding the voice and all that, I think the developer is there. Who has worked on that, so if you can
+
+Deblina Talukdar (47:59)
+So, actually, our two, like, our primary rail is the Pineloves one, the payments one
+
+Prakhar Gour (47:59)
+have these questions for people
+
+Adhavan (47:59)
+Yes.
+
+Deblina Talukdar (48:05)
+And another rail which we had is the Bhyani, the voice one. So, what you just suggested is, like, keeping to one agent and connecting the other via connector, instead of doing
+
+Adhavan (48:10)
+Hmm. Okay. Yes.
+
+Deblina Talukdar (48:17)
+So that's what I was asking, like, is it Like, that is the flow you are suggesting, or is there some, like, your
+
+Adhavan (48:24)
+Yes.
+
+Deblina Talukdar (48:26)
+Okay.
+
+Adhavan (48:26)
+That is the flow they bring, okay, go for it, it's just that, uh, the tool should be visible, as Praka says here. If it's not, then share.
+
+Deblina Talukdar (48:34)
+And any connector Got it. And any connector that is not available, then we have to host an MCP for that.
+
+Adhavan (48:42)
+Yes.
+
+Prakhar Gour (48:43)
+Yes, I would select, host MCP, yeah
+
+Deblina Talukdar (48:48)
+Thank you.
+
+Harsh Singh (48:50)
+Hi, actually I wanted to ask regarding the knowledge base, Like, if we are providing a knowledge base, is it necessarily have to be shared between all of our agents, or can we have individual knowledge bases for each of these agents?
+
+Prakhar Gour (49:07)
+So, once you have uploaded the knowledge base, right, that knowledge base can be used by other agents also For, for your, you can say, for your login. The agents that you have created, and the knowledge base that you have uploaded, it will be shareable with other agents also.
+
+Harsh Singh (49:25)
+Okay, so we don't have the capability of making, the knowledge base specific to the requirement of a particular agent. That… that we can give in the system prompt itself
+
+Prakhar Gour (49:39)
+Yeah, so, you can try it with a system prompt, but system prompt is something like, I would say that it's a, system prompt is something that LLM might follow, might not follow, right?
+
+Harsh Singh (49:49)
+Yeah.
+
+Prakhar Gour (49:49)
+System prompts are those kind of things. So, that restriction might not be there. If we, we can see if we can give that restriction, to a particular agent, but what's the use case? Why do you want to restrict this knowledge base to a particular agent?
+
+Harsh Singh (50:03)
+I was just, trying to, like, categorize, what knowledge, like, the agent has, and does not take much more time wandering into unnecessary, like details, which it doesn't necessarily require or not. So, for that, I was asking if we have that possibility or not.
+
+Prakhar Gour (50:24)
+Okay. So, right now, we don't have that the multiple agents might, will be able to search on that same policy case, right?
+
+Harsh Singh (50:36)
+Okay, okay. No worries.
+
+041 - Devansh Mangal (50:40)
+Hi, Praka, am I audible?
+
+Prakhar Gour (50:41)
+Yes, yes.
+
+041 - Devansh Mangal (50:44)
+Yeah, so thank you for walking us through
+
+
+Link:https://app.fireflies.ai/live/01M3RXN4WDTMKAZP6E4DYJQ9TX?ref=guestMode
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-10-01T17:57:44+05:30.
+</ADDITIONAL_METADATA>
