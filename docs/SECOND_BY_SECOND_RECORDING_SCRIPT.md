@@ -60,13 +60,19 @@
 ---
 
 ### Phase 3: Live Incident Execution — Escrow Lock & Logistics (0:40 – 1:10 | 30s)
-* **Screen**: **AgenticOrg Agent Run / Execution Trace View** (Ticket #1042 — Priya Sharma).
+* **Screen**: **AgenticOrg Agent Page $\rightarrow$ Click `[Run Agent]` Button** (`/dashboard/agents/c56edea9-8cd1-4e31-bf93-48e024d445d5`).
 * **Visual Action**:
-  - Scroll through the input prompt: Shows Priya's vernacular voice intake via Gnani STT (*"Washing machine spin karte waqt tezz kharr-kharr awaz aa rahi hai..."*).
-  - Highlight **Tool Call 1**: `pinelabs_plural__create_order` (`pre_auth: true`, amount: `125000`). Show order `PL_ORD_8A92B1C4` confirmed in `PRE_AUTH_LOCKED` status.
-  - Highlight **Tool Call 2**: `gstn__generate_eway_bill` & `delhivery_logistics` dispatching OEM bearing SKU `BEAR-6205-2RS` directly to Priya's doorstep.
+  - Click the blue **`[Run Agent]`** button.
+  - Paste the live incident docket into the input prompt:
+    `Evaluate appliance diagnostic docket: Godrej 7kg Front-Load Washing Machine (Ticket #1042 — Priya Sharma, Bengaluru). Acoustic telemetry: SNR=22.8 dB, Neyman-Pearson LRT ratio=3.85 (threshold 2.45), anti-spoofing replay detected=False, dominant frequency profile=WM_BEARING_SPALL (SKF 6205 at 1,450 Hz harmonic). Determine diagnostic verification, plural escrow pre-authorization amount (HSN 8450 tariff), and Delhivery forward parts dispatch.`
+  - Hit **Run**: The modal renders the live diagnostic card in real time!
+  - Highlight the execution telemetry: **Latency (`~3,100 ms`)**, **Cost (`$0.00135`)**, and the 4-step verified output:
+    1. `Acoustic Telemetry`: SNR 22.8 dB, LRT 3.85 (>2.45), Confirmed 1,450 Hz BPFO bearing spall.
+    2. `Diagnostic Verification`: Mechanical fault confirmed; out-of-warranty Godrej 7kg.
+    3. `Escrow Pre-Auth`: Plural pre-auth lock for ₹1,250 (Part ₹850 + Labor ₹400).
+    4. `Logistics Dispatch`: Delhivery forward parts dispatch for SKU `BEAR-6205-2RS`.
 * **Founder Narration**:
-  > *"Here is a live execution run for customer Priya in Bengaluru. Ingesting her Hinglish voice memo via Gnani STT, AcuDiag diagnoses a drum bearing failure. Operating under zero-trust, the agent invokes Pine Labs Plural to lock a ₹1,250 pre-auth escrow hold. Guaranteeing funds before anyone leaves the house, AcuDiag generates a legal GSTN e-way bill and manifests factory OEM bearings directly to her doorstep via Delhivery."*
+  > *"Watch AcuDiag process a live incoming incident for customer Priya in Bengaluru. Ingesting her acoustic docket via Gnani, AcuDiag executes in just 3.1 seconds for a fraction of a cent. Operating under zero-trust, the agent confirms the 1,450 Hz bearing spall, triggers Pine Labs Plural to lock a ₹1,250 pre-auth escrow, and manifests genuine OEM bearings to her doorstep via Delhivery."*
 
 ---
 
