@@ -7,6 +7,10 @@
 > **Agent Name**: AcuDiag Orchestrator  
 > **Platform Runtime**: Pine Labs AgenticOrg (`v4.8.0` / LangGraph `v1.1`, Tenant: `abb61bca-a3f5-4aba-b30e-946016b13120`)
 
+> [!TIP]
+> **MASTER COPY-PASTE SUBMISSION**: The finalized, field-by-field copy-paste responses for the official Typeform portal are maintained in:  
+> 👉 [`THE_KEN_ROUND_3_FINAL_SUBMISSION_MASTER.md`](THE_KEN_ROUND_3_FINAL_SUBMISSION_MASTER.md)
+
 ---
 
 # PART 1: YOUR AGENT

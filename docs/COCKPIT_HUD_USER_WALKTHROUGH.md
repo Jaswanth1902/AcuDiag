@@ -1,7 +1,8 @@
 # 🎮 AcuDiag Tactical Cockpit: Step-by-Step User Walkthrough
 
 > **URL**: [http://localhost:8000](http://localhost:8000) or [http://127.0.0.1:8000](http://127.0.0.1:8000)  
-> **Target**: Hackathon Screen Recording, Interactive Testing & Live Demo
+> **Purpose**: Internal Developer Testing Harness & DSP Waveform Debugger  
+> **Official Submission Video**: 100% Native Pine Labs AgenticOrg (See [`SECOND_BY_SECOND_RECORDING_SCRIPT.md`](SECOND_BY_SECOND_RECORDING_SCRIPT.md))
 
 ---
 

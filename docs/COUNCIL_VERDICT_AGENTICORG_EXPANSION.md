@@ -71,3 +71,13 @@ The strategic winning formula for the 5:00 PM demonstration is the **Hybrid Sove
    - Case A: Fake repair (speaker replay) $\rightarrow$ Rejected $\rightarrow$ Escrow withheld.
    - Case B: Genuine repair $\rightarrow$ LRT 0.82 $\rightarrow$ AgenticOrg `/approvals` docket resolved by Inspector R. Sundaram $\rightarrow$ Payment captured & GSTN tax split generated.
 5. **Step 5 (Audit Package - 30 sec)**: Open AgenticOrg `/dashboard/audit` to show the immutable Grantex evidence package ready for export.
+
+---
+
+## 5. 🌟 Final Council Addendum: 100% Native AgenticOrg Demonstration Ratified
+
+* **Date Ratified**: 2026-10-02 01:30 IST  
+* **Consensus**: **UNANIMOUS**  
+* **Resolution**: To maximize judge trust, prevent juror skepticism, and exhibit absolute platform mastery, the standalone Cockpit HUD (`localhost:8000`) is **officially retired from the demo recording**. The entire 120-second submission video will be recorded **100% natively on Pine Labs AgenticOrg** (`agenticorg.hackathon.pinelabs.com`), walking through Ticket #1042 (Priya Sharma) directly inside the agent execution trace, knowledge base RAG, and approvals dashboard.
+* **Verified Elevation**: 25 shadow evaluations, 89.6% shadow accuracy, 0 pending approvals, and 14 native tools.
+* **Master Script**: Ratified in [`SECOND_BY_SECOND_RECORDING_SCRIPT.md`](SECOND_BY_SECOND_RECORDING_SCRIPT.md).

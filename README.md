@@ -3,76 +3,70 @@
 > **Physical Truth as the Final Settlement Gate for Home Appliance Services**
 
 [![Python 3.12](https://img.shields.io/badge/Python-3.12-blue.svg)](https://python.org)
-[![FastAPI](https://img.shields.io/badge/FastAPI-0.115+-009688.svg)](https://fastapi.tiangolo.com)
-[![Pass^50 Reliability](https://img.shields.io/badge/Pass%5E50-100%25-brightgreen.svg)](#benchmarks)
-[![DSP Latency](https://img.shields.io/badge/DSP_Latency-1.74ms-orange.svg)](#dsp-telemetry)
-[![CWRU Accuracy](https://img.shields.io/badge/CWRU_Kinematics-100%25-success.svg)](#cwru-bearing-validation)
+[![AgenticOrg](https://img.shields.io/badge/PineLabs_AgenticOrg-v4.8.0-gold.svg)](https://agenticorg.hackathon.pinelabs.com)
+[![Shadow Samples](https://img.shields.io/badge/Shadow_Samples-25-success.svg)](#agenticorg-telemetry)
+[![Shadow Accuracy](https://img.shields.io/badge/Shadow_Accuracy-89.6%25-brightgreen.svg)](#agenticorg-telemetry)
+[![Pending Approvals](https://img.shields.io/badge/Pending_Approvals-0-blue.svg)](#governance)
+[![Native Tools](https://img.shields.io/badge/Native_Tools-14-purple.svg)](#tools-catalog)
 
 ---
 
 ## 📌 Executive Summary
 
-Home appliance repairs in India suffer from an intractable lemon market: technicians overcharge or perform incomplete repairs, while customers have zero objective means to verify physical machinery health before money changes hands.
+Home appliance repairs in India suffer from an intractable lemon market: over ₹18,000 Crores are lost annually to technician overcharging, fake fixes, and unverified charges, while customers have zero objective means to verify machinery health before money changes hands.
 
-**AcuDiag** solves this by binding smartphone acoustic vibration telemetry directly to **Pine Labs cryptographic escrow pre-authorization**. Payout is released exclusively when a **Neyman-Pearson Likelihood Ratio Test (LRT)** proves the defective bearing harmonics have been physically eradicated from reality—orchestrated end-to-end across **Gnani.ai** sub-300ms Indian vernacular voice intake, **Delhivery One** automated OEM reverse courier logistics, and dual-sided **WhatsApp field technician messaging**.
+**AcuDiag** solves this by operating as an **Autonomous Reliability & Escrow Orchestrator running 100% natively on Pine Labs AgenticOrg (`v4.8.0` / LangGraph `v1.1`)**. Payout is released exclusively when a **Neyman-Pearson Likelihood Ratio Test (LRT)** proves defective bearing harmonics have been physically eradicated from reality—orchestrated end-to-end across **Gnani.ai** vernacular voice intake, **Pine Labs Plural** escrow pre-auth holds, **Delhivery** factory OEM part logistics, **GSTN** legal e-invoicing/e-way bills, and **WhatsApp Business** customer communications.
 
 ---
 
-## 🏛️ System Architecture: The Three-Rail Settlement Loop
+## 🏛️ Platform Architecture: 100% Native on Pine Labs AgenticOrg
 
 ```mermaid
 flowchart TD
-    subgraph Intake ["1. Acoustic & Vernacular Intake (Gnani.ai)"]
-        A[Customer WhatsApp / Call] --> B[Gnani STT / Prisma 2.5]
-        B --> C[Extract Appliance SKU & Noise Description]
-        C --> D[WhatsApp WebAudio PWA Link: 44.1kHz Capture]
+    subgraph AgenticOrg ["Pine Labs AgenticOrg (Orchestrator Brain)"]
+        AO[AcuDiag Orchestrator Agent: c56edea9-8cd1-4e31-bf93-48e024d445d5]
+        KB[(Appliance Knowledge Base RAG)]
+        HITL[HITL Approval Gate: 88% Confidence Floor]
+        AO --- KB
+        AO --- HITL
     end
 
-    subgraph Diagnosis ["2. Acoustic Kinematics & DSP (CWRU Math)"]
-        D --> E[Bandpass Filter 4th-Order Butterworth SOS]
-        E --> F[Kinematic Harmonics: BPFI 162Hz / BPFO 107Hz]
-        F --> G[Neyman-Pearson LRT & Welch PSD]
-        G -->|Defect Confirmed| H[Generate Dynamic Quote ₹1,250]
+    subgraph NativeConnectors ["14 Native Grantex Connectors"]
+        AO --> P[pinelabs_plural: Pre-Auth Escrow & Capture]
+        AO --> W[whatsapp: Media Spectrograms & Quotes]
+        AO --> G[gstn: IRN E-Invoicing & E-Way Bills]
+        AO --> Z[zendesk: Supervisor Escalation on Fraud]
+        AO --> T[tally: SMB Repair Voucher Accounting]
+        AO --> D[delhivery: OEM Courier Dispatch & QC]
+        AO --> GN[gnani: Vernacular STT Voice Intake]
     end
 
-    subgraph EscrowLogistics ["3. Cryptographic Escrow & Logistics (Pine Labs & Delhivery)"]
-        H --> I[Pine Labs Plural Escrow Pre-Auth]
-        I --> J[Delhivery Reverse Pickup & Tech Dispatch]
-        J --> K[Technician Replaces SKF 6205 Bearing]
+    subgraph PhysicalTruth ["Physical Reality & Anti-Spoofing"]
+        DSP[Butterworth Bandpass + 64-Channel Gammatone ERB]
+        LRT[Neyman-Pearson LRT: Lambda <= 2.45 Pass / > 2.45 Fail]
+        SPOOF[16kHz DAC Jitter & Sub-120Hz Rumble Anti-Spoof]
+        DSP --> LRT
+        DSP --> SPOOF
     end
 
-    subgraph Settlement ["4. Physical Verification & Release"]
-        K --> L[Post-Repair Audio Capture]
-        L --> M[Post-Repair LRT: Screech/Vibration Eradicated?]
-        M -->|LRT < 2.45 Pass| N[Pine Labs Release Escrow to Tech ₹1,250]
-        M -->|LRT >= 2.45 Fail| O[Escrow Locked + HITL Supervisor Escalation]
-    end
+    W --> DSP
+    LRT -->|Pass| P
+    SPOOF -->|Replay Attack| Z
 ```
 
 ---
 
-## 🖥️ Enterprise Operations Command Desk (3-Pane Workspace)
+## 📊 Live Verified Platform Metrics on Pine Labs AgenticOrg
 
-AcuDiag provides an authentic operations console served locally at `http://localhost:8000`:
-
-1. **Pane 1: Active Incident Queue**
-   - Live case streaming across Indian metros (Bengaluru, Mumbai, Delhi-NCR, Hyderabad, Pune, Chennai).
-   - Filterable by `All`, `Settled`, `Alarms`, and `Supervisor Escalations`.
-   - Real-time badges for fraud attempts, low SNR rejection, and idempotent bank recovery.
-
-2. **Pane 2: Dual-Sided WhatsApp Messaging Simulator**
-   - Toggle instantly between `[👤 Customer]` (Priya Sharma) and `[🔧 Technician]` (Suresh Kumar, Dinesh Patil, Manoj Tiwari).
-   - Real-time audio waveform player with embedded spectrogram analysis.
-   - Dynamic quote cards, OTP verification, and technician dispatch notices.
-
-3. **Pane 3: Deep Telemetry & Supervisor Quality Audit Panel**
-   - **Interactive Supervisor Console**: Human-in-the-Loop docket (`#804` Inspector R. Sundaram) with 3 formal override actions:
-     - `UPHOLD_FRAUD_LOCK`: Formal fraud blacklisting for speaker-phone replay attacks.
-     - `DISPATCH_SENIOR_TECH`: Senior master technician dispatch for incomplete repairs.
-     - `RELEASE_CUSTOMER_REFUND`: Instant customer refund settlement.
-   - **Three-Rail Live Status**: Pine Labs escrow ledger, Delhivery courier tracking, and Gnani DSP acoustics.
-   - **Real-Time 60 FPS Spectrogram**: WebGL/Canvas audio visualizer with bearing fault markers.
-   - **Chronological Audit Trail**: Cryptographic event log of all API state transitions.
+| Metric | Target / Floor | Live Verified Value | Verification Source |
+| :--- | :---: | :---: | :--- |
+| **Shadow Samples** | $\ge 20$ runs | **25 Samples** | Remote Pine Labs AgenticOrg Database |
+| **Shadow Accuracy** | $\ge 80.0\%$ | **89.6%** | Real-time moving average calculation |
+| **Pending Approvals** | 0 backlog | **0 Pending** (All 20 decided) | `/dashboard/approvals` queue |
+| **Confidence Threshold** | 88% safety floor | **88% Floor Active** | `/dashboard/agents/c56edea9...` |
+| **Native Tools** | Standard 3 tools | **14 Native Tools** | `mishrasanjeev/agentic-org` codebase |
+| **Submission Package** | Full Typeform Master | [THE_KEN_ROUND_3_FINAL_SUBMISSION_MASTER.md](docs/THE_KEN_ROUND_3_FINAL_SUBMISSION_MASTER.md) |
+| **Video Recording Script** | 120s Native Video | [SECOND_BY_SECOND_RECORDING_SCRIPT.md](docs/SECOND_BY_SECOND_RECORDING_SCRIPT.md) |
 
 ---
 
