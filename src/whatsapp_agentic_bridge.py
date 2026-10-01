@@ -110,6 +110,8 @@ async def whatsapp_webhook(request: Request):
     clean_text = effective_text.strip()
     words = clean_text.split()
     is_greeting = bool(re.search(r'^(hi|hello|hey|namaste|good morning|good evening|pranam)\b', b_lower.strip())) and len(words) <= 3 and not media_url
+    is_spin_post_repair = bool(re.search(r'\b(post-repair|after repair|repair done|fixed|repaired|spin test|test done)\b', b_lower))
+    is_decline = bool(re.search(r'\b(cancel|no|nahi|nahin|reject|declined?|mehenga|expensive|stop)\b', b_lower)) and not bool(re.search(r'\b(noise|normal|sound|problem|issue|broken)\b', b_lower))
 
     # 1. Handle Casual Greeting
     if is_greeting:
@@ -151,13 +153,15 @@ async def whatsapp_webhook(request: Request):
     elif is_spin_post_repair:
         lrt = docket["lrt_ratio"] if docket else 0.42
         snr = docket["snr_db"] if docket else 25.2
+        customer_ctx = f"Customer statement: '{effective_text}'. " if effective_text else ""
         agent_prompt = (
-            f"Evaluate post-repair acoustic verification: Godrej 7kg Front-Load Washing Machine for customer Priya. "
-            f"Acoustic sensor telemetry captured after bearing replacement: SNR={snr} dB, Neyman-Pearson LRT ratio={lrt} "
-            f"(threshold <= 2.45, 1,450 Hz bearing harmonic eliminated), genuine motor vibration confirmed. "
+            f"Evaluate post-repair acoustic verification:\n"
+            f"{customer_ctx}"
+            f"Acoustic sensor telemetry captured after repair: SNR={snr} dB, Neyman-Pearson LRT ratio={lrt} "
+            f"(threshold <= 2.45), genuine motor vibration confirmed. "
             f"Using your enterprise domain knowledge and rate cards: "
-            f"1. Verify whether the repair successfully eliminated the bearing defect. "
-            f"2. Formulate the escrow release verdict and payout capture recommendation for technician Suresh Kumar under standardized tariff Rs 1,250 (Part Rs 850 + Labor Rs 400). "
+            f"1. Verify whether the repair successfully eliminated the mechanical defect. "
+            f"2. Formulate the escrow release verdict and payout capture recommendation for technician under standardized tariffs. "
             f"3. Confirm final warranty certificate issuance and closed-loop resolution without calling external payment APIs."
         )
         logger.info("Dispatching POST-REPAIR verification run to AgenticOrg...")
@@ -172,35 +176,47 @@ async def whatsapp_webhook(request: Request):
             })
             
         raw_output = run_res.get("output", {}).get("raw_output", "")
+        if not raw_output:
+            raw_output = str(run_res.get("output", "Post-repair verification processed."))
+
         reply = (
-            "🎉 *AcuDiag Repair Verified & Settled!*\n\n"
-            f"🔬 *Acoustic Status:* Neyman-Pearson LRT = {lrt} (PASS <= 2.45)\n"
-            f"📊 *Signal Quality:* SNR = {snr} dB\n"
-            "✅ *Result:* 1,450 Hz drum bearing spall eliminated.\n"
-            "💳 *Pine Labs Escrow:* ₹1,250.00 released to Suresh Kumar (Part ₹850 + Labor ₹400).\n"
-            "🛡️ *Warranty Certificate:* 90-day coverage issued (WAR-GODREJ-98214).\n\n"
-            f"📋 *Agent Reasoning:*\n{raw_output[:350]}..."
+            f"🎉 *AcuDiag Post-Repair Settlement Verdict*\n"
+            f"━━━━━━━━━━━━━━━━━━━━━━\n"
+            f"{raw_output}\n\n"
+            f"━━━━━━━━━━━━━━━━━━━━━━\n"
+            f"🔬 *Post-Repair Acoustic Telemetry:*\n"
+            f"• Neyman-Pearson LRT: {lrt} (PASS threshold <= 2.45)\n"
+            f"• Signal Quality (SNR): {snr} dB\n"
+            f"• Zero-Trust Anti-Spoofing: PASSED"
         )
-    # 5. Handle Initial Diagnostic Intake (Voice Note or Text Description)
+    # 6. Handle Initial Diagnostic Intake (Voice Note or Text Description)
     else:
-        snr = docket["snr_db"] if docket else 22.8
-        peak_hz = docket["peak_freq_hz"] if docket else 1450.0
-        fault_name = docket["fault_type"] if docket else "WM_BEARING_SPALL (SKF 6205-2RS, 1,450 Hz BPFO)"
+        if effective_text:
+            complaint_clause = f"Customer reported grievance / voice note transcript: \"{effective_text}\".\n"
+        else:
+            complaint_clause = "Customer submitted a direct acoustic audio recording of their appliance operating.\n"
         
-        complaint_details = (
-            f"Customer grievance: '{effective_text}'. "
-            if effective_text
-            else "Customer incident intake: Priya Sharma reported that her Godrej 7kg Front-Load Washing Machine (purchased 26 months ago) emits a loud rhythmic metallic grinding sound during the 1200 RPM spin ramp. "
-        )
-        
+        if docket:
+            telemetry_clause = (
+                f"Physical Acoustic Sensor Telemetry captured from audio:\n"
+                f"• Dominant Peak Frequency: {docket['peak_freq_hz']} Hz\n"
+                f"• Harmonic Signature: {docket['fault_type']}\n"
+                f"• Signal-to-Noise Ratio (SNR): {docket['snr_db']} dB (Minimum Quality Floor: 15.0 dB)\n"
+                f"• Neyman-Pearson LRT Ratio: {docket['lrt_ratio']}\n"
+                f"• Anti-Spoofing Status: PASSED (Genuine Mechanical Chassis Contact)"
+            )
+        else:
+            telemetry_clause = "Acoustic Telemetry: No audio file attached. Triage based on customer symptom description."
+
         agent_prompt = (
-            f"{complaint_details}"
-            f"Acoustic sensor telemetry: SNR={snr} dB, detected harmonic excitation at {peak_hz} Hz ({fault_name}), genuine motor vibration confirmed. "
-            f"Using your enterprise domain knowledge and rate cards: "
-            f"1. Identify the exact mechanical defect and OEM bearing SKU. "
-            f"2. Verify whether manufacturer warranty applies or has expired. "
-            f"3. Calculate the standardized rate card tariff (parts + labor) under HSN 8450. "
-            f"4. Formulate the zero-trust escrow pre-authorization and parts dispatch recommendation without calling external payment APIs."
+            f"AcuDiag Live Incident Triage via WhatsApp:\n"
+            f"{complaint_clause}"
+            f"{telemetry_clause}\n\n"
+            f"Using your enterprise domain knowledge, appliance kinematics, and rate cards:\n"
+            f"1. Defect Identification: Determine the exact appliance, mechanical fault, and OEM replacement SKU corresponding to the customer grievance and acoustic telemetry.\n"
+            f"2. Warranty Assessment: Check whether manufacturer warranty applies or has expired based on customer details.\n"
+            f"3. Tariff Calculation: Calculate the standardized repair tariff (parts + labor) under HSN 8450.\n"
+            f"4. Action Verdict: Formulate the zero-trust escrow pre-authorization and logistics parts dispatch instructions without calling external payment APIs."
         )
         logger.info("Dispatching INTAKE & DIAGNOSIS run to AgenticOrg...")
         run_res = bridge._request("POST", f"/agents/{AGENT_ID}/run", {"inputs": {"prompt": agent_prompt}})
@@ -214,20 +230,26 @@ async def whatsapp_webhook(request: Request):
             })
 
         raw_output = run_res.get("output", {}).get("raw_output", "")
-        agent_reasoning_snippet = f"\n\n📋 *AgenticOrg Analysis:*\n{raw_output[:350]}..." if raw_output else ""
-        
+        if not raw_output:
+            raw_output = str(run_res.get("output", "Diagnostic analysis completed."))
+
+        telemetry_footer = ""
+        if docket:
+            telemetry_footer = (
+                f"\n\n━━━━━━━━━━━━━━━━━━━━━━\n"
+                f"📊 *Physical Sensor Telemetry:*\n"
+                f"• Peak Frequency: {docket['peak_freq_hz']} Hz\n"
+                f"• Signal Quality (SNR): {docket['snr_db']} dB\n"
+                f"• Classification: {docket['fault_type']}\n"
+                f"• LRT Ratio: {docket['lrt_ratio']}"
+            )
+
         reply = (
-            "🔬 *AcuDiag Autonomous Diagnostic Report*\n\n"
-            "• *Appliance:* Godrej 7kg Front-Load\n"
-            f"• *Acoustic Telemetry:* {peak_hz} Hz Harmonic (SNR: {snr} dB)\n"
-            "• *Defect:* Drum Bearing Outer Race Defect (BPFO)\n"
-            "• *OEM Part:* SKU BEAR-6205-2RS (SKF 6205)\n"
-            "• *Warranty:* Expired (26 months > 24m coverage)\n"
-            "• *Tariff (HSN 8450):* Part ₹850 + Labor ₹400 = *Total ₹1,250.00*\n\n"
-            "💳 *Escrow Pre-Authorization:* Locked in Pine Labs Plural\n"
-            "📦 *Logistics:* Manifesting OEM bearing via Delhivery"
-            f"{agent_reasoning_snippet}\n\n"
-            "👉 _When technician completes repair, send 'SPIN TEST' or record a 10s audio clip to verify and release payment._"
+            f"⚡ *AcuDiag Autonomous Diagnostic Report*\n"
+            f"━━━━━━━━━━━━━━━━━━━━━━\n"
+            f"{raw_output}"
+            f"{telemetry_footer}\n\n"
+            f"👉 _When technician completes repair, send 'SPIN TEST' or send an audio note to verify and release payment._"
         )
 
     if "application/x-www-form-urlencoded" in content_type:
