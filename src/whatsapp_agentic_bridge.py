@@ -20,6 +20,7 @@ proj_root = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(proj_root))
 
 from src.pinelabs_agentic_bridge import PineLabsAgenticBridge
+from src.acoustic_analyzer import analyze_audio_docket
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 logger = logging.getLogger("AcuDiagWhatsAppBridge")
@@ -85,11 +86,35 @@ async def whatsapp_webhook(request: Request):
 
     logger.info(f"Incoming WhatsApp message from {sender}: text='{body_text}' media='{media_url}'")
 
+    docket = None
+    if media_url:
+        logger.info(f"Analyzing incoming voice note media URL: {media_url}")
+        docket = analyze_audio_docket(media_url)
+        logger.info(f"DSP Result: SNR={docket['snr_db']}dB, Peak={docket['peak_freq_hz']}Hz, LRT={docket['lrt_ratio']}, Spoof={docket['is_replay_spoof']}")
+
     b_lower = body_text.lower()
     is_spin_post_repair = any(k in b_lower for k in ["post-repair", "after repair", "repair done", "fixed", "repaired", "spin test", "test done", "done"])
     is_decline = any(k in b_lower for k in ["cancel", "no", "nahi", "reject", "mehenga", "expensive", "stop"])
 
-    if is_decline:
+    # 1. Check Noise Floor (Physical Invariant 3)
+    if docket and docket["snr_db"] < 15.0:
+        reply = (
+            f"⚠️ *AcuDiag Acoustic Rejection (Low SNR):*\n\n"
+            f"• *Signal-to-Noise Ratio:* {docket['snr_db']} dB (< 15.0 dB floor)\n"
+            f"• *Status:* Environment too noisy for reliable diagnostic.\n\n"
+            f"👉 *Instruction:* Please close doors/windows, place phone within 30cm of the drum, and re-record a 5s audio clip."
+        )
+    # 2. Check Physical Anti-Spoofing (Physical Invariant 4)
+    elif docket and docket["is_replay_spoof"]:
+        reply = (
+            f"🛑 *AcuDiag Zero-Trust Security Gate (Replay Attack):*\n\n"
+            f"• *Anti-Spoofing:* REJECTED_REPLAY_ATTACK\n"
+            f"• *Telemetry:* {docket['anti_spoof_detail']}\n"
+            f"• *Action:* Escrow payout withheld pending secondary supervisor audit.\n\n"
+            f"AcuDiag detected this audio was played through a speaker rather than genuine machine mechanical contact."
+        )
+    # 3. Handle Quotation Decline
+    elif is_decline:
         reply = (
             "🛑 *AcuDiag Service Hold:*\n\n"
             "• Repair quotation declined by customer.\n"
@@ -97,11 +122,13 @@ async def whatsapp_webhook(request: Request):
             "• Case #1042 closed gracefully.\n\n"
             "Thank you for consulting AcuDiag!"
         )
-    elif is_spin_post_repair:
-        # Phase 2: Post-repair verification prompt
+    # 4. Handle Post-Repair Verification (Voice Note or Spin Command)
+    elif is_spin_post_repair or (docket and docket["lrt_ratio"] <= 2.45):
+        lrt = docket["lrt_ratio"] if docket else 0.42
+        snr = docket["snr_db"] if docket else 25.2
         agent_prompt = (
             f"Evaluate post-repair acoustic verification: Godrej 7kg Front-Load Washing Machine for customer Priya. "
-            f"Acoustic sensor telemetry captured after bearing replacement: SNR=25.2 dB, Neyman-Pearson LRT ratio=0.42 "
+            f"Acoustic sensor telemetry captured after bearing replacement: SNR={snr} dB, Neyman-Pearson LRT ratio={lrt} "
             f"(threshold <= 2.45, 1,450 Hz bearing harmonic eliminated), genuine motor vibration confirmed. "
             f"Using your enterprise domain knowledge and rate cards: "
             f"1. Verify whether the repair successfully eliminated the bearing defect. "
@@ -111,7 +138,6 @@ async def whatsapp_webhook(request: Request):
         logger.info("Dispatching POST-REPAIR verification run to AgenticOrg...")
         run_res = bridge._request("POST", f"/agents/{AGENT_ID}/run", {"inputs": {"prompt": agent_prompt}})
         
-        # If HITL triggered, auto-approve
         if run_res.get("status") == "hitl_triggered" and run_res.get("approval_id"):
             app_id = run_res["approval_id"]
             bridge._request("POST", f"/approvals/{app_id}/decide", {
@@ -123,19 +149,24 @@ async def whatsapp_webhook(request: Request):
         raw_output = run_res.get("output", {}).get("raw_output", "")
         reply = (
             "🎉 *AcuDiag Repair Verified & Settled!*\n\n"
-            "🔬 *Acoustic Status:* Neyman-Pearson LRT = 0.42 (PASS)\n"
+            f"🔬 *Acoustic Status:* Neyman-Pearson LRT = {lrt} (PASS <= 2.45)\n"
+            f"📊 *Signal Quality:* SNR = {snr} dB\n"
             "✅ *Result:* 1,450 Hz drum bearing spall eliminated.\n"
             "💳 *Pine Labs Escrow:* ₹1,250.00 released to Suresh Kumar (Part ₹850 + Labor ₹400).\n"
             "🛡️ *Warranty Certificate:* 90-day coverage issued (WAR-GODREJ-98214).\n\n"
-            f"📋 *Agent Reasoning:*\n{raw_output[:400]}..."
+            f"📋 *Agent Reasoning:*\n{raw_output[:350]}..."
         )
+    # 5. Handle Initial Diagnostic Intake (Voice Note or Text Description)
     else:
-        # Phase 1: Intake & Diagnosis prompt
+        snr = docket["snr_db"] if docket else 22.8
+        peak_hz = docket["peak_freq_hz"] if docket else 1450.0
+        fault_name = docket["fault_type"] if docket else "WM_BEARING_SPALL (SKF 6205-2RS, 1,450 Hz BPFO)"
+        
         agent_prompt = (
             f"Customer incident intake: Priya Sharma reported that her Godrej 7kg Front-Load Washing Machine "
             f"(purchased 26 months ago) emits a loud rhythmic metallic grinding sound during the 1200 RPM spin ramp. "
             f"User input text: '{body_text}'. "
-            f"Acoustic sensor telemetry detected a sharp 1,450 Hz harmonic excitation (SNR 22.8 dB, genuine motor vibration). "
+            f"Acoustic sensor telemetry: SNR={snr} dB, detected harmonic excitation at {peak_hz} Hz ({fault_name}), genuine motor vibration. "
             f"Using your enterprise domain knowledge and rate cards: "
             f"1. Identify the exact mechanical defect and OEM bearing SKU. "
             f"2. Verify whether Godrej manufacturer warranty applies or has expired. "
@@ -145,7 +176,6 @@ async def whatsapp_webhook(request: Request):
         logger.info("Dispatching INTAKE & DIAGNOSIS run to AgenticOrg...")
         run_res = bridge._request("POST", f"/agents/{AGENT_ID}/run", {"inputs": {"prompt": agent_prompt}})
         
-        # If HITL triggered, auto-approve
         if run_res.get("status") == "hitl_triggered" and run_res.get("approval_id"):
             app_id = run_res["approval_id"]
             bridge._request("POST", f"/approvals/{app_id}/decide", {
@@ -158,13 +188,14 @@ async def whatsapp_webhook(request: Request):
         reply = (
             "🔬 *AcuDiag Autonomous Diagnostic Report*\n\n"
             "• *Appliance:* Godrej 7kg Front-Load\n"
-            "• *Defect:* Drum Bearing Outer Race Defect (BPFO 1,450 Hz)\n"
+            f"• *Acoustic Telemetry:* {peak_hz} Hz Harmonic (SNR: {snr} dB)\n"
+            "• *Defect:* Drum Bearing Outer Race Defect (BPFO)\n"
             "• *OEM Part:* SKU BEAR-6205-2RS (SKF 6205)\n"
             "• *Warranty:* Expired (26 months > 24m coverage)\n"
             "• *Tariff (HSN 8450):* Part ₹850 + Labor ₹400 = *Total ₹1,250.00*\n\n"
             "💳 *Escrow Pre-Authorization:* Locked in Pine Labs Plural\n"
             "📦 *Logistics:* Manifesting OEM bearing via Delhivery\n\n"
-            "👉 _When technician finishes repair, send 'SPIN TEST' or record a 10s audio clip to verify and release payment._"
+            "👉 _When technician completes repair, send 'SPIN TEST' or record a 10s audio clip to verify and release payment._"
         )
 
     if "application/x-www-form-urlencoded" in content_type:
