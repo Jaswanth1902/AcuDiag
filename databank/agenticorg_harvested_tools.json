@@ -1,0 +1,195 @@
+{
+  "pinelabs_plural": {
+    "repo_path": "connectors/finance/pinelabs_plural.py",
+    "tools": [
+      "create_order",
+      "get_order_status",
+      "create_payment_link",
+      "initiate_refund",
+      "get_settlement_report",
+      "get_payout_analytics"
+    ],
+    "count": 6
+  },
+  "whatsapp": {
+    "repo_path": "connectors/comms/whatsapp.py",
+    "tools": [
+      "send_template_message",
+      "send_text_message",
+      "send_media_message",
+      "get_message_templates",
+      "get_business_profile"
+    ],
+    "count": 5
+  },
+  "gstn": {
+    "repo_path": "connectors/finance/gstn.py",
+    "tools": [
+      "fetch_gstr2a",
+      "push_gstr1_data",
+      "file_gstr3b",
+      "file_gstr9",
+      "generate_eway_bill",
+      "bulk_generate_eway_bills",
+      "generate_einvoice_irn",
+      "check_filing_status",
+      "get_compliance_notice"
+    ],
+    "count": 9
+  },
+  "tally": {
+    "repo_path": "connectors/finance/tally.py",
+    "tools": [
+      "post_voucher",
+      "get_ledger_balance",
+      "generate_gst_report",
+      "export_tally_xml_data",
+      "get_trial_balance",
+      "get_stock_summary"
+    ],
+    "count": 6
+  },
+  "zoho_books": {
+    "repo_path": "connectors/finance/zoho_books.py",
+    "tools": [
+      "create_invoice",
+      "list_invoices",
+      "search_invoices",
+      "get_invoice_by_id",
+      "list_bills",
+      "list_vendor_bills",
+      "search_bills",
+      "get_bill_by_id",
+      "get_purchase_invoices",
+      "list_overdue_invoices",
+      "list_expense_transactions",
+      "get_expense_transactions",
+      "record_expense",
+      "get_vendor_payables",
+      "list_vendors",
+      "create_vendor",
+      "create_item",
+      "create_bill",
+      "get_vendor_details",
+      "create_journal_entry",
+      "create_tds_entry",
+      "update_bill",
+      "get_balance_sheet",
+      "get_profit_loss",
+      "get_ledger_balance",
+      "get_trial_balance",
+      "generate_gst_report",
+      "calculate_tds",
+      "list_chartofaccounts",
+      "fetch_bank_statement",
+      "check_account_balance",
+      "get_transaction_list",
+      "reconcile_bank",
+      "reconcile_transaction",
+      "get_organization"
+    ],
+    "count": 35
+  },
+  "account_aggregator": {
+    "repo_path": "connectors/finance/banking_aa.py",
+    "tools": [
+      "fetch_bank_statement",
+      "check_account_balance",
+      "get_transaction_list",
+      "request_consent",
+      "fetch_fi_data"
+    ],
+    "count": 5
+  },
+  "twilio": {
+    "repo_path": "connectors/comms/twilio.py",
+    "tools": [
+      "send_sms",
+      "make_call",
+      "send_whatsapp",
+      "get_recordings",
+      "get_message_status"
+    ],
+    "count": 5
+  },
+  "zendesk": {
+    "repo_path": "connectors/ops/zendesk.py",
+    "tools": [
+      "create_ticket",
+      "update_ticket",
+      "get_ticket",
+      "apply_macro",
+      "get_csat_score",
+      "escalate_ticket",
+      "merge_tickets",
+      "get_sla_status"
+    ],
+    "count": 8
+  },
+  "jira": {
+    "repo_path": "connectors/ops/jira.py",
+    "tools": [
+      "list_projects",
+      "get_project",
+      "search_issues",
+      "get_issue",
+      "create_issue",
+      "update_issue",
+      "transition_issue",
+      "get_transitions",
+      "add_comment",
+      "get_sprint_data",
+      "get_project_metrics"
+    ],
+    "count": 11
+  },
+  "servicenow": {
+    "repo_path": "connectors/ops/servicenow.py",
+    "tools": [
+      "create_incident",
+      "update_incident",
+      "submit_change_request",
+      "get_cmdb_ci",
+      "check_sla_status",
+      "get_kb_article"
+    ],
+    "count": 6
+  },
+  "pagerduty": {
+    "repo_path": "connectors/ops/pagerduty.py",
+    "tools": [
+      "create_incident",
+      "acknowledge_incident",
+      "resolve_incident",
+      "get_on_call",
+      "list_incidents",
+      "create_postmortem"
+    ],
+    "count": 6
+  },
+  "github": {
+    "repo_path": "connectors/comms/github_connector.py",
+    "tools": [
+      "list_repos",
+      "get_repo",
+      "list_repository_issues",
+      "create_issue",
+      "create_pull_request",
+      "get_repository_statistics",
+      "search_code",
+      "repository_search",
+      "list_files",
+      "get_directory_tree",
+      "read_file",
+      "create_file",
+      "update_file",
+      "delete_file",
+      "create_branch",
+      "commit_changes",
+      "push_changes",
+      "create_release",
+      "trigger_github_action_workflow"
+    ],
+    "count": 19
+  }
+}
