@@ -137,7 +137,7 @@ async def whatsapp_webhook(request: Request):
             "Thank you for consulting AcuDiag!"
         )
     # 4. Handle Post-Repair Verification (Voice Note or Spin Command)
-    elif is_spin_post_repair or (docket and docket["lrt_ratio"] <= 2.45):
+    elif is_spin_post_repair:
         lrt = docket["lrt_ratio"] if docket else 0.42
         snr = docket["snr_db"] if docket else 25.2
         agent_prompt = (
