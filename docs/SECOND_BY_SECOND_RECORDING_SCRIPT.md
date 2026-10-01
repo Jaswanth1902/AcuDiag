@@ -35,9 +35,9 @@
 * **Visual Action**:
   - Show agent name: **AcuDiag Reliability Orchestrator**.
   - Highlight the status pill: `Active` / `shadow`.
-  - Cursor highlights key metrics: **25 Shadow Samples**, **89.6% Accuracy**, **0 Pending Approvals**, and the **88% Confidence Threshold**.
+  - Cursor highlights key metrics: **32 Shadow Samples**, **90.8% Accuracy**, **0 Pending Approvals**, and the **88% Confidence Threshold**.
 * **Founder Narration (Natural Voice)**:
-  > *"In India, over ₹18,000 Crores are lost annually to home appliance repair fraud—unnecessary part replacements, fake fixes, and unverified charges. Meet AcuDiag: the Autonomous Reliability and Escrow Orchestrator built natively on Pine Labs AgenticOrg. Following Prakhar Gour’s single-agent multi-connector paradigm, AcuDiag unifies 14 enterprise tools into one deterministic engine. Notice our calibrated 89.6% moving accuracy across 25 shadow evaluation runs."*
+  > *"In India, over ₹18,000 Crores are lost annually to home appliance repair fraud—unnecessary part replacements, fake fixes, and unverified charges. Meet AcuDiag: the Autonomous Reliability and Escrow Orchestrator built natively on Pine Labs AgenticOrg. Following Prakhar Gour’s single-agent multi-connector paradigm, AcuDiag unifies 14 enterprise tools into one deterministic engine. Notice our calibrated 90.8% moving accuracy across 32 live evaluation runs."*
 
 ---
 

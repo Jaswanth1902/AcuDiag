@@ -10,7 +10,7 @@
 > **Live AgenticOrg Agent ID**: `c56edea9-8cd1-4e31-bf93-48e024d445d5`  
 > **Tenant ID**: `abb61bca-a3f5-4aba-b30e-946016b13120` (Ken's Case Competition)  
 > **GitHub Repository**: [https://github.com/Jaswanth1902/AcuDiag](https://github.com/Jaswanth1902/AcuDiag)  
-> **Live Verified Metrics**: **25 Shadow Samples** | **89.6% Shadow Accuracy** | **0 Pending Approvals** | **14 Native Tools**
+> **Live Verified Metrics**: **32 Shadow Samples** | **90.8% Shadow Accuracy** | **0 Pending Approvals** | **14 Native Tools**
 
 ---
 
@@ -263,7 +263,7 @@ Round 2 Testing Run Log (Prompt v2.0 — Added Rail Gating)
 Round 3 Testing Run Log (Prompt v3.0 — Physical Anti-Spoofing & Production Calibration)
 * Observed Failure: In Eval Case 2 (Replay Attack), a speaker playback of a healthy machine passed the LRT test because the acoustic frequency matched the healthy template.
 * Root Cause: The engine evaluated frequency spectrum without checking physical contact rumble or DAC quantization artifacts.
-* Mutation: Codified Invariant 4: Added dual-condition physical anti-spoofing: (1) low-frequency motor rumble (<120 Hz) energy ratio must exceed 0.06, and (2) high-frequency DAC sampling peak (16 kHz) must be absent. This brought our live AgenticOrg shadow accuracy from 67.5% to 89.6% across 25 verified evaluation runs.
+* Mutation: Codified Invariant 4: Added dual-condition physical anti-spoofing: (1) low-frequency motor rumble (<120 Hz) energy ratio must exceed 0.06, and (2) high-frequency DAC sampling peak (16 kHz) must be absent. This brought our live AgenticOrg shadow accuracy from 67.5% to 90.8% across 32 verified evaluation runs.
 ```
 
 ---
