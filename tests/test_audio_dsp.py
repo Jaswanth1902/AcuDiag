@@ -131,6 +131,10 @@ def test_dsp_latency_sla(synth, engine):
     engine.set_golden_baseline(engine.extract_erb_features(healthy_filtered))
 
     test_chunk = audio[:44100]
+    # Warmup
+    for _ in range(5):
+        _ = engine.classify_acoustic_signature(test_chunk)
+
     latencies = []
     for _ in range(50):
         t_start = time.perf_counter()
