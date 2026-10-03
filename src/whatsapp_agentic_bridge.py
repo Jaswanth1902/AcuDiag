@@ -567,13 +567,17 @@ async def whatsapp_webhook(request: Request):
 
         telemetry_footer = ""
         if docket:
+            kurt_txt = f"• Transient Kurtosis: {docket.get('envelope_kurtosis', 3.0)} (Impact Peak Isolated)\n" if 'envelope_kurtosis' in docket else ""
+            spec_txt = f"\n\n{docket['ascii_spectrogram']}" if 'ascii_spectrogram' in docket else ""
             telemetry_footer = (
                 f"\n\n━━━━━━━━━━━━━━━━━━━━━━\n"
-                f"📊 *Physical Sensor Telemetry:*\n"
+                f"🔬 *Physical Sensor Telemetry & Proof:*\n"
                 f"• Peak Frequency: {docket['peak_freq_hz']} Hz\n"
                 f"• Signal Quality (SNR): {docket['snr_db']} dB\n"
-                f"• Classification: {docket['fault_type']}\n"
-                f"• LRT Ratio: {docket['lrt_ratio']}"
+                f"{kurt_txt}"
+                f"• Neyman-Pearson LRT: {docket['lrt_ratio']} (Threshold <= 2.45)\n"
+                f"• Classification: {docket['fault_type']}"
+                f"{spec_txt}"
             )
 
         reply = (
@@ -581,7 +585,7 @@ async def whatsapp_webhook(request: Request):
             f"━━━━━━━━━━━━━━━━━━━━━━\n"
             f"{raw_output}"
             f"{telemetry_footer}\n\n"
-            f"👉 *Next Step:* Reply *'Approve'* or *'Proceed'* to lock ₹{total_cost}.00 in Pine Labs Plural and dispatch OEM SKF bearing."
+            f"👉 *Next Step:* Reply *'Approve'* or *'Proceed'* to lock ₹{total_cost}.00 in Pine Labs Plural and dispatch genuine OEM parts."
         )
 
     # Synchronize with working sessions store for Cockpit HUD live mirroring

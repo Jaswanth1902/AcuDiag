@@ -108,6 +108,44 @@ class TestMultiApplianceEnterpriseScope(unittest.TestCase):
         res = self.engine.classify_acoustic_signature(ac_leak)
         self.assertFalse(res["passed"])
         self.assertEqual(res["fault_type"], "COMPRESSOR_VALVE_LEAK")
+        self.assertIn("envelope_kurtosis", res)
+        self.assertGreater(res["envelope_kurtosis"], 1.0)
+
+    def test_ascii_spectrogram_and_kurtosis_integration(self):
+        """Verify ASCII spectrogram proof generation and kurtosis transient calculation."""
+        from src.acoustic_analyzer import generate_ascii_spectrogram, compute_envelope_kurtosis
+        import numpy as np
+        
+        t = np.linspace(0, 0.5, int(16000 * 0.5), endpoint=False)
+        bearing_tone = (np.sin(2 * np.pi * 1450.0 * t)).astype(np.float32)
+        kurt = compute_envelope_kurtosis(bearing_tone)
+        self.assertGreaterEqual(kurt, 1.0)
+        
+        spec = generate_ascii_spectrogram(1450.0, "WM_BEARING_SPALL", 22.1)
+        self.assertIn("1450Hz", spec)
+        self.assertIn("ACTIVE FAULT", spec)
+        self.assertIn("SNR 22.1 dB", spec)
+
+    def test_edaakhil_docket_compilation(self):
+        """Verify legal consumer arbitration docket generation."""
+        from src.docket_generator import generate_edaakhil_evidence_docket
+        docket = generate_edaakhil_evidence_docket(
+            customer_name="Priya Sharma",
+            phone="+91 98450 11042",
+            pincode="560059",
+            appliance_brand="Godrej",
+            appliance_name="7kg Front-Load",
+            model_no="GDE-70",
+            purchase_date="14-Feb-2024",
+            statutory_clause="2-Year Comprehensive Warranty",
+            claimed_rejection_reason="Technician demanded Rs 3,500 cash claiming wear and tear",
+            acoustic_telemetry={"peak_freq_hz": 1450.0, "lrt_ratio": 3.85, "fault_type": "WM_BEARING_SPALL", "snr_db": 22.1, "envelope_kurtosis": 5.4},
+            escrow_id="PL_ORD_8A92B1C4"
+        )
+        self.assertIn("EDA-ACU-", docket["docket_number"])
+        self.assertIn("OFFICIAL CONSUMER GRIEVANCE", docket["formatted_legal_docket"])
+        self.assertIn("1450.0 Hz", docket["formatted_legal_docket"])
+        self.assertIn("3.85", docket["formatted_legal_docket"])
 
 
 if __name__ == "__main__":
