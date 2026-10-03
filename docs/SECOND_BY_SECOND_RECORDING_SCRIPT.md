@@ -1,130 +1,138 @@
-# 🎬 AcuDiag: 100% Native Pine Labs AgenticOrg Video Recording Script (120s / 2:00)
-### *A Live, Zero-Distraction Customer Journey Walkthrough Exclusively Inside AgenticOrg*
+# 🎬 AcuDiag: Live WhatsApp Execution Video Recording Script (120s / 2:00)
+### *A Real-Time, End-to-End Customer Journey on WhatsApp Powered by Pine Labs AgenticOrg*
 
 > **Submission Target**: The Ken & Pine Labs AgenticOrg Case Competition (₹20 Lakhs Prize Pool)  
-> **Platform Runtime**: **100% Pine Labs AgenticOrg** (`agenticorg.hackathon.pinelabs.com`)  
+> **Frontend Interface**: **WhatsApp Web / Mobile** (Direct Consumer Experience via Baileys Gateway)  
+> **Autonomous Brain**: **100% Pine Labs AgenticOrg** (`agenticorg.hackathon.pinelabs.com` / Tenant `abb61bca...`)  
 > **Target Video Runtime**: **120 Seconds (2:00)** [Strict maximum: 2:15]  
-> **Screen Recording Target**: **Single Browser Window** locked to `https://agenticorg.hackathon.pinelabs.com` (Zero external tabs, zero localhost)  
+> **Recording Setup**: **WhatsApp Web** (primary interactive screen) + **AgenticOrg Dashboard** (architectural validation)  
 > **Resolution & Framerate**: 1080p, 60 FPS (16:9), Browser Zoom: 110%  
-> **Audio Strategy**: **Founder Natural Voice** for pitch narration (clear, energetic, authoritative).
+> **Audio Strategy**: **Founder Natural Voice** for live narration (authoritative, crisp, confident).
 
 ---
 
-## 🧭 The 100% Native Strategic Advantage
+## 🧭 The WhatsApp + AgenticOrg Dual-Power Paradigm
 
-### Why scrap the external Cockpit HUD entirely?
-1. **Zero Extraneous Surface Area**: The jury is comprised of Pine Labs platform leadership (Prakhar Gour, Shubham) and The Ken editors. Showing an external `localhost:8000` website risks making them think the logic lives outside their platform.
-2. **100% Platform Fidelity**: By staying exclusively inside `agenticorg.hackathon.pinelabs.com`, every second of video proves mastery of their flagship product—Agent Settings, Knowledge Base RAG, Connector Registries, Live Run Traces, HITL Approvals, and Execution Auditing.
-3. **Exact Alignment with Submission Questions**: Demonstrates the 6 chronological decisions directly inside the AgenticOrg execution trace.
+### Why Live WhatsApp Execution Wins the Competition:
+1. **Zero Consumer Friction**: Real Indian homeowners do not open developer portals or developer cockpit websites—they use **WhatsApp**. Demonstrating physical voice notes and chat interactions on WhatsApp proves immediate market viability.
+2. **True Enterprise Backend Fidelity**: Behind every WhatsApp reply sits **Pine Labs AgenticOrg** (`c56edea9-8cd1-4e31-bf93-48e024d445d5`). The agent autonomously queries rate cards, verifies OEM warranty statutes, triggers Pine Labs Plural escrow locks, commands Delhivery logistics, and enforces Neyman-Pearson acoustic clearance.
+3. **Prakhar Gour’s Invariant Realized**: Demonstrates the single-agent, multi-connector model operating seamlessly on an external consumer rail with zero third-party SaaS bloat.
 
 ---
 
 ## ⏱️ Master Second-by-Second Flow (0:00 – 2:00)
 
 ```
-0:00        0:20                  0:45                  1:10                  1:40                  2:00
-|-- Hook ---|-- Knowledge Base ---|-- Live Run Trace:---|-- Acoustic Verification|-- Settlement & -----|
-| & Agent   |   & RAG Grounding   |   Escrow Lock &     |   & Anti-Spoof Rejection|  HITL Governance    |
-| Overview  |   (Prakhar's SRE)   |   Delhivery Dispatch|   (Decisions 4 & 5)   |  (Dec 6 & Outro)    |
+0:00        0:20                  0:50                  1:20                  1:45                  2:00
+|-- Hook ---|-- Live WhatsApp ----|-- Pre-Auth Lock ----|-- Post-Repair ------|-- AgenticOrg Trace -|
+| & System  |   Intake & Triage   |   & Delhivery Parts |   Verification &    |   & HITL Governance |
+| Overview  |   (Acoustic DSP)    |   Dispatch          |   Escrow Settlement |   (Outro)           |
 ```
 
 ---
 
-### Phase 1: The Problem & The Agent Command Center (0:00 – 0:20 | 20s)
-* **Screen**: **AgenticOrg Dashboard $\rightarrow$ AcuDiag Agent Page** (`/dashboard/agents/c56edea9-8cd1-4e31-bf93-48e024d445d5`).
+### Phase 1: The Problem & The Architecture (0:00 – 0:20 | 20s)
+* **Screen**: **AgenticOrg Dashboard $\rightarrow$ AcuDiag Agent Overview** (`/dashboard/agents/c56edea9...`) or Split View with WhatsApp Web ready.
 * **Visual Action**:
-  - Show agent name: **AcuDiag Reliability Orchestrator**.
-  - Highlight the status pill: `Active` / `shadow`.
-  - Cursor highlights key metrics: **32 Shadow Samples**, **90.8% Accuracy**, **0 Pending Approvals**, and the **88% Confidence Threshold**.
+  - Show agent: **AcuDiag Orchestrator**.
+  - Highlight key metrics: **14 Tools / Connectors** (Plural, GSTN, Delhivery, Tally), **0 Pending Approvals**, and the **88% Confidence Floor**.
+  - Transition cursor to WhatsApp Web chat.
 * **Founder Narration (Natural Voice)**:
-  > *"In India, over ₹18,000 Crores are lost annually to home appliance repair fraud—unnecessary part replacements, fake fixes, and unverified charges. Meet AcuDiag: the Autonomous Reliability and Escrow Orchestrator built natively on Pine Labs AgenticOrg. Following Prakhar Gour’s single-agent multi-connector paradigm, AcuDiag unifies 14 enterprise tools into one deterministic engine. Notice our calibrated 90.8% moving accuracy across 32 live evaluation runs."*
+  > *"In India, over ₹18,000 Crores are lost annually to home appliance repair fraud—fake fixes, counterfeit parts, and extortionate billing. Meet AcuDiag: the Autonomous Appliance Reliability and Escrow Orchestrator built on Pine Labs AgenticOrg. Following Prakhar Gour’s single-agent multi-connector paradigm, AcuDiag puts bank-grade escrow and acoustic physics directly into the hands of 500 million Indian homeowners on WhatsApp. Watch real autonomous triage happen live."*
 
 ---
 
-### Phase 2: Vector Knowledge Base Grounding (0:20 – 0:40 | 20s)
-* **Screen**: **AgenticOrg Knowledge Base Page / Drawer** (`/dashboard/knowledge`).
+### Phase 2: Live WhatsApp Intake & Acoustic Triage (0:20 – 0:50 | 30s)
+* **Screen**: **WhatsApp Web Chat Window**.
 * **Visual Action**:
-  - Show the **8 uploaded enterprise knowledge bases**:
-    1. `01_Washing_Machines_Acoustic_Kinematics.md`
-    2. `02_Refrigerators_Compressor_Thermodynamics.md`
-    3. `03_Air_Conditioners_Inverter_Acoustics.md`
-    4. `04_Zero_Trust_Anti_Spoofing_Manual.md`
-    5. `05_Standardized_Rate_Card_and_Escrow_SOP.md`
-    6. `06_OEM_Warranty_Intercept_Directory.md`
-    7. `07_Microwaves_and_Water_Purifiers_Diagnostics.md`
-    8. `08_Delhivery_Reverse_Logistics_and_Transit_SOP.md`
-  - Quick click into `01_Washing_Machines`: Highlight the 1,450 Hz CWRU BPFO frequency, OEM SKU `BEAR-6205-2RS`, and standardized ₹1,250 labor/parts cost matrix.
+  - Type or paste customer incident into chat:
+    ```text
+    My Godrej 7kg front load washing machine is making a loud metallic grinding sound during the 1200 RPM spin ramp. Bought it 26 months ago.
+    ```
+    *(Or play `fault_bearing_ricketing_1450hz.wav` and send a live voice note: "मेरे गोदरेज वॉशिंग मशीन स्पिन में ग्राइंडिंग कट कट आवाज कर रहा है")*
+  - Message sends $\rightarrow$ Within **2.5 seconds**, AcuDiag delivers the formal diagnostic card directly in WhatsApp!
+  - Cursor highlights the 4-part intelligence breakdown:
+    1. **Defect**: 1,450 Hz Drum Bearing Outer Race Defect (BPFO, SKU: `SKF 6205-2RS`).
+    2. **Warranty Intercept**: 26 months exceeds Godrej 24-month comprehensive warranty; 10-year motor warranty strictly excludes drum bearings.
+    3. **Standardized Tariff**: Part ₹850 + Labor ₹400 = Exactly ₹1,250 (HSN 8450).
+    4. **Action Verdict**: Plural escrow pre-authorization ₹1,250 + Delhivery parts dispatch.
 * **Founder Narration**:
-  > *"To eliminate LLM hallucination, AcuDiag grounds every decision in an 8-document appliance knowledge base suite. Through vector retrieval, the agent references mechanical fault kinematics—such as 1,450 Hz drum bearing spalls—pre-negotiated OEM rate cards, and statutory warranty coverage rules before taking any external action."*
+  > *"Customer Priya in Bengaluru reports a metallic grinding noise on her 26-month-old Godrej machine. In under 3 seconds, AgenticOrg's LLM reasons across three knowledge modules: it identifies the 1,450 Hz bearing spall, detects that the statutory 24-month warranty expired two months ago while the motor warranty excludes bearings, enforces the standardized ₹1,250 rate card, and prepares the Plural escrow lock."*
 
 ---
 
-### Phase 3: Live Incident Execution — Diagnosis, Warranty & Escrow Lock (0:40 – 1:10 | 30s)
-* **Screen**: **AgenticOrg Agent Page $\rightarrow$ Click `[Run Agent]` Button** (`/dashboard/agents/c56edea9-8cd1-4e31-bf93-48e024d445d5`).
+### Phase 3: Zero-Trust Pre-Auth & Logistics Dispatch (0:50 – 1:20 | 30s)
+* **Screen**: **WhatsApp Web Chat Window**.
 * **Visual Action**:
-  - Click the blue **`[Run Agent]`** button.
-  - Paste the authentic multi-hop incident prompt:
-    `Customer incident intake: Priya Sharma reported that her Godrej 7kg Front-Load Washing Machine (purchased 26 months ago) emits a loud rhythmic metallic grinding sound during the 1200 RPM spin ramp. Acoustic sensor telemetry detected a sharp 1,450 Hz harmonic excitation (SNR 22.8 dB, genuine motor vibration). Using your enterprise knowledge bases, identify the exact mechanical defect and OEM bearing SKU, verify whether Godrej manufacturer warranty applies or has expired, calculate the standardized rate card tariff (parts + labor) under HSN 8450, and formulate the escrow pre-authorization and parts dispatch recommendation.`
-  - Hit **Run**: The modal executes live multi-hop reasoning in ~3.2 seconds!
-  - Highlight the 4-part domain intelligence output:
-    1. `Kinematic Diagnosis`: Identifies 1,450 Hz BPFO bearing outer race spall on SKU `BEAR-6205-2RS`.
-    2. `Warranty Intercept`: 26 months exceeds Godrej 24-month comprehensive coverage; 10-year motor warranty excludes drum bearings.
-    3. `Tariff Calculation`: Part ₹850 + Labor ₹400 = Exactly ₹1,250.00 standardized tariff (HSN 8450).
-    4. `Escrow & Dispatch`: Pre-authorizes ₹1,250 Plural Escrow lock and mandates Delhivery forward SKU dispatch.
+  - Customer replies in WhatsApp:
+    ```text
+    Yes, approve repair and proceed with parts dispatch
+    ```
+  - AcuDiag immediately returns the escrow and dispatch confirmation receipt:
+    - **Escrow Status**: ₹1,250 pre-auth locked in Pine Labs Plural.
+    - **Logistics**: OEM SKF 6205 bearing dispatched via Delhivery (Waybill `DEL16100984210`).
+    - **Doorstep Security**: Brand technician visits with single-use verification QR; zero cash demanded at doorstep.
 * **Founder Narration**:
-  > *"Watch AcuDiag perform real autonomous triage for customer Priya in Bengaluru. Instead of a pre-baked script, we feed raw incident observations: a 1,450 Hz harmonic during spin and a 26-month-old Godrej machine. In 3.2 seconds, AcuDiag queries three modular knowledge bases: it maps the frequency to an SKF 6205 bearing spall, catches that Godrej warranty expired two months ago, enforces the standardized ₹1,250 tariff, and locks escrow via Plural."*
+  > *"When Priya approves, AcuDiag calls Pine Labs Plural to lock ₹1,250 into zero-trust escrow and creates a forward dispatch with Delhivery for a genuine SKF bearing. No cash changes hands. The technician cannot overcharge, and counterfeit parts are completely eliminated because parts ship directly from OEM hubs."*
 
 ---
 
-### Phase 4: Acoustic Verification & Anti-Spoof Rejection (1:10 – 1:35 | 25s)
-* **Screen**: **AgenticOrg Post-Repair Run Trace & Adversarial Run Contrast**.
+### Phase 4: Acoustic Verification & Escrow Settlement (1:20 – 1:45 | 25s)
+* **Screen**: **WhatsApp Web Chat Window**.
 * **Visual Action**:
-  - Show the post-repair telemetry evaluation in the trace:
-    `SNR: 23.8 dB` (passes 15 dB floor), `Neyman-Pearson LRT: Lambda = 0.38 <= 2.45` (PASS: bearing harmonic absent).
-  - Quick scroll / click to the adversarial evaluation run (Ticket #1045):
-    Show the agent response: `REJECTED_REPLAY_ATTACK`. Anti-spoofing caught 16 kHz DAC jitter and lack of physical sub-120Hz motor rumble from a technician's phone speaker, blocking payout and triggering `zendesk__escalate_ticket`!
+  - Technician completes installation. Customer types:
+    ```text
+    SPIN TEST
+    ```
+    *(Or sends clean spin audio note from `healthy_clean_spin_motor.wav`).*
+  - Within 2 seconds, AcuDiag returns the **Post-Repair Settlement Verdict**:
+    - **Neyman-Pearson LRT**: $\Lambda = 0.38 \le 2.45$ (PASS threshold met).
+    - **Signal Quality**: SNR 25.2 dB (> 15.0 dB floor).
+    - **Anti-Spoofing**: Verified genuine motor vibration (sub-120Hz chassis contact confirmed; 16kHz DAC speaker spoof rejected).
+    - **Settlement**: Escrow released to technician UPI; 90-day digital warranty certificate issued!
 * **Founder Narration**:
-  > *"When the technician finishes, Priya runs a 10-second verification spin. In the execution trace, AcuDiag evaluates physical acoustic telemetry: the Neyman-Pearson score drops to 0.38, well below our 2.45 threshold, mathematically proving the fault is eliminated. In an adversarial run where a technician played a recorded sound from his phone speaker, AcuDiag’s anti-spoofing engine detected 16 kHz DAC jitter, blocked the payout, and escalated the fraud to Zendesk."*
+  > *"Once installed, Priya runs a 5-second spin test. AcuDiag calculates the Neyman-Pearson likelihood ratio: score drops to 0.38, well below our 2.45 threshold. Our sub-120Hz anti-spoofing filter verifies real mechanical vibration, rejecting speaker replay attacks. With physical proof mathematically established, Plural automatically releases the ₹1,250 payout to the technician and issues a 90-day warranty certificate."*
 
 ---
 
-### Phase 5: Closed-Loop Settlement, E-Invoicing & Ledger Sync (1:35 – 1:52 | 17s)
-* **Screen**: **AgenticOrg Tool Output Trace** (End of Successful Run).
+### Phase 5: AgenticOrg Platform Audit & HITL Governance (1:45 – 2:00 | 15s)
+* **Screen**: **Switch to Chrome $\rightarrow$ Pine Labs AgenticOrg Portal** (`agenticorg.hackathon.pinelabs.com`).
 * **Visual Action**:
-  - Point to the final sequence of automated tool executions:
-    1. `pinelabs_plural__get_order_status` $\rightarrow$ Captures ₹1,250 to technician Suresh Kumar's UPI.
-    2. `gstn__generate_einvoice_irn` $\rightarrow$ Government IRN generated (`4b8d7a...`).
-    3. `whatsapp__send_media_message` $\rightarrow$ 90-day warranty certificate dispatched to customer.
-    4. `tally__post_voucher` $\rightarrow$ Repair expense synced into merchant Tally ledger.
-* **Founder Narration**:
-  > *"With physical clearance confirmed, AcuDiag executes full financial closure inside AgenticOrg: capturing the Plural escrow to the technician's UPI, generating a legal GSTN e-invoice IRN, dispatching the warranty certificate via WhatsApp, and posting the voucher into Tally—completely autonomous, transparent, and auditable."*
+  - Show the **Live Execution Audit Trail** (`/dashboard/audit`):
+    - Highlight the chronological audit log: `hitl.decided`, `tool_call: pinelabs_plural`, `workflow: AcuDiag_End_to_End_Lifecycle`.
+  - Click **Approvals Dashboard** (`/dashboard/approvals`):
+    - Show **Pending Approvals: 0**, proving autonomous real-time resolution and zero governance backlogs.
+* **Founder Narration (Outro)**:
+  > *"Back inside Pine Labs AgenticOrg, every step—from audio DSP to tax e-invoicing—is immutably sealed in audit logs. With zero pending approvals and enterprise HITL governance, AcuDiag transforms broken consumer trust into mathematical and financial certainty. Real AI. Real payments. 100% native on Pine Labs. Thank you."*
 
 ---
 
-### Phase 6: Human-In-The-Loop Governance & Outro (1:52 – 2:00 | 8s)
-* **Screen**: **AgenticOrg Approvals Dashboard** (`/dashboard/approvals`).
-* **Visual Action**:
-  - Show **Pending Approvals: 0**, showing that all 20 historical edge cases were reviewed, elevating moving accuracy to 89.6%.
-  - Pan back to the Agent Overview with all systems green.
-* **Founder Narration**:
-  > *"With zero pending approvals and an 88% confidence floor, AcuDiag turns broken human trust into mathematical and financial certainty. Built for India, 100% native on Pine Labs AgenticOrg. Thank you."*
+## 🎬 3-Minute Pre-Recording Checklist & Tool Setup
 
----
+### 1. Browser & Desktop Preparation
+- **Left Window / Main Tab**: WhatsApp Web (`web.whatsapp.com`) logged into the connected test chat. Zoom: **110%**.
+- **Right Window / Second Tab**: Pine Labs AgenticOrg (`agenticorg.hackathon.pinelabs.com`) on `/dashboard/agents/c56edea9-8cd1-4e31-bf93-48e024d445d5`. Zoom: **110%**.
+- **Hide Bookmarks Bar**: Press `Ctrl + Shift + B` in Chrome for a pristine UI.
 
-## 🎬 3-Minute Quick Setup Guide for Recording
+### 2. Clipboard Quick-Reference Payloads (Ready to Paste)
+1. **Intake Message**:
+   ```text
+   My Godrej 7kg front load washing machine is making a loud metallic grinding sound during the 1200 RPM spin ramp. Bought it 26 months ago.
+   ```
+2. **Approval Message**:
+   ```text
+   Yes, approve repair and proceed with parts dispatch
+   ```
+3. **Verification Command**:
+   ```text
+   SPIN TEST
+   ```
 
-1. **Open Chrome**: Navigate to `https://agenticorg.hackathon.pinelabs.com/dashboard/agents/c56edea9-8cd1-4e31-bf93-48e024d445d5`.
-2. **Browser Layout**:
-   - Set zoom to **110%** (so metrics and tool names are crisp).
-   - Have the Agent Page open. In another tab (for your own reference only), you can see the run trace, but during recording, you stay entirely within the AgenticOrg UI!
-3. **OBS / Recorder Settings**:
-   - Capture Mode: **Window Capture** (Chrome: AgenticOrg).
-   - Resolution: 1920x1080 (1080p), 60 FPS.
-4. **Recording Flow**:
-   - Start on Agent Overview (0:00).
-   - Click Knowledge Base (0:20).
-   - Click Runs / Recent Execution Trace for Ticket #1042 (0:40).
-   - Show Telemetry & Fraud rejection in trace (1:10).
-   - Show Closed-Loop Tool Outputs (1:35).
-   - Click Approvals tab showing 0 pending (1:52).
-   - Finish on Agent Overview at exactly 2:00!
+### 3. Audio Testing Assets (Optional Phone Mic Demo)
+- Defective Sound: [`test_audio/fault_bearing_ricketing_1450hz.wav`](file:///c:/Users/jaswa/Antigravity/01_Projects/AcuDiag/test_audio/fault_bearing_ricketing_1450hz.wav)
+- Healthy Sound: [`test_audio/healthy_clean_spin_motor.wav`](file:///c:/Users/jaswa/Antigravity/01_Projects/AcuDiag/test_audio/healthy_clean_spin_motor.wav)
+
+### 4. Background Daemons Health Check
+Ensure both background tasks are running in terminal:
+- `python src/whatsapp_agentic_bridge.py 8000` (FastAPI / Agentic Bridge)
+- `node whatsapp_bridge/gateway.js` (Baileys WhatsApp Socket)

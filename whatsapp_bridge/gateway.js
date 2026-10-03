@@ -55,12 +55,20 @@ async function startWhatsAppGateway() {
         }
     });
 
+    const sentMessageIds = new Set();
+
     sock.ev.on('messages.upsert', async (m) => {
         if (!m.messages || !m.messages[0]) return;
         const msg = m.messages[0];
 
         // Skip messages that have no content or are protocol syncs
         if (!msg.message) return;
+
+        // Anti-Loop Guard: Ignore messages sent by this bot process
+        if (msg.key?.id && sentMessageIds.has(msg.key.id)) {
+            sentMessageIds.delete(msg.key.id);
+            return;
+        }
 
         const remoteJid = msg.key.remoteJid;
         const sender = msg.pushName || remoteJid;
@@ -136,30 +144,43 @@ async function startWhatsAppGateway() {
                 res.on('data', chunk => respBody += chunk);
                 res.on('end', async () => {
                     try {
+                        if (res.statusCode !== 200) {
+                            console.error(`⚠️ AcuDiag webhook returned status ${res.statusCode}:`, respBody);
+                            return;
+                        }
                         const data = JSON.parse(respBody);
                         const reply = data.reply || 'Diagnosing appliance...';
                         console.log('💬 Sending verified diagnosis reply to WhatsApp...');
-                        await sock.sendMessage(remoteJid, { text: reply });
-                        console.log('✅ Reply sent successfully to WhatsApp!');
-
-                        // Clean up audio file if created
-                        if (audioFile && fs.existsSync(audioFile)) {
-                            fs.unlinkSync(audioFile);
+                        const sent = await sock.sendMessage(remoteJid, { text: reply });
+                        if (sent?.key?.id) {
+                            sentMessageIds.add(sent.key.id);
                         }
+                        console.log('✅ Reply sent successfully to WhatsApp!');
                     } catch (e) {
                         console.error('Error parsing AcuDiag response:', e, respBody);
+                    } finally {
+                        // Clean up audio file if created
+                        if (audioFile && fs.existsSync(audioFile)) {
+                            try { fs.unlinkSync(audioFile); } catch (_) {}
+                        }
                     }
                 });
             });
 
             req.on('error', (e) => {
                 console.error('Error connecting to AcuDiag bridge:', e.message);
+                if (audioFile && fs.existsSync(audioFile)) {
+                    try { fs.unlinkSync(audioFile); } catch (_) {}
+                }
             });
 
             req.write(postData);
             req.end();
         } catch (err) {
             console.error('Dispatch error:', err);
+            if (audioFile && fs.existsSync(audioFile)) {
+                try { fs.unlinkSync(audioFile); } catch (_) {}
+            }
         }
     });
 }
