@@ -135,14 +135,13 @@ Open your browser to **[http://localhost:8000](http://localhost:8000)** to inter
 
 ### 3. Run Automated Tests
 ```powershell
-# Run the complete unit test suite (32 tests)
+# Run master verification suite (pytest + Pass^50 benchmark + CWRU physics)
+python run_full_verification.py
+
+# Or run components individually:
 pytest tests/ -v
-
-# Run the Pass^50 reliability benchmark
-python benchmarks/pass50_benchmark.py
-
-# Run the CWRU bearing physics test
-python tests/test_cwru_kinematics.py
+python benchmarks/run_pass_k_benchmark.py
+python databank/06_Acoustic_Datasets/test_cwru_dataset_kinematics.py
 ```
 
 ---
@@ -151,8 +150,14 @@ python tests/test_cwru_kinematics.py
 
 ```
 AcuDiag/
+├── additional_info/                  # Archived research, transcripts, and visual artifacts
+│   ├── meeting_transcripts/          # Jury/mentor briefings & Pine Labs demo transcripts
+│   ├── research_probes/              # Exploratory API probes & reverse-engineering scripts
+│   └── visual_artifacts/             # Platform screenshots & tool registry captures
+├── baseline_vectors/                 # Calibrated golden acoustic vectors
 ├── benchmarks/
-│   ├── pass50_benchmark.py           # Enterprise 50-run reliability benchmark
+│   ├── dsp_profiler.py               # Sub-5ms DSP Profiler & Golden Baseline Exporter
+│   ├── run_pass_k_benchmark.py       # Enterprise Pass^50 reliability benchmark
 │   └── PROOF_REPORT.md               # Empirical benchmark evidence & latency logs
 ├── credentials/
 │   ├── .gitignore                    # Local credential quarantine
@@ -160,27 +165,40 @@ AcuDiag/
 ├── databank/
 │   ├── 01_Rails_Docs/                # Vendor API schemas (Pine Labs, Gnani, Delhivery)
 │   ├── 02_Competitor_Analysis/       # Urban Company, Onsitego, Servify comparison
-│   ├── 03_Mock_Server/
-│   │   ├── mock_server.py            # FastAPI mock server & static mount
-│   │   └── sessions_store.py         # 6 enterprise sessions & supervisor engine
+│   ├── 03_Mock_Server/               # FastAPI mock server & static mount
 │   ├── 04_Eval_Cases_and_Logs/       # Edge case logs & test telemetry
-│   └── 05_Final_Submission_Dossier/  # Submission pack & video recording guides
+│   ├── 05_Final_Submission_Dossier/  # Submission pack & master dossiers
+│   ├── 05_Strategic_Deep_Dives/      # Architecture deep dives & fourth pillar
+│   ├── 06_Acoustic_Datasets/         # Acoustic datasets & CWRU kinematics
+│   └── knowledge_base/               # Domain manuals & warranty SOPs
 ├── docs/
-│   ├── COUNCIL_VERDICT_*.md          # 5-Persona council review verdicts
-│   ├── SCREEN_RECORDING_GUIDE.md     # 90-120s video capture walkthrough
-│   └── ARCHITECTURE.md               # High-level architecture specification
+│   ├── council_verdicts/             # 5-Persona Council evaluation records
+│   ├── SCREEN_RECORDING_GUIDE.md     # Video capture walkthrough
+│   └── THE_KEN_ROUND_3_*.md          # Final master submission specifications
 ├── public/
 │   ├── index.html                    # 3-Pane Enterprise Incident Desk UI
 │   └── cockpit_verified.png          # Visual verification evidence
+├── scripts/
+│   ├── generate_audio_test_tones.py  # Diagnostic test tone synthesizer
+│   ├── play_test_audio.py            # CLI test audio player
+│   ├── run_acoustic_benchmark.py     # Acoustic benchmark runner
+│   ├── start_tunnel.py               # Live webhook tunnel utility
+│   └── test_whatsapp_live.py         # Live WhatsApp test harness
 ├── src/
+│   ├── acoustic_analyzer.py          # Dual-channel audio analysis
 │   ├── audio_diagnostic.py           # Bandpass SOS & Neyman-Pearson LRT engine
+│   ├── blackboard_hub.py             # SQLite WAL central blackboard connector
+│   ├── gnani_voice_client.py         # Sub-300ms vernacular voice client
+│   ├── pinelabs_agentic_bridge.py    # Pine Labs Plural agentic bridge
 │   ├── synthetic_acoustic_gen.py     # CWRU bearing kinematic waveform generator
-│   └── blackboard_hub.py             # SQLite WAL central blackboard connector
-└── tests/
-    ├── test_audio_dsp.py             # Signal processing unit tests
-    ├── test_cwru_kinematics.py       # Physics & harmonic verification
-    ├── test_eval_cases.py            # Edge case validation (spoofing, SNR, timeout)
-    └── test_mock_server.py           # Mock server & dual-channel API tests
+│   └── whatsapp_agentic_bridge.py    # Live WhatsApp zero-trust webhook router
+├── tests/
+│   ├── test_audio_dsp.py             # Signal processing unit tests
+│   ├── test_blackboard_hub.py        # Central blackboard state machine tests
+│   ├── test_eval_cases.py            # Edge case validation (spoofing, SNR, timeout)
+│   └── test_mock_server.py           # Mock server & dual-channel API tests
+├── test_audio/                       # Audio waveforms for manual validation
+└── whatsapp_bridge/                  # Baileys WhatsApp web gateway service
 ```
 
 ---

@@ -114,7 +114,7 @@ class AcousticDiagnosticEngine:
         snr = float(10.0 * np.log10(max(in_band_power / out_band_power, 1.0)))
         return min(max(snr, 0.0), 60.0)
 
-    def detect_replay_spoofing(self, audio: np.ndarray, fft_data: Optional[np.ndarray] = None, freqs: Optional[np.ndarray] = None) -> Dict:
+    def detect_replay_spoofing(self, audio: np.ndarray, fft_data: Optional[np.ndarray] = None, freqs: Optional[np.ndarray] = None, fft_mags: Optional[np.ndarray] = None) -> Dict:
         """
         Adversarial Anti-Spoofing Engine:
         Differentiates physical mechanical vibrations from speaker-replayed phone audio.
@@ -126,21 +126,23 @@ class AcousticDiagnosticEngine:
         if fft_data is None or freqs is None:
             fft_data = np.abs(np.fft.rfft(audio))
             freqs = np.fft.rfftfreq(len(audio), 1.0 / self.sample_rate)
-        total_energy = np.sum(fft_data ** 2) + 1e-12
+        if fft_mags is None:
+            fft_mags = fft_data ** 2
+        total_energy = np.sum(fft_mags) + 1e-12
         
         # 1. Low frequency motor rumble ratio (20 Hz - 120 Hz vs Total)
         low_freq_mask = (freqs >= 20.0) & (freqs <= 120.0)
-        low_energy = np.sum(fft_data[low_freq_mask] ** 2)
+        low_energy = np.sum(fft_mags[low_freq_mask])
         low_ratio = float(low_energy / total_energy)
         
         # 2. Speaker resonance peak around 2.5kHz - 4kHz
         speaker_band_mask = (freqs >= 2500.0) & (freqs <= 4000.0)
-        speaker_energy = np.sum(fft_data[speaker_band_mask] ** 2)
+        speaker_energy = np.sum(fft_mags[speaker_band_mask])
         speaker_ratio = float(speaker_energy / total_energy)
         
         # 3. High-frequency DAC spectral flatness (Wiener entropy in 6 kHz - 20 kHz)
         hf_mask = (freqs >= 6000.0) & (freqs <= 20000.0)
-        hf_power = (fft_data[hf_mask] ** 2) + 1e-12
+        hf_power = fft_mags[hf_mask] + 1e-12
         geom_mean = float(np.exp(np.mean(np.log(hf_power))))
         arith_mean = float(np.mean(hf_power))
         dac_spectral_flatness = float(geom_mean / (arith_mean + 1e-12))
@@ -176,9 +178,10 @@ class AcousticDiagnosticEngine:
         # Shared single FFT for gating checks
         fft_raw = np.abs(np.fft.rfft(audio))
         freqs_raw = np.fft.rfftfreq(len(audio), 1.0 / self.sample_rate)
+        fft_mags = fft_raw ** 2
         
         # 1. Replay Anti-Spoofing Gate (Check fraud first)
-        spoof_check = self.detect_replay_spoofing(audio, fft_data=fft_raw, freqs=freqs_raw)
+        spoof_check = self.detect_replay_spoofing(audio, fft_data=fft_raw, freqs=freqs_raw, fft_mags=fft_mags)
         if spoof_check["is_replay_spoof"]:
             return {
                 "verdict": "REJECTED_REPLAY_ATTACK",
