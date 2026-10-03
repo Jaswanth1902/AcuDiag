@@ -64,28 +64,11 @@ class GnaniVoiceClient:
                 "transcript": "मेरी गोदरेज वॉशिंग मशीन स्पिन साइकिल में बहुत तेज़ खड़-खड़ आवाज़ कर रही है।"
             }
 
-        temp_downloaded_path = None
-        target_path = audio_path
-
-        if audio_path.startswith("http://") or audio_path.startswith("https://"):
-            import tempfile
-            try:
-                dl_req = urllib.request.Request(
-                    audio_path,
-                    headers={"User-Agent": "AcuDiag-Voice-Ingress/1.0"}
-                )
-                with urllib.request.urlopen(dl_req, timeout=15) as dl_resp:
-                    raw_audio_bytes = dl_resp.read()
-                tf = tempfile.NamedTemporaryFile(suffix=".wav", delete=False)
-                tf.write(raw_audio_bytes)
-                tf.close()
-                temp_downloaded_path = tf.name
-                target_path = temp_downloaded_path
-            except Exception as e:
-                return {"success": False, "error": f"Failed to download audio from URL: {e}"}
-
-        if not os.path.exists(target_path):
-            return {"success": False, "error": f"Audio file not found: {target_path}"}
+        # Fetch audio bytes securely with strict SSRF and path traversal defenses
+        from src.security_warden import safe_fetch_media_bytes
+        audio_bytes, err = safe_fetch_media_bytes(audio_path, allow_localhost_dev=True)
+        if err or not audio_bytes:
+            return {"success": False, "error": f"Security Ingress Protection: {err}"}
 
         try:
             # Build multipart/form-data payload
@@ -107,13 +90,12 @@ class GnaniVoiceClient:
                 add_field("bias_score", str(bias_score))
 
             # Add file field
-            filename = os.path.basename(target_path)
-            content_type = mimetypes.guess_type(target_path)[0] or "audio/wav"
+            filename = os.path.basename(audio_path) or "audio.wav"
+            content_type = mimetypes.guess_type(filename)[0] or "audio/wav"
             body.extend(f"--{boundary}\r\n".encode("utf-8"))
             body.extend(f'Content-Disposition: form-data; name="audio_file"; filename="{filename}"\r\n'.encode("utf-8"))
             body.extend(f"Content-Type: {content_type}\r\n\r\n".encode("utf-8"))
-            with open(target_path, "rb") as f:
-                body.extend(f.read())
+            body.extend(audio_bytes)
             body.extend(b"\r\n")
             body.extend(f"--{boundary}--\r\n".encode("utf-8"))
 
@@ -131,12 +113,6 @@ class GnaniVoiceClient:
             return {"success": False, "status": e.code, "error": err}
         except Exception as e:
             return {"success": False, "error": str(e)}
-        finally:
-            if temp_downloaded_path and os.path.exists(temp_downloaded_path):
-                try:
-                    os.remove(temp_downloaded_path)
-                except Exception:
-                    pass
 
     def synthesize_speech(
         self,

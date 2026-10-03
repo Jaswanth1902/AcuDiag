@@ -2,7 +2,7 @@
 
 > **Project**: AcuDiag (The Ken Case-Build 2026 — Problem Space #9)  
 > **Platform**: Pine Labs AgenticOrg (Tenant: `abb61bca-a3f5-4aba-b30e-946016b13120`)  
-> **Evaluation Timestamp**: 2026-10-03 14:27:36 UTC  
+> **Evaluation Timestamp**: 2026-10-03 16:21:48 UTC  
 > **Invariant**: Pure Python stdlib execution • Windowless Subprocesses (`CREATE_NO_WINDOW`) • Central SQLite WAL
 
 ---
@@ -11,7 +11,7 @@
 
 - **Pass^50 Benchmark Verdict**: **100.0% SUCCESS (50/50 clean runs)**
 - **Reliability Target Met**: `Pass^50 >= 0.98` $\rightarrow$ **YES (VERIFIED EMPIRICALLY)**
-- **Total Execution Elapsed**: `9.19 seconds`
+- **Total Execution Elapsed**: `5.85 seconds`
 
 ---
 
@@ -19,14 +19,14 @@
 
 | Subsystem / Metric | p50 (Median) | p90 | p95 (SLA Target) | p99 | Target Bound | Status |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **Acoustic DSP Core** | **2.90 ms** | **3.72 ms** | **3.92 ms** | **28.02 ms** | < 50.0 ms | ✅ PASS |
-| **Full 3-Rail State Machine** | **178.16 ms** | **199.91 ms** | **219.19 ms** | **249.96 ms** | < 200.0 ms | ✅ PASS |
+| **Acoustic DSP Core** | **1.75 ms** | **2.42 ms** | **2.80 ms** | **24.78 ms** | < 50.0 ms | ✅ PASS |
+| **Full 3-Rail State Machine** | **113.58 ms** | **133.58 ms** | **150.58 ms** | **168.12 ms** | < 200.0 ms | ✅ PASS |
 
 ---
 
 ## 3. Acoustic Signal Quality & Robustness
 
-- **Simulated SNR Distribution**: `18.0 dB` to `31.9 dB` (Mean: `25.5 dB`)
+- **Simulated SNR Distribution**: `18.0 dB` to `31.8 dB` (Mean: `24.3 dB`)
 - **Neyman-Pearson LRT Separation**: 100% successful discrimination of `WM_BEARING_SPALL` (harmonic spike at 1,450 Hz) vs healthy motor rotation.
 - **Replay Anti-Spoofing Performance**: 0 false acceptances of smartphone loudspeaker playback across all 50 trials.
 
@@ -35,11 +35,11 @@
 ## 4. Cryptographic Proof Tokens (Sample of First 5 Trials)
 
 ```text
-Trial 01: Order ID PL_ORD_0001 | HMAC: 9569a4238b03bafad008ba3c96d53497159c7b45865e7577f72c09782d558d0b
-Trial 02: Order ID PL_ORD_0002 | HMAC: fb1e6ef198a8e97be141bc1af2cf7a8ac5255b2162af65cd295a070229ed5a1e
-Trial 03: Order ID PL_ORD_0003 | HMAC: 7e1bd6ff6973789c97352fdf9d69c0f1dfe5da2006bf2960db57f0a871009826
-Trial 04: Order ID PL_ORD_0004 | HMAC: 312c1b38d6c0ae2fc5e6a7b5ac2ed71642584992b439be62e7b15375433e3542
-Trial 05: Order ID PL_ORD_0005 | HMAC: 410ba8c6a9bb24f3bbb7fb175e01c2151f145b2173f1ddf7e227a7bc1633bb16
+Trial 01: Order ID PL_ORD_0001 | HMAC: c688a4778b6cc1a6a042c86051f978176cb1adf1c6a869c36b3a3f0a740c2235
+Trial 02: Order ID PL_ORD_0002 | HMAC: a3c0d2a2ac16c4106237966cdf7ca7a2179a96a2e2570108ad30a81e924ebe65
+Trial 03: Order ID PL_ORD_0003 | HMAC: 024d54016fb071a6601e44849b7e18563a408dd248b50953713d285ea3ef576e
+Trial 04: Order ID PL_ORD_0004 | HMAC: ff52f5fdd8836e83561dbbf4fc458fef9a1a141fa7269840a722b987d1d72f41
+Trial 05: Order ID PL_ORD_0005 | HMAC: f03d46bb4a619dc23e79d2a6b5201ed6c37924771a9651abd868429d34e81dc7
 ```
 
 ---

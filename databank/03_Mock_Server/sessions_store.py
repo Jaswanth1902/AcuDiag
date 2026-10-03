@@ -667,6 +667,91 @@ def get_all_sessions_summary():
         })
     return summaries
 
+def get_or_create_session(session_id: str, customer_name: str = "Enterprise Customer", phone: str = "+91 98000 00000"):
+    """Returns an existing session or dynamically initializes a new enterprise session envelope."""
+    if session_id in SESSIONS:
+        session = SESSIONS[session_id]
+        if "messages" not in session:
+            session["messages"] = session.get("messages_customer", [])
+        return session
+
+    curr_t = time.strftime("%H:%M:%S IST")
+    ticket_num = str(1000 + len(SESSIONS) + 1)
+    new_sess = {
+        "id": session_id,
+        "ticket_no": ticket_num,
+        "customer_name": customer_name,
+        "phone": phone,
+        "location": "Dynamic Ingress, India",
+        "pincode": "560001",
+        "appliance": "Multi-Appliance Ingress",
+        "model_no": "Enterprise-Auto",
+        "fault_name": "Pending Acoustic Classification",
+        "fault_code": "PENDING",
+        "sku": "PENDING",
+        "state": "INTAKE",
+        "alarm": "NONE",
+        "alarm_text": "Live session initialized.",
+        "created_at": curr_t,
+        "last_updated": curr_t,
+        "cost": {"part": 0, "labor": 0, "total": 0},
+        "technician": {
+            "name": "Network Technician Pending",
+            "phone": "N/A",
+            "badge": "Certified OEM Network",
+            "upi_vpa": "pending@upi",
+            "rating": "4.90 / 5.0"
+        },
+        "escrow": {
+            "order_id": f"PL_ORD_{uuid.uuid4().hex[:8].upper()}",
+            "amount": 0.0,
+            "status": "AWAITING_DIAGNOSIS",
+            "provider": "Pine Labs Plural"
+        },
+        "logistics": {
+            "waybill": "UNMANIFESTED",
+            "hub": "REGIONAL_HUB",
+            "status": "PENDING_APPROVAL",
+            "reverse_docket": "N/A"
+        },
+        "telemetry": {
+            "snr_db": 0.0,
+            "snr_status": "PENDING",
+            "peak_freq_hz": 0.0,
+            "lrt_score": 0.0,
+            "lrt_threshold": 2.45,
+            "lrt_verdict": "PENDING",
+            "anti_spoofing": "PENDING"
+        },
+        "supervisor_docket": {
+            "docket_id": f"DOC_SUP_{ticket_num}",
+            "status": "ACTIVE_MONITORING",
+            "assigned_supervisor": "Inspector R. Sundaram (#804)",
+            "notes": "Dynamic enterprise ingress session active.",
+            "override_history": []
+        },
+        "warranty": {
+            "status": "PENDING_VERIFICATION",
+            "policy_no": f"WAR-ENT-{ticket_num}",
+            "invoice_no": "INV-PENDING",
+            "purchase_date": "N/A",
+            "coverage_until": "N/A",
+            "oem_provider": "OEM Authorized",
+            "coverage_type": "Standard",
+            "split_bill": "Pending",
+            "customer_liability": 0.0,
+            "post_repair_token": "PENDING"
+        },
+        "audit_timeline": [
+            {"time": curr_t, "event": "Session Provisioned", "detail": f"Session {session_id} initialized dynamically"}
+        ],
+        "messages_customer": [],
+        "messages_technician": []
+    }
+    new_sess["messages"] = new_sess["messages_customer"]
+    SESSIONS[session_id] = new_sess
+    return new_sess
+
 def get_session(session_id: str):
     """Returns complete session envelope by ID."""
     session = SESSIONS.get(session_id)
