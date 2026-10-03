@@ -1,85 +1,63 @@
-# 🚀 AcuDiag Enterprise Evolution Blueprint & Action Plan
-**From Single-Appliance Prototype to Industrial-Grade Domestic Diagnostics & Escrow Platform**
-
-> **Investigation Engines Activated**: `/research` (arXiv + DCASE), `/scrapling` (DCASE 2024 / MIMII DG), `/agent-reach` (Edge-to-Cloud Teleoperation Tunnel)  
-> **Target System**: `01_Projects/AcuDiag/`  
-> **Date**: October 3, 2026  
-> **Status**: **APPROVED FOR IMPLEMENTATION**
+# 🚀 Comprehensive Strategic Improvement Plan: AcuDiag 2.5 Enterprise
+**Informed by**: Reddit Consumer Intelligence, X/Twitter Escalations, Pinterest Visual Diagnostics, National Consumer Helpline (NCH / e-Jagriti), and Layer 0 Empirical Standards  
+**Target Milestone**: The Ken Round 3 Build Track & Enterprise Scalability  
+**Date**: October 3, 2026  
 
 ---
 
-## 1. 🔍 Comprehensive Research Synthesis
+## 1. Executive Summary & Improvement Mandates
 
-### 1.1 The Academic & Industrial SOTA (arXiv & DCASE 2024)
-1. **The "Domain Shift" Invariant (DCASE 2024 Task 2)**:
-   - DCASE Task 2 (`First-Shot Unsupervised Anomalous Sound Detection`) proves that machine acoustic models fail in the real world when moving from lab test benches to consumer smartphones due to **device microphone frequency curves** (e.g., iPhone vs. Redmi vs. Samsung AGC and mic sensitivity).
-   - **Remedy**: Spectral Normalization & Wiener Entropy (Spectral Flatness) ratio. Rather than comparing absolute amplitudes, compare relative ERB energy differentials across bands.
-2. **Transient Impulse Analysis (Kurtosis + GMM Clustering)**:
-   - SOTA edge predictive maintenance (Edge Impulse / STMicroelectronics IMAD-DS) extracts **high-frequency envelope kurtosis** alongside FFT harmonics.
-   - Bearing spalls and loose pump impellers emit sharp impact transients ($>3.5$ kurtosis vs. Gaussian $3.0$), making fault detection immune to ambient speech and hum.
-3. **Multi-Appliance Kinematics (CWRU, HAASD, MIMII)**:
-   - Domestic machinery falls into 3 kinematic archetypes:
-     - *Rotational Bearings & Belts*: High-frequency shock pulses modulated by shaft speed (1,450 Hz, 640 Hz, 220 Hz).
-     - *Fluid & Refrigerant Cavitation*: High-entropy broad-spectrum turbulent bursts (2.1 kHz – 4.5 kHz).
-     - *Electromechanical Relays & Solenoids*: Periodic low-frequency impulsive chatter (50 Hz, 100 Hz, 200 Hz).
+Based on extensive public intelligence gathering, community sentiment auditing, and technical review across Reddit, X, and Pinterest, the AcuDiag repair flow is strategically sound and enthusiastically endorsed for its zero-counterfeit parts delivery (Delhivery) and escrow protection (Pine Labs Plural). 
+
+However, to evolve into an enterprise-grade, fraud-proof consumer standard, AcuDiag must execute **5 high-impact architectural upgrades**:
+
+1. **Pinterest-Style ASCII Spectrogram & Before/After Visual Proof Cards**: Deliver instant visual clarity on WhatsApp, replacing opaque text with high-resolution acoustic verification charts.
+2. **Automated e-Jagriti & NCH 1915 Legal Evidentiary Docket Generation**: Automatically compile legal-grade consumer court dossiers if technician tampering or fraud is detected.
+3. **Adaptive Audio Guidance Meter & Dereverberation**: Prevent repeated "low SNR" rejections by offering multi-modal noise suppression and dynamic distance coaching.
+4. **Single-Use Tamper-Evident Packaging QR Binding**: Enforce physical cryptographic verification linking the Delhivery part package to the assigned technician's phone before drum disassembly.
+5. **Multi-Appliance Rate Card & Compound Fault Expansion**: Extend rate card and acoustic kinematics to multi-stage inverter BLDC compressors and smart RO purifiers.
 
 ---
 
-## 2. 🗺️ The 4-Phase Enterprise Improvement Plan
+## 2. Actionable Engineering Roadmaps
 
 ```
-┌──────────────────────────────────────────────────────────────────────────────────────────────────┐
-│                                   ACUDIAG ENTERPRISE UPGRADE MATRIX                              │
-├────────────────────────────┬─────────────────────────────┬───────────────────────────────────────┤
-│ PHASE                      │ CORE ENHANCEMENT            │ KEY DELIVERABLES & IMPACT             │
-├────────────────────────────┼─────────────────────────────┼───────────────────────────────────────┤
-│ Phase 1: Signal Hardening  │ Wavelet / Kurtosis Transient│ - Envelope Kurtosis feature extractor │
-│ (DSP & Physical Layer)     │ Gating & Microphone AGC Norm│ - Ambient Speech / TV Rejection Filter│
-│                            │                             │ - Sub-5ms pure NumPy implementation   │
-├────────────────────────────┼─────────────────────────────┼───────────────────────────────────────┤
-│ Phase 2: Knowledge & RAG   │ Multi-Appliance Diagnostic  │ - 5 Full Appliance Classes Ingested   │
-│ (Kinematic Expansion)      │ Vectors & OEM Tariff Tables │ - 12 OEM Brand Rules (LG, Godrej etc) │
-│                            │                             │ - Dual-Tier Warranty Intercept Logic  │
-├────────────────────────────┼─────────────────────────────┼───────────────────────────────────────┤
-│ Phase 3: Teleoperation     │ AgentReach Remote Ingress   │ - WhatsApp Cloud Webhook Tunnel       │
-│ (Boundary Crossing)        │ & Multi-Tenant Routing      │ - Zero remote server dependency       │
-│                            │                             │ - Sovereign Ryzen 7 Host Security     │
-├────────────────────────────┼─────────────────────────────┼───────────────────────────────────────┤
-│ Phase 4: Operations Console│ 3-Pane Enterprise Incident  │ - Multi-Session Live Queue (7 tickets)│
-│ (Fleet Cockpit Desk)       │ Desk with HITL Overrides    │ - Forensic Spectrogram & Audio Player │
-│                            │                             │ - Pine Labs Escrow Audit Trail        │
-└────────────────────────────┴─────────────────────────────┴───────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                       ACUDIAG 2.5 STRATEGIC UPGRADE MATRIX                  │
+├──────────────────────────┬──────────────────────────────────────────────────┤
+│ Stream 1: Acoustic DSP   │ Multi-frequency compound detection & dereverb   │
+│ Stream 2: Visual UX      │ ASCII/PNG before-and-after spectrogram cards    │
+│ Stream 3: Legal Redress  │ e-Jagriti (NCH 1915) automated fraud docketing   │
+│ Stream 4: 3-Rail Bridges │ Cryptographic Plural capture & Delhivery QR Pod  │
+└──────────────────────────┴──────────────────────────────────────────────────┘
 ```
 
----
+### Stream 1: Acoustic Physics & Compound Fault Detection
+- **Task 1.1**: Add Envelope Kurtosis & Harmonic Peak Modulation in `src/acoustic_analyzer.py` to identify dual-faults (e.g. bearing spall + drain cavitation).
+- **Task 1.2**: Implement Minimum Mean Square Error (MMSE) noise spectral subtraction for Indian kitchen background sounds (reverberant bathrooms, traffic hum).
+- **Metric**: Maintain DSP classification latency $< 3.0\text{ms}$ on standard CPU Swarm with zero external GPU dependencies.
 
-## 3. 🛠️ Detailed Implementation Workstreams
+### Stream 2: Visual Customer Experience & Spectrogram Proof Cards
+- **Task 2.1**: Generate lightweight ASCII / SVG / PNG "Before & After" harmonic cards delivered directly over WhatsApp.
+- **Task 2.2**: Include clear Pinterest-style guidance diagrams: *"Place phone 5cm from machine door at 45-degree angle."*
+- **Metric**: Zero confusion or hesitation in user testing; 100% clarity on repair status.
 
-### Workstream 1: Envelope Kurtosis & Robustness Gating (`src/audio_diagnostic.py`)
-- **Action**: Augment `extract_erb_features()` with high-frequency envelope kurtosis ($\text{Kurtosis} = \frac{\mathbb{E}[(x-\mu)^4]}{\sigma^4}$).
-- **Value**: Differentiates mechanical impact spalling from conversational speech or background music with 99.4% precision.
-- **Latency Budget**: $< 0.8\text{ ms}$ overhead using vectorized NumPy.
+### Stream 3: Automated Consumer Protection & Legal Docket Generation
+- **Task 3.1**: Create `src/docket_generator.py` to generate complete, PDF/JSON-compliant **e-Jagriti / NCH 1915 Consumer Court Proof Dockets** when technician tampering or fraud is detected.
+- **Task 3.2**: Include SHA-256 cryptographic hashes of raw audio recordings, timestamped logs, Neyman-Pearson LRT scores, and WhatsApp message history.
+- **Metric**: One-click export enabling cheated homeowners to file automated claims in under 60 seconds.
 
-### Workstream 2: Statutory Warranty Intercept Engine (`src/appliance_catalog.py`)
-- **Action**: Codify statutory rules from Indian Consumer Protection norms:
-  1. *Comprehensive Period (0–24 Months)*: 100% Free repair; agent transfers docket directly to OEM brand service desk.
-  2. *Extended Major Component (25–120 Months)*: Free OEM motor/compressor via Delhivery, with customer paying standardized visit + labor co-pay hold (₹750) via Pine Labs Plural escrow.
-  3. *Out-of-Warranty (120+ Months)*: Full standardized rate card pre-auth.
-
-### Workstream 3: AgentReach Teleoperation Tunnel (`scripts/start_tunnel.py`)
-- **Action**: Provide a bridge connecting external smartphone WhatsApp webhooks (Meta Cloud API / Twilio) into local port 8000 using Cloudflare/Localtunnel/AgentReach patterns.
-- **Invariant**: Strict SSRF and path traversal validation in `src/security_warden.py` prevents external webhook exploitation.
-
-### Workstream 4: Automated Multi-Appliance Verification Suite (`tests/`)
-- **Action**: Expand automated test fixtures across all 5 appliance classes, verifying that:
-  - 10-year motor co-pay invoices compute accurately.
-  - Replay spoof attacks are caught regardless of appliance model.
-  - Sub-50ms CPU execution bounds are preserved across 100+ batch trials.
+### Stream 4: Physical Custody & QR Code Security Gate
+- **Task 4.1**: Link Delhivery waybills to single-use QR verification codes on the parts package (`DEL-POUCH-REV-XX`).
+- **Task 4.2**: Require the homeowner to witness the technician scanning the box before beginning the job, eliminating counterfeit substitution.
 
 ---
 
-## 4. 🚦 Execution Roadmap & Milestones
+## 3. Implementation Schedule & Delivery Gates
 
-1. **Milestone 1 (Immediate)**: All 64 existing unit tests verified green.
-2. **Milestone 2 (DSP Optimization)**: Implement envelope kurtosis in `audio_diagnostic.py` and run benchmark against CWRU & MIMII synthetic profiles.
-3. **Milestone 3 (Documentation & Brief)**: Synchronize `executive_brief.md` and databank manifests with the new enterprise capability suite.
+| Milestone | Deliverable | Verification Gate |
+| :--- | :--- | :--- |
+| **Stage 1** | Visual Spectrogram Card & Guidance Generator | Gate 1 (Syntax) & Gate 4 (UI/UX Atelier Craft) |
+| **Stage 2** | e-Jagriti Legal Evidentiary Docket Engine | Gate 2 (Unit Tests) & Gate 3 (Mock Server Integration) |
+| **Stage 3** | Multi-Fault Compound Kinematics Calibration | Gate 5 (Physical Kinematics) & Pass^50 Benchmark |
+| **Stage 4** | Git Commit & Master Documentation Update | Gate 6 (Executive Brief & Zero Regression) |

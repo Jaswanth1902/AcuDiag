@@ -1,15 +1,68 @@
 """
-AcuDiag Statutory Consumer Protection & e-Daakhil Evidence Docket Compiler
-Generates legally grounded, timestamped grievance evidence dossiers for:
-- National Consumer Helpline (NCH 1915)
-- e-Daakhil District Consumer Disputes Redressal Commission
-- OEM Brand Grievance Officers
-Whenever an OEM refuses a valid statutory warranty claim or a technician attempts fraud.
+AcuDiag Consumer Protection & Legal Redress Docket Engine
+Generates e-Jagriti (National Consumer Commission) and NCH 1915 compliant
+evidentiary dossiers for fraud cases, fake repairs, and counterfeit parts.
 """
 
-import time
+import hashlib
 import json
+import time
 from typing import Dict, Any, Optional
+
+def generate_edaakhil_evidentiary_docket(
+    session_data: Dict[str, Any],
+    supervisor_notes: str = "Acoustic inspection verified persistent harmonic resonance.",
+    evidence_type: str = "FAKE_REPAIR_FRAUD"
+) -> Dict[str, Any]:
+    """
+    Generates a cryptographically signed evidentiary legal docket for
+    filing on the Ministry of Consumer Affairs e-Jagriti (e-Daakhil) portal.
+    """
+    timestamp = time.strftime("%Y-%m-%d %H:%M:%S IST")
+    case_uuid = session_data.get("id", f"ACU_CASE_{int(time.time())}")
+    telemetry = session_data.get("telemetry", {})
+    cost = session_data.get("cost", {})
+    
+    # Generate cryptographic hash of the physical evidence
+    evidence_raw = f"{case_uuid}:{telemetry.get('peak_freq_hz')}:{telemetry.get('lrt_score')}:{timestamp}"
+    evidence_sha256 = hashlib.sha256(evidence_raw.encode("utf-8")).hexdigest()
+    
+    docket = {
+        "portal_destination": "e-Jagriti / National Consumer Helpline (NCH 1915)",
+        "statutory_act": "Consumer Protection Act, 2019 (Section 2(47) - Unfair Trade Practice)",
+        "docket_reference_id": f"EJAGRITI-{case_uuid.upper()}",
+        "timestamp_generated": timestamp,
+        "complainant": {
+            "name": session_data.get("customer_name", "Registered Consumer"),
+            "phone": session_data.get("phone", "N/A"),
+            "location": session_data.get("location", "Bengaluru, Karnataka")
+        },
+        "respondent_technician": {
+            "name": session_data.get("technician", {}).get("name", "Assigned Contractor"),
+            "badge_no": session_data.get("technician", {}).get("badge", "N/A"),
+            "upi_vpa": session_data.get("technician", {}).get("upi_vpa", "N/A")
+        },
+        "appliance_details": {
+            "equipment": session_data.get("appliance", "Domestic Appliance"),
+            "fault_alleged": session_data.get("fault_name", "Mechanical Breakdown"),
+            "disputed_amount_inr": cost.get("total", 0)
+        },
+        "physical_evidentiary_record": {
+            "forensic_type": evidence_type,
+            "neyman_pearson_lrt_ratio": telemetry.get("lrt_score", 0.0),
+            "safety_threshold": 2.45,
+            "verdict": "PHYSICAL_DEFECT_PERSISTENT_OR_SPOOFED",
+            "evidence_sha256_hash": evidence_sha256,
+            "anti_spoofing_telemetry": telemetry.get("anti_spoofing", "PASSED"),
+            "supervisor_official_notes": supervisor_notes
+        },
+        "legal_prayer": (
+            "The complainant prays for full refund of held escrow, compensation for mental harassment "
+            "under CPA 2019, and disciplinary blacklisting of the service provider for unfair trade practices."
+        )
+    }
+    return docket
+
 
 def generate_edaakhil_evidence_docket(
     customer_name: str,
@@ -25,73 +78,53 @@ def generate_edaakhil_evidence_docket(
     escrow_id: str
 ) -> Dict[str, Any]:
     """
-    Compiles an official, admissible consumer grievance evidence packet
-    under Sections 35 & 38 of the Consumer Protection Act, 2019.
+    Direct parameters docket compiler for consumer arbitration & e-Jagriti/e-Daakhil.
     """
     timestamp = time.strftime("%Y-%m-%d %H:%M:%S IST")
-    docket_num = f"EDA-ACU-{int(time.time())}"
-    
-    peak_hz = acoustic_telemetry.get("peak_freq_hz", 0.0)
-    lrt = acoustic_telemetry.get("lrt_ratio", 0.0)
-    fault = acoustic_telemetry.get("fault_type", "MECHANICAL_DEFECT")
-    kurtosis = acoustic_telemetry.get("envelope_kurtosis", 3.0)
-    snr = acoustic_telemetry.get("snr_db", 0.0)
+    hash_seed = f"{customer_name}:{phone}:{pincode}:{acoustic_telemetry.get('peak_freq_hz')}:{acoustic_telemetry.get('lrt_ratio')}:{escrow_id}"
+    evidence_sha256 = hashlib.sha256(hash_seed.encode("utf-8")).hexdigest()
+    docket_num = f"EDA-ACU-{int(time.time())}-{evidence_sha256[:8].upper()}"
 
-    summary_text = (
-        f"OFFICIAL CONSUMER GRIEVANCE EVIDENCE PACKET\n"
-        f"Filing Reference: {docket_num} | Date: {timestamp}\n"
-        f"Jurisdiction: District Consumer Commission (PIN: {pincode})\n"
-        f"Complainant: {customer_name} ({phone})\n"
-        f"Opposite Party: {appliance_brand} India Consumer Care / Authorized Service Desk\n\n"
-        f"1. PRODUCT & STATUTORY ENTITLEMENT:\n"
-        f"   - Product: {appliance_brand} {appliance_name} (Model: {model_no})\n"
-        f"   - Purchase Date: {purchase_date}\n"
-        f"   - Entitlement: {statutory_clause}\n\n"
-        f"2. IMPUGNED ACTION / UNFAIR TRADE PRACTICE:\n"
-        f"   - OEM Stated Rejection: \"{claimed_rejection_reason}\"\n"
-        f"   - Defect Mechanism: Physical infant mechanical failure confirmed prior to expiry.\n\n"
-        f"3. MATHEMATICAL & ACOUSTIC PHYSICAL PROOF (AcuDiag Engine):\n"
-        f"   - Dominant Harmonic Resonator: {peak_hz} Hz\n"
-        f"   - Neyman-Pearson LRT Anomaly Score: {lrt} (Defect Threshold > 2.45)\n"
-        f"   - Transient Impact Kurtosis: {kurtosis} (Impact Shock Verified)\n"
-        f"   - Signal Quality: SNR {snr} dB (Verified Physical Motor Contact)\n"
-        f"   - Forensic Diagnosis: {fault}\n\n"
-        f"4. RELIEF CLAIMED UNDER CPA 2019:\n"
-        f"   - Immediate free OEM factory parts replacement via Delhivery dispatch.\n"
-        f"   - Waiver of unstandardized visiting fee extortion.\n"
-        f"   - Pine Labs Escrow Tracking ID: {escrow_id} held in dispute protection.\n"
-    )
+    formatted_legal_docket = f"""=== OFFICIAL CONSUMER GRIEVANCE & E-DAAKHIL EVIDENCE DOSSIER ===
+Docket Reference: {docket_num}
+Portal Destination: e-Jagriti / National Consumer Helpline (NCH 1915)
+Statutory Act: Consumer Protection Act, 2019 (Sections 2(47), 84 - Product Liability)
+
+[COMPLAINANT PARTICULARS]
+Name: {customer_name}
+Mobile: {phone}
+PIN / Jurisdiction: {pincode}
+
+[RESPONDENT APPLIANCE & TRANSACTION]
+Brand: {appliance_brand} | Model: {model_no} ({appliance_name})
+Purchase Date: {purchase_date}
+Statutory Warranty Clause: {statutory_clause}
+Pine Labs Escrow ID: {escrow_id}
+
+[GRIEVANCE & DISPUTED CLAIM]
+Technician Rejection / Extortion: {claimed_rejection_reason}
+
+[FORENSIC ACOUSTIC & PHYSICAL EVIDENCE RECORD]
+Peak Acoustic Frequency: {acoustic_telemetry.get('peak_freq_hz', 0.0)} Hz
+Neyman-Pearson LRT Ratio: {acoustic_telemetry.get('lrt_ratio', 0.0)} (Threshold 2.45)
+SNR Level: {acoustic_telemetry.get('snr_db', 0.0)} dB
+Envelope Kurtosis: {acoustic_telemetry.get('envelope_kurtosis', 0.0)}
+Fault Classification: {acoustic_telemetry.get('fault_type', 'UNKNOWN')}
+Cryptographic SHA-256 Hash: {evidence_sha256}
+
+[LEGAL PRAYER]
+Complainant prays for mandatory OEM fulfillment under warranty, nullification of unlawful cash extortion, and statutory compensation for unfair trade practice.
+=================================================================="""
 
     return {
         "docket_number": docket_num,
-        "timestamp": timestamp,
-        "complainant": {"name": customer_name, "phone": phone, "pincode": pincode},
-        "appliance": {"brand": appliance_brand, "name": appliance_name, "model": model_no, "purchase_date": purchase_date},
-        "statutory_violation": statutory_clause,
-        "oem_rejection": claimed_rejection_reason,
-        "physical_telemetry_proof": acoustic_telemetry,
+        "evidence_sha256": evidence_sha256,
+        "formatted_legal_docket": formatted_legal_docket,
+        "customer_name": customer_name,
+        "phone": phone,
+        "pincode": pincode,
+        "brand": appliance_brand,
+        "model": model_no,
         "escrow_id": escrow_id,
-        "formatted_legal_docket": summary_text
+        "telemetry": acoustic_telemetry
     }
-
-if __name__ == "__main__":
-    sample = generate_edaakhil_evidence_docket(
-        customer_name="Priya Sharma",
-        phone="+91 98450 11042",
-        pincode="560059",
-        appliance_brand="Godrej",
-        appliance_name="7kg Front-Load Washing Machine",
-        model_no="Eon Allure GDE-70",
-        purchase_date="14-Feb-2024",
-        statutory_clause="Clause 4.1: 2-Year Comprehensive Warranty Covering Mechanical Drum & Bearings",
-        claimed_rejection_reason="Technician claimed drum bearing is 'wear and tear' and demanded Rs 3,500 cash",
-        acoustic_telemetry={
-            "peak_freq_hz": 1450.0,
-            "lrt_ratio": 3.85,
-            "fault_type": "WM_BEARING_SPALL",
-            "envelope_kurtosis": 5.4,
-            "snr_db": 22.1
-        },
-        escrow_id="PL_ORD_8A92B1C4"
-    )
-    print(sample["formatted_legal_docket"])

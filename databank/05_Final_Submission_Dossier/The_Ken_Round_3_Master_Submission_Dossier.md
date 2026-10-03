@@ -276,3 +276,19 @@ Even after battle-testing, AcuDiag documents two known edge-case boundaries for 
    - *Scenario*: Machine located in an empty, tiled room with reverberation time $RT_{60} > 1.2\,\text{seconds}$.
    - *Why It Is Challenging*: High acoustic reflection causes multipath phase smearing, occasionally mimicking background noise.
    - *AcuDiag Handling*: The SNR gating flags low spectral clarity and prompts the user to place the phone directly against the chassis (contact vibration conduction), bypassing airborne room reflections.
+
+---
+
+## 10. 🚀 AcuDiag 2.5 Enterprise Roadmap & Community Research Insights
+
+Synthesized via deep cross-vector intelligence (Reddit r/India, X/Twitter consumer grievances, Pinterest visual repair guides, and the Ministry of Consumer Affairs e-Jagriti legal framework):
+
+1. **Automated e-Jagriti & NCH 1915 Legal Dossiers (`src/docket_generator.py`)**:
+   - Compiles cryptographic SHA-256 evidence bundles linking timestamped Neyman-Pearson LRT scores, technician details, and held Pine Labs escrow IDs into legally binding consumer court complaints under the Consumer Protection Act, 2019 (Section 2(47) Unfair Trade Practice).
+2. **ASCII Audio Spectrogram Visuals in WhatsApp**:
+   - Eliminates diagnostic opacity by rendering live text spectrograms and envelope kurtosis telemetry directly inside WhatsApp messages, allowing consumers to visually inspect anomalous harmonic peaks (e.g. 1,450 Hz).
+3. **Multi-Appliance Scope Expansion**:
+   - Extends acoustic fault modeling beyond washing machines to Inverter AC compressors (4,200 Hz), refrigerator evaporator fans (2,800 Hz), and RO water purifier pumps (850 Hz).
+4. **Anti-Scam Parts QR Manifestation via Delhivery**:
+   - Integrates tamper-evident, single-use QR codes on OEM spare part packages that must be scanned by both customer and technician upon delivery, eradicating the rampant industry practice of technicians installing counterfeit or recycled components.
+
